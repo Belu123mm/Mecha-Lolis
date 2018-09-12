@@ -3,16 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-[ExecuteInEditMode]
 public class NodeGroup : MonoBehaviour {
-    public List<Node> nodeList = new List<Node>();  //TODO Como usar la lista para manejar los removeat y los addat
+    public List<Node> nodeList;//TODO Como usar la lista para manejar los removeat y los addat
     public Node nodePrefab;
-    private int _count;
-    Node _first;
-    Node _last;
-    public void Awake() {
-        _count = nodeList.Count;
-    }
+    public int _count;
+    public Node _first;
+    public Node _last;
 
     public void AddFirst( Node value) {
         if ( _count >= 0 ) {
@@ -27,16 +23,20 @@ public class NodeGroup : MonoBehaviour {
             _last.next = _first;
         }
         nodeList.Add(value);
+        value.id = _count + 1;
         _count++;
     }
     public void AddLast( Node value ) {
-        if ( _count < 1 ) AddFirst(value);
-        else if ( _count == 1 ) {
+        if ( _count < 1 ) {
+            AddFirst(value);
+            return;
+        } else if ( _count == 1 ) {
             value.previous = _first;
             value.next = _first;
             _last = value;
             _first.next = _last;
             _first.previous = _last;
+            nodeList.Add(value);
         } else {
             var oldLast = _last;
             value.previous = oldLast;
@@ -44,19 +44,26 @@ public class NodeGroup : MonoBehaviour {
             _last = value;
             oldLast.next = _last;
             _first.previous = _last;
+            nodeList.Add(value);
         }
-        nodeList.Add(value);
+            value.id = _count + 1;
         _count++;
     }
     public void Clear() {
         _count = 0;
         _first = null;
         _last = null;
+        foreach ( Node n in nodeList ) {
+            if (n)
+            DestroyImmediate(n.gameObject);
+        }
         nodeList = new List<Node>();
+        Debug.Log("NodosLimpiados");
     }
-    public void NewNode() {
-        Instantiate(nodePrefab);
-        //TODO Probablemente ampliar esto
+    public Node NewNode() {
+        Node n = Instantiate(nodePrefab);
+        AddLast(n);
+        return n;
     }
     public bool Contains(Node node) {
         return nodeList.Contains(node);
