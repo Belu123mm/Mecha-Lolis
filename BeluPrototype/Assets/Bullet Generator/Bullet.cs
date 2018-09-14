@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Bullet : MonoBehaviour {
 
+    public delegate void OnMovement();
+    public OnMovement Movement;
     public float speedOscilation;
     public Vector3 center;
     public int bulletsCount;
@@ -12,38 +15,24 @@ public class Bullet : MonoBehaviour {
     public int numberOfBullets;
     [Range(0, 360)]
     public int angle;
-    public GameObject circle;
     public float degrees;
     public float radians;
     public float radiusX;
     public float radiusY;
-    public float speed;
 
     // Use this for initialization
     void Start () {
-		
+		Destroy(this.gameObject,5);
+
 	}
     void Update() {
-        degrees += 1;
-
-        center += this.transform.forward * speed * Time.deltaTime;
-
-        degrees += speedOscilation * Time.deltaTime;
-        radians = degrees * Mathf.Deg2Rad;
-
-        Vector3 realPosition;
-        realPosition.x = Mathf.Cos(radians) * radiusX;
-        realPosition.y = 0;
-        realPosition.z = Mathf.Sin(radians) * radiusY;
-
-        this.transform.position = center + realPosition;
-
-        this.transform.position += this.transform.forward * Time.deltaTime * speed;
-        
+        Movement();
     }
     private void OnDrawGizmos() {
         Gizmos.color = Color.blue;
         Gizmos.DrawSphere(center, 1);
     }
+
+
 
 }

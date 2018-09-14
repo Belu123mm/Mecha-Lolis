@@ -58,7 +58,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a66010179c0d6d945b913ab6e55a254b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -120,7 +120,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 20
+  m_Time: 1
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 1
@@ -128,10 +128,16 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
+        time: 0.0051021576
+        value: 0.5735836
+        inSlope: -0.8102105
+        outSlope: -0.8102105
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0.042553067
+        inSlope: -0.08144935
+        outSlope: -0.08144935
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -188,12 +194,10 @@ MonoBehaviour:
   bulletsCount: 0
   numberOfBullets: 0
   angle: 0
-  circle: {fileID: 0}
   degrees: 0
   radians: 0
   radiusX: 0
   radiusY: 0
-  speed: 0
 --- !u!135 &135176586178085280
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -201,7 +205,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1734671470639838}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5

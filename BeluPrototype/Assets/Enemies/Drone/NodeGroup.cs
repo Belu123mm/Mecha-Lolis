@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-
+[ExecuteInEditMode]
+[System.Serializable]
 public class NodeGroup : MonoBehaviour {
+    [SerializeField]
     public List<Node> nodeList;//TODO Como usar la lista para manejar los removeat y los addat
     public Node nodePrefab;
     public int _count;
@@ -22,7 +24,6 @@ public class NodeGroup : MonoBehaviour {
             oldfirst.previous = _first;
             _last.next = _first;
         }
-        nodeList.Add(value);
         value.id = _count + 1;
         _count++;
     }
@@ -131,9 +132,4 @@ public class NodeGroup : MonoBehaviour {
         _last.next = _first;
         nodeList.Remove(_last);
     }
-
-
-
-
-
 }

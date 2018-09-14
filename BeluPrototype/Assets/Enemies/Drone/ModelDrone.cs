@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ModelDrone : Model {
+public class ModelDrone {
     public float speed;
     public Rigidbody rigidbody;
     public EventFSM<DroneState> stateMachine;
@@ -14,15 +14,14 @@ public class ModelDrone : Model {
         speed = s;
         rigidbody = rb;
         nodegroup = ng;
-        currentNode = nodegroup._first;
-        Debug.Log(currentNode);
+        currentNode = nodegroup._last;
         SetStateMachine();
     }
-    public override void SetStateMachine() {
+    public void SetStateMachine() {
         var quiet = new State<DroneState>("QUIET");
         var moving = new State<DroneState>("MOVE");
-        var alert = new State<DroneState>("ALERT");
         var rotate = new State<DroneState>("ROTATE");
+        var alert = new State<DroneState>("ALERT");
         var search = new State<DroneState>("SEARCH");
 
         quiet.AddTransition(DroneState.move, moving);
@@ -33,6 +32,9 @@ public class ModelDrone : Model {
         moving.AddTransition(DroneState.rotate, rotate);
         moving.AddTransition(DroneState.alert, alert);
 
+        rotate.AddTransition(DroneState.quiet, quiet);
+        rotate.AddTransition(DroneState.move, moving);
+                    
         alert.AddTransition(DroneState.search, search);
 
         search.AddTransition(DroneState.quiet, quiet);
@@ -44,14 +46,16 @@ public class ModelDrone : Model {
 
         moving.OnUpdate += () => MoveToNext();
 
-        stateMachine = new EventFSM<DroneState>(quiet);
+        rotate.OnEnter += () => RotateTo();
+
+        stateMachine = new EventFSM<DroneState>(rotate);
     }
 
     //FUNCIONES
 
     public void RotateTo() {
         currentNode = currentNode.next;
-        rigidbody.transform.forward = rigidbody.transform.position + currentNode.position;
+        rigidbody.transform.forward = -rigidbody.transform.position + currentNode.position;
 
     }
     public void MoveToNext() {

@@ -16,6 +16,11 @@ public class Drone : MonoBehaviour {
     }
     void Update() {
         control.OnUpdate();
+         
+    }
+    public void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(rb.transform.position, rb.transform.position + rb.transform.forward * 5);
     }
 
 }

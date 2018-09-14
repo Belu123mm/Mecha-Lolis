@@ -4,8 +4,8 @@ using UnityEngine;
 
 [System.Serializable]
 public class Node : MonoBehaviour{
-    public Node next;
     public Node previous;
+    public Node next;
     public int id;
     public Color color = Color.green;
 
