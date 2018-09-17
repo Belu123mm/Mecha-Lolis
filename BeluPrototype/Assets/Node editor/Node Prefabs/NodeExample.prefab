@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af51319f42867854baaac84e56734dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  next: {fileID: 0}
   previous: {fileID: 0}
+  next: {fileID: 0}
   id: 0
   color: {r: 0, g: 0.49511033, b: 0.697, a: 1}
