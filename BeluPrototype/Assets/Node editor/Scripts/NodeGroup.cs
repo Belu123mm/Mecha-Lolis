@@ -24,6 +24,7 @@ public class NodeGroup : MonoBehaviour {
             oldfirst.previous = _first;
             _last.next = _first;
         }
+        nodeList.Add(value);
         value.id = _count + 1;
         _count++;
     }

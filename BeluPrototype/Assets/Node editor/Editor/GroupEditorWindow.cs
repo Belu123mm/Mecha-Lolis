@@ -58,7 +58,8 @@ public class GroupEditorWindow : EditorWindow {
         if ( GUILayout.Button("+", GUILayout.Width(20)) ) {
 
             NodeGroup ng = new GameObject().AddComponent<NodeGroup>(); ;
-            nodegroup = (NodeGroup) EditorGUILayout.ObjectField("Grupo", ng, typeof(NodeGroup), false);
+            ng.nodeList = new List<Node>();
+            nodegroup = ng;
             nodegroup.name = "NewGroup";
         }
     }
