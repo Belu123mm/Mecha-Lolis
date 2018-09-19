@@ -25,7 +25,7 @@ public class RoundBullets : BulletGroup
     {
         for (int i = 1; i < angle; i += angle / numberOfBullets)
         {
-            print("HEU");
+
             Bullet bullets = Instantiate(circle,canon.position,Quaternion.identity);
             Vector3 direction;
             direction.z = Mathf.Cos((i + degrees) * Mathf.Deg2Rad);

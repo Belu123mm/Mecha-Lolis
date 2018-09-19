@@ -32,7 +32,7 @@ public class Bullet : MonoBehaviour {
         Gizmos.color = Color.blue;
         Gizmos.DrawSphere(center, 1);
     }
-
-
-
+    public void OnTriggerEnter( Collider other ) {
+        Destroy(this.gameObject);
+    }
 }

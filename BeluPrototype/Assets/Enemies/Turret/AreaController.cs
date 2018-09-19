@@ -26,7 +26,7 @@ public class AreaController : IControl
         {
             OnInput(TurretState.quiet);
         }
-        Debug.Log(m.stateMachine.current.name);
+
         m.stateMachine.Update();
 
     }
