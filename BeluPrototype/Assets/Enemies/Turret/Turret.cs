@@ -19,4 +19,9 @@ public class Turret : MonoBehaviour {
         control.OnUpdate();
         control.GetTarget(target);
     }
+
+    public void OnCollisionEnter( Collision collision ) {
+        if ( collision.gameObject.layer == LayerMask.NameToLayer("MyBulletz") )
+            Destroy(this.gameObject);
+    }
 }

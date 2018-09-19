@@ -22,5 +22,9 @@ public class Drone : MonoBehaviour {
     {
         Gizmos.DrawLine(rb.transform.position, rb.transform.position + rb.transform.forward * 5);
     }
+    public void OnCollisionEnter( Collision collision ) {
+        if ( collision.gameObject.layer == LayerMask.NameToLayer("MyBulletz") )
+            Destroy(this.gameObject);
+    }
 
 }

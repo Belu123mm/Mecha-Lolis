@@ -33,6 +33,7 @@ public class Bullet : MonoBehaviour {
         Gizmos.DrawSphere(center, 1);
     }
     public void OnTriggerEnter( Collider other ) {
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+        print("hit");
     }
 }
