@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-
+using UnityEditor;
+[ExecuteInEditMode]
 public class Bullet : MonoBehaviour {
 
     public delegate void OnMovement();
@@ -22,9 +23,12 @@ public class Bullet : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		Destroy(this.gameObject,5);
+        if ( Application.isPlaying )
+            Destroy(this.gameObject, 5);
+        else
+            Selection.activeGameObject = this.gameObject;
 
-	}
+    }
     void Update() {
         Movement();
     }
