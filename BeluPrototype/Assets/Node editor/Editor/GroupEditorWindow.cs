@@ -10,13 +10,21 @@ public class GroupEditorWindow : EditorWindow {
     public NodeGroup nodegroup;
     public Node nodo;
     private string newFolderName = "Bullet prefabs";
+    static GroupEditorWindow window;
+    bool hasFolder;
+    private string folderPath;
 
     [MenuItem("IA/Node Group")]
     public static void OpenWindow() {       //Start 
-        GetWindow(typeof(GroupEditorWindow));
+        window = (GroupEditorWindow)GetWindow(typeof(GroupEditorWindow));
+        
+    }
+    private void OnEnable() {
+        folderPath = "Assets/Node editor/Node Prefabs";
     }
 
     private void OnGUI() {
+        Rect buttonRect = new Rect(position.height/3,position.width/5, 0, 0);
         EditorGUILayout.LabelField("Grupo de Nodos", EditorStyles.centeredGreyMiniLabel);
 
         EditorGUILayout.BeginHorizontal();
@@ -30,23 +38,41 @@ public class GroupEditorWindow : EditorWindow {
             //TODO Funciones+
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField(nodegroup.name + ": Edicion", EditorStyles.boldLabel);
-            //TODO Agregar ventana de editar nombre :3
-            GUILayout.Button("Editar");
+            if ( GUILayout.Button("Editar") ) {
+                Debug.Log("editadah");
+                var popup = new EditNamePopup {
+                    ng = nodegroup
+                };
+                PopupWindow.Show(buttonRect, popup );
+            }
+
             EditorGUILayout.EndHorizontal();
 
             EditorGUILayout.BeginHorizontal();
             GetNodePrefab();
-            SelectNodePrefab();
             EditorGUILayout.EndHorizontal();
-            //TODO Assetdatabase
+
+            EditorGUILayout.BeginHorizontal();
             CreateNode();
-            ClearButton();
             AddFirst();
+            AddLast();
+            ClearButton();
+            EditorGUILayout.EndHorizontal();
+
+
+            if (AssetDatabase.IsValidFolder(folderPath)) {
+                if (GUILayout.Button("Guardar grupo como archivo") ) {
+                    PrefabUtility.CreatePrefab(folderPath + "/" + nodegroup.name + ".prefab", nodegroup.gameObject);
+                }
+            }
+            else {
+                EditorGUILayout.HelpBox("No tenes carpeta de Prefabs! Haz click para crear una.", MessageType.Warning);
+                if ( GUILayout.Button("Crear Carpeta ") ) {
+                    AssetDatabase.CreateFolder("Assets/Node editor", "Node Prefabs");
+                }
+
+            }
         }
-
-        var currentPath = AssetDatabase.GetAssetPath(nodo);
-        EditorGUILayout.LabelField(currentPath);
-
     }
 
     void ChooseNodeGroup() {
@@ -76,14 +102,6 @@ public class GroupEditorWindow : EditorWindow {
         nodo = (Node) EditorGUILayout.ObjectField(nodo, typeof(Node), true);
         nodegroup.nodePrefab = nodo;
     }
-    void SelectNodePrefab() {
-        GUILayout.Button("Seleccionar");
-        //TODO Abrir ventana y seleccionar con assets y cosas
-    }
-
-
-
-
 
     private void CreateNode() {
         if ( GUILayout.Button("Crear Nodo") ) {
@@ -93,13 +111,20 @@ public class GroupEditorWindow : EditorWindow {
         }
     }
     private void AddFirst() {
-        if ( GUILayout.Button("Agregar primer nodo") ) {
+        if ( GUILayout.Button("Agregar primer") ) {
             Node n = nodegroup.NewNode();
             nodegroup.AddFirst(n);
             n.name = n.id.ToString();
         }
     }
+    private void AddLast() {
+        if ( GUILayout.Button("Agregar ultimo") ) {
+            Node n = nodegroup.NewNode();
+            nodegroup.AddLast(n);
+            n.name = n.id.ToString();
+        }
 
+    }
 
     void ClearButton() {
         if ( GUILayout.Button("Limpiar nodos") ) {
@@ -107,28 +132,6 @@ public class GroupEditorWindow : EditorWindow {
         }
 
     }
-    public void CheckAssetFolder() {
-        EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Folder name: ", GUILayout.Width(75));
-        newFolderName = EditorGUILayout.TextField(newFolderName);
-        if ( GUILayout.Button("Create Folder") ) {
-            //con esto podemos revisar si un folder existe o no.
-            //SOLO VALIDO PARA CARPETAS DENTRO DE ASSETS
-            //Y solo valido, obviamente, para cuando estamos trabajando dentro del editor de Unity
-            if ( !AssetDatabase.IsValidFolder("Assets/" + newFolderName) ) {
-                /*crea un nuevo folder dentro de assets
-                el primer parámetro es la ruta a la carpeta padre, desde assets
-                o sea, "Assets" si la queremos crear directo dentro de assets,
-                o "Assets/OtraCarpeta", si lo quisieramos crear dentro de la carpeta "OtraCarpeta"*/
-                AssetDatabase.CreateFolder("Assets", newFolderName);
-                //UpdateDatabase();
-            }
-        }
-        EditorGUILayout.EndHorizontal();
-
-
-    }
-
 
 
 }
