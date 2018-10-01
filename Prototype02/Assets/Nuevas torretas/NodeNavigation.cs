@@ -1,0 +1,34 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class NodeNavigation : MonoBehaviour {
+    public Node currentNode;
+    public float speed;
+    public new Rigidbody rigidbody;
+    public float percent;
+
+    public void MoveToNext() {
+        rigidbody.velocity = rigidbody.transform.forward * speed;
+    }
+    public void mOVEbUTsLOWER() {
+        rigidbody.velocity = rigidbody.transform.forward * (speed * percent);
+    }
+
+    public bool IsOnDistance(float distance ) {
+        if ( currentNode.Distance(transform.position) < distance ) {
+            return true;
+        } else
+            return false;
+    }
+    public Vector3 position {
+        get {
+            return rigidbody.transform.position;
+        }
+    }
+    public void NextNode() {
+        currentNode = currentNode.next;
+        rigidbody.transform.forward = -rigidbody.transform.position + currentNode.position;
+    }
+
+}
