@@ -70,5 +70,7 @@ public class RoundTurret : MonoBehaviour {
 }
 public enum TurretState {
     shooting,
-    quiet
+    quiet,
+    moving,
+    iterate
 }
