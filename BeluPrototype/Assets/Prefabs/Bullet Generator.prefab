@@ -51,14 +51,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 289815af04eae6c4b9ef4b6686914427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfBullets: 78
-  angle: 360
-  circle: {fileID: 114615119562921344, guid: 684c79682e034c64282fd544f42735eb, type: 2}
-  degrees: 0
-  radians: 0
-  radiusX: 0
-  radiusY: 0
-  speedOscilation: 0
-  center: {x: 0, y: 0, z: 0}
-  bulletsCount: 0
-  speed: 20
+  target: {fileID: 0}

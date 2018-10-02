@@ -1148,7 +1148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc0ed7921b2e0843b0d75000d7dc258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 4522309513160314}
   numberOfBullets: 5
   canon: {fileID: 4615238939081978}
   angle: 360
