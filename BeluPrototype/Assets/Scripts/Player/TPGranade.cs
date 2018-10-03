@@ -6,6 +6,8 @@
 //El enfriamiento marcaria el tanto el tiempo de activación del teletransportado. Por otro lado pickear el la granada reduciría el enfriamiento.
 
 public class TPGranade : MonoBehaviour {
+    public GameModelManager game;
+
     public float Cooldown;
     public GameObject Pointer;
     public GameObject grenadePrefab;
@@ -15,45 +17,21 @@ public class TPGranade : MonoBehaviour {
     float TimeToRecast;
     int uses = 0;
     bool Triggereable = false;
-    bool grenadeIsSelected = false;
 
     private void Start()
     {
         TimeToRecast = Cooldown;
+        game = new GameModelManager();
+
+        GameModelManager.instance.controller.AddInputEvent(KeyCode.E, Teleport);
+        GameModelManager.instance.controller.AddInputEvent(KeyCode.Alpha3, Selection);
+        GameModelManager.instance.controller.AddMouseEvent(0, Shoot);
     }
-    // Update is called once per frame
-    void Update () {
 
-        //Cooldown & Tp
-        if (Triggereable == true)
-        {
-            CooldownCount();
-            if (Input.GetKeyDown(KeyCode.E) && uses == 1)
-            {
-                uses = 0;
-                transform.position = activeGrenade.transform.localPosition;
-            }
-        }
-
-        //Selección.
-        if (Input.GetKeyDown(KeyCode.Alpha3) && !Triggereable && uses == 0)
-        {
-            TimeToRecast = Cooldown;
-            Triggereable = false;
-            grenadeIsSelected = !grenadeIsSelected;
-            print(grenadeIsSelected ?"Granada esta seleccionada" : "La Granda fue deseleccionada");
-        }
-
-        //Disparo
-        if (grenadeIsSelected && Input.GetMouseButtonUp(0) && uses == 0)
-        {
-            Triggereable = true;
-            grenadeIsSelected = false;
-            uses = 1;
-            activeGrenade = Instantiate(grenadePrefab,transform.position + new Vector3(1,1,0),Quaternion.identity);
-            activeGrenade.GetComponent<Rigidbody>().AddForce(Pointer.transform.forward * force, ForceMode.Impulse);
-        }
-	}
+    private void Update()
+    {
+        if (!Triggereable) CooldownCount();
+    }
 
     void CooldownCount()
     {
@@ -65,6 +43,39 @@ public class TPGranade : MonoBehaviour {
             TimeToRecast = Cooldown;
             Triggereable = false;
             uses = 0;
+        }
+    }
+
+    void Teleport()
+    {
+        //(KeyCode.E)
+        if (uses == 1)
+        {
+            uses = 0;
+            transform.position = activeGrenade.transform.localPosition;
+        }
+    }
+
+    void Selection()
+    {
+        //Selección.
+        //(KeyCode.Alpha3)
+        if (Triggereable && uses == 0)
+        {
+            TimeToRecast = Cooldown;
+            Triggereable = true;
+            print(Triggereable ? "Granada esta seleccionada" : "La Granda fue deseleccionada");
+        }
+    }
+
+    void Shoot()
+    {
+        //Input.GetMouseButtonUp(0)
+        if (!Triggereable && uses == 0)
+        {
+            uses = 1;
+            activeGrenade = Instantiate(grenadePrefab, transform.position + new Vector3(1, 1, 0), Quaternion.identity);
+            activeGrenade.GetComponent<Rigidbody>().AddForce(Pointer.transform.forward * force, ForceMode.Impulse);
         }
     }
 }

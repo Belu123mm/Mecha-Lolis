@@ -8,7 +8,9 @@ public class GameManagerView : MonoBehaviour {
     public static GameManagerView instance;
     public LifeBarrController barraDeVida;
     public Text Points_T;
-    public string PointDisplay { set { Points_T.text = value; } }
 
-    public ShowLfe() { }
+    public string PointDisplay { set { Points_T.text = value; } }
+    public float LifeDisplay { set { barraDeVida.HPDisplay = value; } }
+
+    public GameManagerView(){ instance = this; }
 }
