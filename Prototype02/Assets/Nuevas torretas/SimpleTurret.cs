@@ -8,7 +8,7 @@ using System;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Sight))]
 
-public class SimpleTurret : MonoBehaviour {
+public class SimpleTurret : MonoBehaviour, IEnemy {
     public EventFSM<TurretState> stateMachine;
     public event Action<TurretState> OnInput = delegate { };
     public float timeToShoot;
@@ -20,7 +20,7 @@ public class SimpleTurret : MonoBehaviour {
     public float distance;
     float timer;
     // Use this for initialization
-    void Start () {
+    void Start() {
         navigation = GetComponent<NodeNavigation>();
         group = GetComponent<SimpleBulletGroup>();
         rigidbody = GetComponent<Rigidbody>();
@@ -34,7 +34,7 @@ public class SimpleTurret : MonoBehaviour {
 
     }
 
-    private void SetStateMachine() {
+    public void SetStateMachine() {
         var moving = new State<TurretState>("MOVE");
         var shooting = new State<TurretState>("SHOOT");
         var iterate = new State<TurretState>("ITERATE");
@@ -48,7 +48,7 @@ public class SimpleTurret : MonoBehaviour {
 
         moving.OnUpdate = () => navigation.MoveToNext();
 
-        shooting.OnUpdate = () => Shooting();
+        shooting.OnUpdate = () => Shoot();
 
         iterate.OnEnter = () => navigation.NextNode();
 
@@ -57,25 +57,26 @@ public class SimpleTurret : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update() {
         if ( navigation.currentNode ) {
             if ( navigation.IsOnDistance(distance) ) {
                 OnInput(TurretState.iterate);
-            }else
+            } else
             if ( sight.GetSight() ) {
                 OnInput(TurretState.shooting);
-            }else {
-            OnInput(TurretState.moving);
+            } else {
+                OnInput(TurretState.moving);
             }
         }
         stateMachine.Update();
-	}
-    void Shooting() { //TODO corutina de esto xd
+    }
+    public void Shoot() { //TODO corutina de esto xd
         timer += Time.deltaTime;
-        if (timer > timeToShoot ) {
+        if ( timer > timeToShoot ) {
             group.Shoot();
             timer = 0;
         }
         navigation.mOVEbUTsLOWER();
     }
+
 }

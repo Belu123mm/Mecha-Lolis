@@ -6,7 +6,7 @@ using System;
 [RequireComponent(typeof(RoundBullets))]
 [RequireComponent(typeof(Sight))]
 
-public class RoundTurret : MonoBehaviour {
+public class RoundTurret : MonoBehaviour, IEnemy{
     public EventFSM<TurretState> stateMachine;
     public event Action<TurretState> OnInput = delegate { };
 
