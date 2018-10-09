@@ -15,7 +15,7 @@ public class Player : MonoBehaviour {
 	{
 		game = new GameModelManager();
 		rb = GetComponent<Rigidbody>();
-	}
+    }
     private void Start()
     {
         //Suscribo mis eventos.

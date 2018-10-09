@@ -9,7 +9,6 @@ sub-categoria --> Por Ejemplo Assets/Scripts/NodeEditor.
    En ese caso lo pones en Editor con su correspondiente nombre.
 
 ---------------------------------------------------------------------
-
 Estructura de Carpetas:
 
 Assets/
@@ -22,3 +21,12 @@ Assets/
 	StandartAssets --> Será ignorado por el GitIgnore.
 	
 Faltan carpetas en caso de que algo mas sea agregado.		
+
+---------------------------------------------------------------------
+Problema:
+	El GameController ejecutara una sola vez los eventos de teclado - SOLUCIONADO.
+
+SOLUCION: El manager ahora tiene varios diccionarios con eventos que se almacenan por separado. El GameManager es el que añade los eventos.
+Además los llamados a las funciones almecenadas son más específicas.
+
+POSIBLE SOLUCION - guardar el evento con una key que sea un int. Guardamos una tupla con un keycode y un Action. Creamos una lista de Actions. Por cada valor del diccionario, chequemos que el keycode coincida. Creamos una función GetKey, GetKeyUp, GetKeyDown, GetKeyUp.	Si coindiden dentro de la función añadimos el evento(Action) en la lista de ejecución. En caso de que no exista ya. Al final ejecutamos Solo las funciones que estan listadas.)

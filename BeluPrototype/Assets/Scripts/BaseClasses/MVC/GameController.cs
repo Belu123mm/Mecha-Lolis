@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour
 
 	List<Action> SimpleExecutionList;
 	List<Tuple<float,Action<float>>> AxesExecutionList;
+
     public void Awake()
 	{
 		//Inicializo los Diccionarios.
@@ -35,25 +36,17 @@ public class GameController : MonoBehaviour
 		OnBeginMouse = new Dictionary<int, Action>() { { 0, delegate { print("Clic start 1"); } }, { 1, delegate { print("Clic start 2"); } } };
 		OnReleaseMouse = new Dictionary<int, Action>() { { 0, delegate { print("Clic release 1"); } }, { 1, delegate { print("Clic release 2"); } } };
 
-		OnGetAxes = new Dictionary<int, Action<float>>();
-		OnBeginAxes = new Dictionary<int, Action<float>>();
-		OnReleaseAxes = new Dictionary<int, Action<float>>();
+		OnGetAxes = new Dictionary<int, Action<float>>() { { 1, delegate { print("Elemento vacío"); } } };
+		OnBeginAxes = new Dictionary<int, Action<float>>() { { 1, delegate { print("Elemento vacío"); } } };
+		OnReleaseAxes = new Dictionary<int, Action<float>>() { { 1, delegate { print("Elemento vacío"); } } };
 
 		SimpleExecutionList = new List<Action>();
+		AxesExecutionList = new List<Tuple<float, Action<float>>>();
 	}
 
 	//Chequeo el input del jugador.
 	private void Update()
 	{
-		//Problema, se ejecutara una sola vez.
-
-		//Posible solucion, guardar el evento con una key que sea un int.
-		//Guardamos una tupla con un keycode y un Action.
-		//Creamos una lista de Actions.
-		//Por cada valor del diccionario, chequemos que el keycode coincida.
-		//Creamos una función GetKey, GetKeyUp, GetKeyDown, GetKeyUp.
-		//Si coindiden dentro de la función añadimos el evento(Action) en la lista de ejecución. En caso de que no exista ya.
-		//Al final ejecutamos Solo las funciones que estan listadas.
 		foreach (var key in keys)
 		{
 			if (Input.GetKeyDown(key))
@@ -74,30 +67,27 @@ public class GameController : MonoBehaviour
 		if (Input.GetMouseButtonUp(1)) SimpleExecutionList.Add(OnReleaseMouse[1]);
 
 
-		if (Input.GetButtonDown("Horizontal"))
-			if (OnBeginAxes.ContainsKey(1))
-                AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Horizontal"), OnBeginAxes[1]));
-            else
-                print("Horizontal no existe");
-        //if (Input.GetButton("Horizontal"))
-        //	if (OnBeginAxes.ContainsKey(1))
-        //		AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Horizontal"), OnGetAxes[1]));
-        //if (Input.GetButtonUp("Horizontal"))
-        //	if (OnBeginAxes.ContainsKey(1))
-        //		AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Horizontal"), OnReleaseAxes[1]));
+		OnBeginAxes[1](Input.GetAxis("Horizontal"));
+		if (Input.GetButtonDown("Horizontal") && OnBeginAxes.ContainsKey(1))
+				AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Horizontal"), OnBeginAxes[1]));
+		//else if (Input.GetButton("Horizontal") && OnGetAxes.ContainsKey(1))
+		//		AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Horizontal"), OnGetAxes[1]));
+		//if (Input.GetButtonUp("Horizontal") && OnBeginAxes.ContainsKey(1))
+		//		AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Horizontal"), OnReleaseAxes[1]));
 
 
-        //if (Input.GetButtonDown("Vertical"))
-        //	if (OnBeginAxes.ContainsKey(2))
-        //		AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Vertical"), OnBeginAxes[2]));
-        //if (Input.GetButton("Vertical"))
-        //	if (OnBeginAxes.ContainsKey(2))
-        //		AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Vertical"), OnGetAxes[2]));
-        //if (Input.GetButtonDown("Vertical"))
-        //	if (OnBeginAxes.ContainsKey(2))
-        //		AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Vertical"), OnReleaseAxes[2]));
+		//if (Input.GetButtonDown("Vertical") && OnBeginAxes.ContainsKey(2))
+		//		AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Vertical"), OnBeginAxes[2]));
+		//else if (Input.GetButton("Vertical") && OnBeginAxes.ContainsKey(2))
+		//		AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Vertical"), OnGetAxes[2]));
+		//if (Input.GetButtonDown("Vertical") && OnBeginAxes.ContainsKey(2))
+		//		AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Vertical"), OnReleaseAxes[2]));
 
-        if (SimpleExecutionList.Count > 0) foreach (var item in SimpleExecutionList) item();
+
+		if (SimpleExecutionList.Count > 0) foreach (var item in SimpleExecutionList) item();
 		SimpleExecutionList.Clear();
+
+		if (AxesExecutionList.Count > 0) foreach (var element in AxesExecutionList) element.Item2(element.Item1);
+		AxesExecutionList.Clear();
 	}	
 }

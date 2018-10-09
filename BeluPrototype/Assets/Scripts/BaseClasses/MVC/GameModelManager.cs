@@ -60,15 +60,37 @@ public class GameModelManager
 		//Serializa el estado del juego y lo guarda en disco.
 	}
 
-	#region Eventos Comunes
-	//Añadir eventos de teclado
-	public void AddHorizontalMovement(Action<float> evento)
+    #region Eventos Comunes
+    //Añadir eventos de teclado
+    public void AddBeginHorizontalMovement(Action<float> evento)
+    {
+        UnityEngine.MonoBehaviour.print("Añadido un evento Horizontal");
+        if (controller.OnBeginAxes.ContainsKey(1))
+        {
+            UnityEngine.MonoBehaviour.print("Agregado un evento a OnBegin");
+            controller.OnBeginAxes[1] += evento;
+            controller.OnBeginAxes[1](1f);
+        }
+        else
+        {
+            controller.OnBeginAxes.Add(1, evento);
+        }
+    }
+    public void AddHorizontalMovement(Action<float> evento)
 	{
-		controller.OnGetAxes.Add(1, evento);
+		UnityEngine.MonoBehaviour.print("Añadido un evento Horizontal");
+		if (!controller.OnGetAxes.ContainsKey(1))
+			controller.OnGetAxes.Add(1, evento);
+		else
+			controller.OnGetAxes[1] += evento;
 	}
 	public void AddVerticalMovement(Action<float> evento)
 	{
-		controller.OnGetAxes.Add(2, evento);
+		UnityEngine.MonoBehaviour.print("Añadido un evento Vertical");
+		if (!controller.OnGetAxes.ContainsKey(2))
+			controller.OnGetAxes.Add(2, evento);
+		else
+			controller.OnGetAxes[2] += evento;
 	}
 
 
