@@ -10,7 +10,7 @@ public class TestObject : MonoBehaviour {
     {
         Game = new GameModelManager();
         //Añado un evento de teclado;
-        Game.controller.AddInputEvent(KeyCode.W, DecirBla);
+        Game.AddBeginInputEvent(KeyCode.W, DecirBla);
     }
 
     // Update is called once per frame

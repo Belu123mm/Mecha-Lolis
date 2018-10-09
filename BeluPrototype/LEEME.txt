@@ -1,0 +1,24 @@
+-----------------------Carpetas Reordenadas--------------------------
+TODO lo que sea de EDITOR debería terminar o empezar con la palabra 
+Editor y guardarse en Assets/Editor. Específicamente los scripts que 
+sean CustomWindows o CustomInspectors.
+
+Las clases auxiliares se guardan en Assets/Scripts en alguna 
+sub-categoria --> Por Ejemplo Assets/Scripts/NodeEditor.
+ * Evitar nombres con aclaraciones --> Creador de Salas(Window)
+   En ese caso lo pones en Editor con su correspondiente nombre.
+
+---------------------------------------------------------------------
+
+Estructura de Carpetas:
+
+Assets/
+	Editor --> Todo lo que sea de editor.
+	Materials --> Materiales y PhysicsMaterials (Puede categorizarse).
+	Prefabs
+	Scenes 
+	Scripts --> Puede Catergorizarse.
+		/BaseClasses --> Estructuras de dato. Dlls. MVC. StateMachine(Base).
+	StandartAssets --> Será ignorado por el GitIgnore.
+	
+Faltan carpetas en caso de que algo mas sea agregado.		

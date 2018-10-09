@@ -16,22 +16,14 @@ public class Gun : MonoBehaviour {
     private void Start()
     {
         canShoot = true;
+        
+        //GameModelManager.instance.controller.AddMouseEvent(0, shoot);
+        GameModelManager.instance.AddBeginInputEvent(KeyCode.R,reload);
     }
 
     // Update is called once per frame
     void Update () {
         SmoothShoot();
-
-        if (Input.GetMouseButton(0) && bulletCount > 0)
-        {
-            if (canShoot)
-                shoot();
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            reload();
-        }
 	}
 
     private void reload()
@@ -57,10 +49,13 @@ public class Gun : MonoBehaviour {
 
     private void shoot()
     {
-        bulletCount--;
-        canShoot = false;
-        var newbullet = Instantiate(bullet);
-        newbullet.transform.position = cañon.transform.position;
-        newbullet.transform.forward = cañon.transform.forward;
+        if (canShoot && bulletCount > 0)
+        {
+            bulletCount--;
+            canShoot = false;
+            var newbullet = Instantiate(bullet);
+            newbullet.transform.position = cañon.transform.position;
+            newbullet.transform.forward = cañon.transform.forward;
+        }
     }
 }

@@ -6,8 +6,6 @@
 //El enfriamiento marcaria el tanto el tiempo de activación del teletransportado. Por otro lado pickear el la granada reduciría el enfriamiento.
 
 public class TPGranade : MonoBehaviour {
-    public GameModelManager game;
-
     public float Cooldown;
     public GameObject Pointer;
     public GameObject grenadePrefab;
@@ -21,11 +19,11 @@ public class TPGranade : MonoBehaviour {
     private void Start()
     {
         TimeToRecast = Cooldown;
-        game = new GameModelManager();
-
-        GameModelManager.instance.controller.AddInputEvent(KeyCode.E, Teleport);
-        GameModelManager.instance.controller.AddInputEvent(KeyCode.Alpha3, Selection);
-        GameModelManager.instance.controller.AddMouseEvent(0, Shoot);
+        
+        //Action de la clase.
+        GameModelManager.instance.AddBeginInputEvent(KeyCode.E, Teleport);
+        GameModelManager.instance.AddBeginInputEvent(KeyCode.Alpha3, Selection);
+        GameModelManager.instance.AddOnBeginMouseEvent(0, Shoot);
     }
 
     private void Update()

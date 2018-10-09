@@ -169,9 +169,38 @@ Prefab:
       propertyPath: m_IsWalking
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114301556954683254, guid: d9470fa3cbfc6264d9077ae1652b9409,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114541077927387740, guid: d9470fa3cbfc6264d9077ae1652b9409,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d9470fa3cbfc6264d9077ae1652b9409, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &331899272 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1886151979611232, guid: d9470fa3cbfc6264d9077ae1652b9409,
+    type: 2}
+  m_PrefabInternal: {fileID: 331899271}
+--- !u!114 &331899273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 331899272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 032e5943b3b5cff4cb7e837ba97947ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BaseMovementSpeed: 10
+  RunningSpeed: 20
+  isRunning: 0
 --- !u!1 &472023506
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +376,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keys: 
-  continius: 0
 --- !u!114 &887795228
 MonoBehaviour:
   m_ObjectHideFlags: 0
