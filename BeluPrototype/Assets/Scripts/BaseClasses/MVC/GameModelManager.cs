@@ -60,37 +60,50 @@ public class GameModelManager
 		//Serializa el estado del juego y lo guarda en disco.
 	}
 
-    #region Eventos Comunes
-    //Añadir eventos de teclado
-    public void AddBeginHorizontalMovement(Action<float> evento)
-    {
-        UnityEngine.MonoBehaviour.print("Añadido un evento Horizontal");
-        if (controller.OnBeginAxes.ContainsKey(1))
-        {
-            UnityEngine.MonoBehaviour.print("Agregado un evento a OnBegin");
-            controller.OnBeginAxes[1] += evento;
-            controller.OnBeginAxes[1](1f);
-        }
-        else
-        {
-            controller.OnBeginAxes.Add(1, evento);
-        }
-    }
-    public void AddHorizontalMovement(Action<float> evento)
+	#region Eventos Comunes
+	//Añadir eventos de teclado
+	public void AddBeginHorizontal(Action<float> evento)
 	{
-		UnityEngine.MonoBehaviour.print("Añadido un evento Horizontal");
-		if (!controller.OnGetAxes.ContainsKey(1))
-			controller.OnGetAxes.Add(1, evento);
+		if (controller.OnBeginAxes.ContainsKey(1))
+		{
+			UnityEngine.MonoBehaviour.print("Agregado un evento a OnBegin");
+			controller.OnBeginAxes[1] += evento;
+		}
 		else
-			controller.OnGetAxes[1] += evento;
+		{
+			UnityEngine.MonoBehaviour.print("Agregado un nuevo elemento y el evento");
+			controller.OnBeginAxes.Add(1, evento);
+		}
 	}
-	public void AddVerticalMovement(Action<float> evento)
+	public void AddHorizontal(Action<float> evento)
 	{
-		UnityEngine.MonoBehaviour.print("Añadido un evento Vertical");
-		if (!controller.OnGetAxes.ContainsKey(2))
-			controller.OnGetAxes.Add(2, evento);
-		else
-			controller.OnGetAxes[2] += evento;
+		if (!controller.OnGetAxes.ContainsKey(1)) controller.OnGetAxes.Add(1, evento);
+			//UnityEngine.MonoBehaviour.print("Añadido y creado un evento Horizontal");
+		else controller.OnGetAxes[1] += evento;
+			//UnityEngine.MonoBehaviour.print("Añadido un evento Horizontal");
+	}
+	public void AddReleaseHorizontal(Action<float> evento)
+	{
+		if (!controller.OnReleaseAxes.ContainsKey(1)) controller.OnReleaseAxes.Add(1, evento);
+		else controller.OnReleaseAxes[1] += evento;
+	}
+
+    public void AddBeginVertical(Action<float> evento)
+    {
+        if (!controller.OnBeginAxes.ContainsKey(2)) controller.OnGetAxes.Add(2, evento);
+        else controller.OnGetAxes[2] += evento;
+    }
+	public void AddVertical(Action<float> evento)
+	{
+		if (!controller.OnGetAxes.ContainsKey(2)) controller.OnGetAxes.Add(2, evento);
+			//UnityEngine.MonoBehaviour.print("Añadido y creado un evento Vertical");
+		else controller.OnGetAxes[2] += evento;
+			//UnityEngine.MonoBehaviour.print("Añadido un evento Vertical");
+	}
+	public void AddReleaseVertical(Action<float> evento)
+	{
+		if (!controller.OnReleaseAxes.ContainsKey(2)) controller.OnReleaseAxes.Add(2, evento);
+		else controller.OnReleaseAxes[2] += evento;
 	}
 
 

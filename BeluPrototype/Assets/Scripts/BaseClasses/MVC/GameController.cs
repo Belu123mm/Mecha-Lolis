@@ -32,20 +32,20 @@ public class GameController : MonoBehaviour
 		OnBeginKeyCode = new Dictionary<KeyCode, Action>();
 		OnRealeaseKeyCode = new Dictionary<KeyCode, Action>();
 
-		OnMouse = new Dictionary<int, Action>() { { 0, delegate { print("Clic 1"); } }, { 1, delegate { print("Clic 2"); } } };
-		OnBeginMouse = new Dictionary<int, Action>() { { 0, delegate { print("Clic start 1"); } }, { 1, delegate { print("Clic start 2"); } } };
-		OnReleaseMouse = new Dictionary<int, Action>() { { 0, delegate { print("Clic release 1"); } }, { 1, delegate { print("Clic release 2"); } } };
+		OnMouse = new Dictionary<int, Action>() { { 0, delegate { } }, { 1, delegate { } } };
+		OnBeginMouse = new Dictionary<int, Action>() { { 0, delegate { } }, { 1, delegate { } } };
+		OnReleaseMouse = new Dictionary<int, Action>() { { 0, delegate { } }, { 1, delegate { } } };
 
-		OnGetAxes = new Dictionary<int, Action<float>>() { { 1, delegate { print("Elemento vacío"); } } };
-		OnBeginAxes = new Dictionary<int, Action<float>>() { { 1, delegate { print("Elemento vacío"); } } };
-		OnReleaseAxes = new Dictionary<int, Action<float>>() { { 1, delegate { print("Elemento vacío"); } } };
+		OnGetAxes = new Dictionary<int, Action<float>>() { { 1, delegate { } } };
+		OnBeginAxes = new Dictionary<int, Action<float>>() { { 1, delegate { } } };
+		OnReleaseAxes = new Dictionary<int, Action<float>>() { { 1, delegate { } } };
 
 		SimpleExecutionList = new List<Action>();
 		AxesExecutionList = new List<Tuple<float, Action<float>>>();
 	}
 
-	//Chequeo el input del jugador.
-	private void Update()
+    //Chequeo el input del jugador.
+    private void Update()
 	{
 		foreach (var key in keys)
 		{
@@ -67,21 +67,20 @@ public class GameController : MonoBehaviour
 		if (Input.GetMouseButtonUp(1)) SimpleExecutionList.Add(OnReleaseMouse[1]);
 
 
-		OnBeginAxes[1](Input.GetAxis("Horizontal"));
 		if (Input.GetButtonDown("Horizontal") && OnBeginAxes.ContainsKey(1))
-				AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Horizontal"), OnBeginAxes[1]));
-		//else if (Input.GetButton("Horizontal") && OnGetAxes.ContainsKey(1))
-		//		AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Horizontal"), OnGetAxes[1]));
-		//if (Input.GetButtonUp("Horizontal") && OnBeginAxes.ContainsKey(1))
-		//		AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Horizontal"), OnReleaseAxes[1]));
+			AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Horizontal"), OnBeginAxes[1]));
+		else if (Input.GetButton("Horizontal") && OnGetAxes.ContainsKey(1))
+			AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Horizontal"), OnGetAxes[1]));
+		if (Input.GetButtonUp("Horizontal") && OnBeginAxes.ContainsKey(1))
+			AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Horizontal"), OnReleaseAxes[1]));
 
 
-		//if (Input.GetButtonDown("Vertical") && OnBeginAxes.ContainsKey(2))
-		//		AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Vertical"), OnBeginAxes[2]));
-		//else if (Input.GetButton("Vertical") && OnBeginAxes.ContainsKey(2))
-		//		AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Vertical"), OnGetAxes[2]));
-		//if (Input.GetButtonDown("Vertical") && OnBeginAxes.ContainsKey(2))
-		//		AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Vertical"), OnReleaseAxes[2]));
+		if (Input.GetButtonDown("Vertical") && OnBeginAxes.ContainsKey(2))
+			AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Vertical"), OnBeginAxes[2]));
+		else if (Input.GetButton("Vertical") && OnGetAxes.ContainsKey(2))
+			AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Vertical"), OnGetAxes[2]));
+		if (Input.GetButtonDown("Vertical") && OnReleaseAxes.ContainsKey(2))
+			AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Vertical"), OnReleaseAxes[2]));
 
 
 		if (SimpleExecutionList.Count > 0) foreach (var item in SimpleExecutionList) item();
