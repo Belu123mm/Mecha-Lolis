@@ -21,9 +21,9 @@ public class TPGranade : MonoBehaviour {
 		TimeToRecast = Cooldown;
 		
 		//Action de la clase.
-		GameModelManager.instance.AddBeginInputEvent(KeyCode.E, Teleport);
-		GameModelManager.instance.AddBeginInputEvent(KeyCode.Alpha3, Selection);
-		GameModelManager.instance.AddOnBeginMouseEvent(0, Shoot);
+		GameModelManager.instance.AddSimpleInputEvent(InputEventType.OnBegin, KeyCode.E, Teleport);
+		GameModelManager.instance.AddSimpleInputEvent(InputEventType.OnBegin, KeyCode.Alpha3, Selection);
+		GameModelManager.instance.AddMouseEvent(InputEventType.OnBegin, 0, Shoot);
 	}
 
 	private void Update()

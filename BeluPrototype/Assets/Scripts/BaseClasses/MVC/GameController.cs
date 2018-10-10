@@ -16,6 +16,8 @@ public class GameController : MonoBehaviour
 	public Dictionary<int, Action> OnMouse;
 	public Dictionary<int, Action> OnReleaseMouse;
 
+	public Action<float, float> MouseAxisTrack = delegate { };
+
 	//El int: 1 = Horizontal, 2 = vertical.
 	public Dictionary<int,Action<float>> OnGetAxes;
 	public Dictionary<int,Action<float>> OnBeginAxes;
@@ -24,7 +26,7 @@ public class GameController : MonoBehaviour
 	List<Action> SimpleExecutionList;
 	List<Tuple<float,Action<float>>> AxesExecutionList;
 
-    public void Awake()
+	public void Awake()
 	{
 		//Inicializo los Diccionarios.
 		keys = new List<KeyCode>();
@@ -44,8 +46,8 @@ public class GameController : MonoBehaviour
 		AxesExecutionList = new List<Tuple<float, Action<float>>>();
 	}
 
-    //Chequeo el input del jugador.
-    private void Update()
+	//Chequeo el input del jugador.
+	private void Update()
 	{
 		foreach (var key in keys)
 		{
@@ -88,5 +90,7 @@ public class GameController : MonoBehaviour
 
 		if (AxesExecutionList.Count > 0) foreach (var element in AxesExecutionList) element.Item2(element.Item1);
 		AxesExecutionList.Clear();
+
+		MouseAxisTrack(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 	}	
 }

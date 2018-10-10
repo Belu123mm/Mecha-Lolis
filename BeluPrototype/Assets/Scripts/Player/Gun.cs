@@ -16,9 +16,9 @@ public class Gun : MonoBehaviour {
     private void Start()
     {
         canShoot = true;
-        
-        //GameModelManager.instance.controller.AddMouseEvent(0, shoot);
-        GameModelManager.instance.AddBeginInputEvent(KeyCode.R,reload);
+
+        //GameModelManager.instance.controller.AddMouseEvent(InputEventType.OnBegin, 0, shoot);
+        GameModelManager.instance.AddSimpleInputEvent(InputEventType.OnBegin, KeyCode.R,reload);
     }
 
     // Update is called once per frame
