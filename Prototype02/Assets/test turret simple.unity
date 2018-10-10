@@ -469,21 +469,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   oleadas:
-  - enemy: {fileID: 1180113400}
-    quatity: 3
-    lifetime: 1
-  grupos: []
-  currentWave:
-    enemy: {fileID: 0}
-    quatity: 0
-    lifetime: 0
+  - enemy: {fileID: 0}
+    qt: 0
+    spawntime: 0
+    hasNodes: 0
+  nodeGroups: []
   waitToStartTime: 2
-  cooldown: 3
   timer: 0
   start: 0
-  count: 0
-  waveCount: 0
-  cooldowning: 0
+  finished: 0
 --- !u!4 &739584703
 Transform:
   m_ObjectHideFlags: 0
@@ -637,12 +631,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba9a3b8fd21a1c147a9a1864fb5d72c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 166289519}
+  sight: {fileID: 0}
+  nodegroup: {fileID: 0}
   timeToShoot: 0.2
   navigation: {fileID: 0}
   group: {fileID: 0}
-  target: {fileID: 166289519}
   rigidbody: {fileID: 0}
-  sight: {fileID: 0}
   distance: 1
 --- !u!23 &965503521
 MeshRenderer:
@@ -1030,6 +1025,61 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &1725076499
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1725076501}
+  - component: {fileID: 1725076500}
+  m_Layer: 0
+  m_Name: GameObject (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1725076500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1725076499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328f10d916b5e2141a112bd4e1c0f45b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oleadas:
+  - enemy: {fileID: 0}
+    qt: 0
+    spawntime: 0
+    hasNodes: 0
+  - enemy: {fileID: 0}
+    qt: 0
+    spawntime: 0
+    hasNodes: 0
+  nodeGroups:
+  - {fileID: 1249066918}
+  waitToStartTime: 0
+  timer: 0
+  start: 0
+  finished: 0
+--- !u!4 &1725076501
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1725076499}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.314664, y: 2.0591507, z: -4.9743934}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2006385404
 GameObject:
   m_ObjectHideFlags: 0

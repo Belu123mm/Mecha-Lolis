@@ -4,28 +4,27 @@ using UnityEngine;
 using System;
 
 [RequireComponent(typeof(NodeNavigation))]
-[RequireComponent(typeof(SimpleBulletGroup))]
+[RequireComponent(typeof(SimpleBullets))]
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Sight))]
 
-public class SimpleTurret : MonoBehaviour, IEnemy {
+public class SimpleTurret : Turret, IEnemy {
     public EventFSM<TurretState> stateMachine;
     public event Action<TurretState> OnInput = delegate { };
     public float timeToShoot;
     public NodeNavigation navigation;
-    public SimpleBulletGroup group;
-    public Transform target;
+    public SimpleBullets group;
     public new Rigidbody rigidbody;
-    public Sight sight;
     public float distance;
+
     float timer;
     // Use this for initialization
     void Start() {
         navigation = GetComponent<NodeNavigation>();
-        group = GetComponent<SimpleBulletGroup>();
+        group = GetComponent<SimpleBullets>();
         rigidbody = GetComponent<Rigidbody>();
         sight = GetComponent<Sight>();
-
+        navigation.currentNode = nodegroup._first;
         group.target = target;
         sight.targetTransform = target;
         navigation.rigidbody = rigidbody;
@@ -54,10 +53,12 @@ public class SimpleTurret : MonoBehaviour, IEnemy {
 
         stateMachine = new EventFSM<TurretState>(iterate);
 
+
     }
 
     // Update is called once per frame
     void Update() {
+
         if ( navigation.currentNode ) {
             if ( navigation.IsOnDistance(distance) ) {
                 OnInput(TurretState.iterate);

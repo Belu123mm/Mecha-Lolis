@@ -6,15 +6,13 @@ using System;
 [RequireComponent(typeof(RoundBullets))]
 [RequireComponent(typeof(Sight))]
 
-public class RoundTurret : MonoBehaviour, IEnemy{
+public class RoundTurret : Turret, IEnemy{
     public EventFSM<TurretState> stateMachine;
     public event Action<TurretState> OnInput = delegate { };
 
-    public Transform target;
     public float timer;
     public float timetoshot;
     public RoundBullets group;
-    public Sight sight;
 
     public void Awake() {
         sight = GetComponent<Sight>();
