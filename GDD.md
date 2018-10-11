@@ -60,7 +60,6 @@ EStilo2; Arañas. finos y delgados en estructura. Armas pequeñas.
 Estilo3: Droids limpios y con pocos detalles. Luces y armas retractiles. Gran camara como ojo. Inofensivos a primera vista. 
 
 
-
 # MVC 
 (Ingrese diagrama de flujo de cosas)
 
