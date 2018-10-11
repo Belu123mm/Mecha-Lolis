@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour {
     public TPGranade granadeHability;
+    public Animator anim;
     public GameObject bullet;
     public GameObject cañon;
     public float recoil;
@@ -52,7 +53,8 @@ public class Gun : MonoBehaviour {
     private void shoot()
     {
         if (canShoot && bulletCount > 0)
-        {
+        {   
+            anim.SetTrigger("Shoot");
             bulletCount--;
             canShoot = false;
             var newbullet = Instantiate(bullet);
