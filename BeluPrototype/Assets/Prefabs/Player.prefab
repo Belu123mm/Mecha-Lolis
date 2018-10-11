@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 136663475517086314}
   - component: {fileID: 114419503513734866}
   - component: {fileID: 114236362535177934}
+  - component: {fileID: 114234756068578338}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -73,7 +74,6 @@ GameObject:
   - component: {fileID: 4360756004544304}
   - component: {fileID: 33502271618093692}
   - component: {fileID: 23602118285574052}
-  - component: {fileID: 114876016056385732}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -87,7 +87,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1056065510007430}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -223,7 +223,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -235,13 +235,31 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1720790913363028}
   m_Enabled: 1
+--- !u!114 &114234756068578338
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1056065510007430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 506c44216a2ca9344ac033ee48b4fd21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  granadeHability: {fileID: 114236362535177934}
+  bullet: {fileID: 1791854876743614, guid: 1ce107934ae99db45b0dcd7aba68fa4c, type: 2}
+  "ca\xF1on": {fileID: 1431137175767242}
+  recoil: 1
+  cooldown: 0.4
+  bulletCount: 20
+  maxBullets: 20
 --- !u!114 &114236362535177934
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1056065510007430}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f852b565a0216448b65c929dd99bc98, type: 3}
   m_Name: 
@@ -251,6 +269,7 @@ MonoBehaviour:
   grenadePrefab: {fileID: 1565781933416148, guid: c71020af808f18c45abf9b1d0248254d,
     type: 2}
   force: 10
+  Triggereable: 0
 --- !u!114 &114419503513734866
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -268,23 +287,6 @@ MonoBehaviour:
   HorizontalSpeed: 2
   VerticalSpeed: 2
   isRunning: 0
---- !u!114 &114876016056385732
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1763361837891290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 506c44216a2ca9344ac033ee48b4fd21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullet: {fileID: 0}
-  "ca\xF1on": {fileID: 0}
-  recoil: 0
-  cooldown: 0
-  bulletCount: 0
-  maxBullets: 0
 --- !u!124 &124216133861980904
 Behaviour:
   m_ObjectHideFlags: 1
