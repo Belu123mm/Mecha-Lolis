@@ -10,11 +10,11 @@ public class TPGranade : MonoBehaviour {
 	public GameObject Pointer;
 	public GameObject grenadePrefab;
 	public float force;
+	public bool Triggereable = false;
 
 	GameObject activeGrenade;
 	float TimeToRecast;
 	int uses = 0;
-	bool Triggereable = false;
 
 	private void Start()
 	{
@@ -23,12 +23,12 @@ public class TPGranade : MonoBehaviour {
 		//Action de la clase.
 		GameModelManager.instance.AddSimpleInputEvent(InputEventType.OnBegin, KeyCode.E, Teleport);
 		GameModelManager.instance.AddSimpleInputEvent(InputEventType.OnBegin, KeyCode.Alpha3, Selection);
-		GameModelManager.instance.AddMouseEvent(InputEventType.OnBegin, 0, Shoot);
+		GameModelManager.instance.AddMouseEvent(InputEventType.OnBegin, 0, ThrowGrenade);
 	}
 
 	private void Update()
 	{
-		if (!Triggereable) CooldownCount();
+		if (Triggereable && uses == 0) CooldownCount();
 	}
 
 	void CooldownCount()
@@ -44,32 +44,34 @@ public class TPGranade : MonoBehaviour {
 		}
 	}
 
-	void Teleport()
-	{
-		if (uses == 1)
-		{
-			uses = 0;
-			transform.position = activeGrenade.transform.localPosition;
-		}
-	}
 
 	void Selection()
 	{
-		if (Triggereable && uses == 0)
+		if (!Triggereable)
 		{
+            uses = 1;
 			TimeToRecast = Cooldown;
 			Triggereable = true;
 			print(Triggereable ? "Granada esta seleccionada" : "La Granda fue deseleccionada");
 		}
 	}
 
-	void Shoot()
+	void ThrowGrenade()
 	{
-		if (!Triggereable && uses == 0)
+		if (Triggereable && uses == 1)
 		{
-			uses = 1;
 			activeGrenade = Instantiate(grenadePrefab, transform.position + new Vector3(1, 1, 0), Quaternion.identity);
 			activeGrenade.GetComponent<Rigidbody>().AddForce(Pointer.transform.forward * force, ForceMode.Impulse);
+		}
+	}
+
+	void Teleport()
+	{
+        print("Teleport y uses: " + uses);
+		if (uses == 1)
+		{
+			uses = 0;
+			transform.position = activeGrenade.transform.localPosition;
 		}
 	}
 }

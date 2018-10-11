@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Gun : MonoBehaviour {
+    public TPGranade granadeHability;
     public GameObject bullet;
     public GameObject cañon;
     public float recoil;
@@ -17,7 +18,7 @@ public class Gun : MonoBehaviour {
     {
         canShoot = true;
 
-        //GameModelManager.instance.controller.AddMouseEvent(InputEventType.OnBegin, 0, shoot);
+        GameModelManager.instance.AddMouseEvent(InputEventType.Continious, 0, shoot);
         GameModelManager.instance.AddSimpleInputEvent(InputEventType.OnBegin, KeyCode.R,reload);
     }
 
@@ -28,6 +29,7 @@ public class Gun : MonoBehaviour {
 
     private void reload()
     {
+        print("Reloaded");
         bulletCount = maxBullets;
     }
 

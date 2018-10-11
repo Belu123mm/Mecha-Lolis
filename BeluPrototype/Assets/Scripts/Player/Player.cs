@@ -24,9 +24,9 @@ public class Player : MonoBehaviour {
 		//Suscribo mis eventos.
 		game.AddHorizontalEvent( InputEventType.Continious, MoveHorizontal );
 		game.AddVerticalEvent( InputEventType.Continious, MoveVertical);
-		game.AddSimpleInputEvent( InputEventType.OnBegin, KeyCode.LeftShift, running);
-		game.AddSimpleInputEvent( InputEventType.OnRelease, KeyCode.LeftShift, running);
-		game.AddMouseTrack(RotateCamera);
+        game.AddSimpleInputEvent(InputEventType.OnBegin, KeyCode.LeftShift, running);
+        game.AddSimpleInputEvent(InputEventType.OnRelease, KeyCode.LeftShift, running);
+        game.AddMouseTrack(RotateCamera);
 	}
 
 	public void MoveHorizontal(float dir)
@@ -39,10 +39,6 @@ public class Player : MonoBehaviour {
 		_currentMovementSpeed = isRunning ? RunningSpeed : BaseMovementSpeed;
 		transform.position += transform.forward * dir * _currentMovementSpeed * Time.deltaTime;
 	}
-	public void running()
-	{
-		isRunning = !isRunning;
-	}
 
 	public void RotateCamera(float x, float y)
 	{
@@ -53,7 +49,12 @@ public class Player : MonoBehaviour {
 		firstPersonCamera.transform.Rotate(-v, 0, 0);
 	}
 
-	public void Jump()
+    public void running()
+    {
+        isRunning = !isRunning;
+    }
+
+    public void Jump()
 	{
 		//Añadir lógica del salto.
 		//Tenemos el rb.

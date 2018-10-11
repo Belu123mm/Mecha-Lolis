@@ -119,19 +119,21 @@ public class GameModelManager
 	/// <param name="Evento">Evento a ejecutar.</param>
 	public void AddSimpleInputEvent(InputEventType type, UnityEngine.KeyCode Input, Action Evento)
 	{
-		switch (type)
+        if (!controller.keys.Contains(Input)) controller.keys.Add(Input);
+
+        switch (type)
 		{
 			case InputEventType.OnBegin:
-				controller.keys.Add(Input);
-				controller.OnBeginKeyCode.Add(Input, Evento);
+                if (!controller.OnBeginKeyCode.ContainsKey(Input)) controller.OnBeginKeyCode.Add(Input, Evento);
+                else controller.OnBeginKeyCode[Input] += Evento;
 				break;
 			case InputEventType.Continious:
-				controller.keys.Add(Input);
-				controller.OnKeyCode.Add(Input, Evento);
+                if (!controller.OnKeyCode.ContainsKey(Input)) controller.OnKeyCode.Add(Input, Evento);
+                else controller.OnKeyCode[Input] += Evento;
 				break;
 			case InputEventType.OnRelease:
-				controller.keys.Add(Input);
-				controller.OnKeyCode.Add(Input, Evento);
+                if (!controller.OnReleaseKeyCode.ContainsKey(Input)) controller.OnReleaseKeyCode.Add(Input, Evento);
+                else controller.OnReleaseKeyCode[Input] += Evento;
 				break;
 			default:
 				break;
@@ -149,13 +151,16 @@ public class GameModelManager
 		switch (type)
 		{
 			case InputEventType.OnBegin:
-				controller.OnBeginMouse.Add(mouseButton, Evento);
+                if (!controller.OnBeginMouse.ContainsKey(mouseButton)) controller.OnBeginMouse.Add(mouseButton, Evento);
+                else controller.OnBeginMouse[mouseButton] += Evento;
 				break;
 			case InputEventType.Continious:
-				controller.OnMouse.Add(mouseButton, Evento);
+                if (!controller.OnMouse.ContainsKey(mouseButton)) controller.OnMouse.Add(mouseButton, Evento);
+                else controller.OnMouse[mouseButton] += Evento;
 				break;
 			case InputEventType.OnRelease:
-				controller.OnReleaseMouse.Add(mouseButton, Evento);
+                if (!controller.OnReleaseMouse.ContainsKey(mouseButton)) controller.OnReleaseMouse.Add(mouseButton, Evento);
+                else controller.OnReleaseMouse[mouseButton] += Evento;
 				break;
 			default:
 				break;

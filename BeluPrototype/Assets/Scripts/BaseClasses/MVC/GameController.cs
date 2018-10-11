@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour
 	public List<KeyCode> keys; //Keys que vamos a trackear.
 	public Dictionary<KeyCode, Action> OnKeyCode;//Eventos simples continuos.
 	public Dictionary<KeyCode, Action> OnBeginKeyCode;//Eventos simples.
-	public Dictionary<KeyCode, Action> OnRealeaseKeyCode; //Final de eventos simples.
+	public Dictionary<KeyCode, Action> OnReleaseKeyCode; //Final de eventos simples.
 
 	public Dictionary<int, Action> OnBeginMouse;
 	public Dictionary<int, Action> OnMouse;
@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour
 		keys = new List<KeyCode>();
 		OnKeyCode = new Dictionary<KeyCode, Action>();
 		OnBeginKeyCode = new Dictionary<KeyCode, Action>();
-		OnRealeaseKeyCode = new Dictionary<KeyCode, Action>();
+		OnReleaseKeyCode = new Dictionary<KeyCode, Action>();
 
 		OnMouse = new Dictionary<int, Action>() { { 0, delegate { } }, { 1, delegate { } } };
 		OnBeginMouse = new Dictionary<int, Action>() { { 0, delegate { } }, { 1, delegate { } } };
@@ -49,16 +49,15 @@ public class GameController : MonoBehaviour
 	//Chequeo el input del jugador.
 	private void Update()
 	{
-		foreach (var key in keys)
-		{
-			if (Input.GetKeyDown(key))
-				SimpleExecutionList.Add(OnBeginKeyCode[key]);
-			else if (Input.GetKey(key))
-				SimpleExecutionList.Add(OnBeginKeyCode[key]);
-
-			if (Input.GetKeyDown(key))
-				SimpleExecutionList.Add(OnRealeaseKeyCode[key]);
-		}
+        foreach (var key in keys)
+        {
+            if (Input.GetKeyUp(key) && OnReleaseKeyCode.ContainsKey(key))
+                SimpleExecutionList.Add(OnReleaseKeyCode[key]);
+            if (Input.GetKeyDown(key) && OnBeginKeyCode.ContainsKey(key))
+                SimpleExecutionList.Add(OnBeginKeyCode[key]);
+			if (Input.GetKey(key) && OnKeyCode.ContainsKey(key))
+				SimpleExecutionList.Add(OnKeyCode[key]);
+        }
 
 		if (Input.GetMouseButtonDown(0)) SimpleExecutionList.Add(OnBeginMouse[0]);
 		else if (Input.GetMouseButton(0)) SimpleExecutionList.Add(OnMouse[0]);
@@ -84,7 +83,7 @@ public class GameController : MonoBehaviour
 		if (Input.GetButtonDown("Vertical") && OnReleaseAxes.ContainsKey(2))
 			AxesExecutionList.Add(Tuple.Create(Input.GetAxis("Vertical"), OnReleaseAxes[2]));
 
-
+        //-------------------------------------Ejecucion-----------------------------------------------------------
 		if (SimpleExecutionList.Count > 0) foreach (var item in SimpleExecutionList) item();
 		SimpleExecutionList.Clear();
 
