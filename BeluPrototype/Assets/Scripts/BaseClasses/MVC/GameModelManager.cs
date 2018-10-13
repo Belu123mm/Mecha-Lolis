@@ -20,6 +20,7 @@ public class GameModelManager
 		instance = this;
 		gameView = UnityEngine.Object.FindObjectOfType<GameManagerView>();
 		controller = UnityEngine.Object.FindObjectOfType<GameController>();
+		UpdatePoints();
 	}
 
 	/// <summary>
@@ -55,6 +56,18 @@ public class GameModelManager
 	public void SaveGame()
 	{
 		//Serializa el estado del juego y lo guarda en disco.
+	}
+
+	public void UpdateLife(float life)
+	{
+		if (life < 0)
+			gameView.LifeDisplay = 0;
+		else
+			gameView.LifeDisplay = life;
+	}
+	public void UpdatePoints()
+	{
+		gameView.PointDisplay = Points.ToString();
 	}
 
 	#region Eventos Comunes

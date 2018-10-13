@@ -22,9 +22,9 @@ GameObject:
   - component: {fileID: 33338760153365852}
   - component: {fileID: 135377794085267984}
   - component: {fileID: 23099230279737428}
-  - component: {fileID: 114193548211809700}
   - component: {fileID: 54739094344056316}
   - component: {fileID: 96922905783593626}
+  - component: {fileID: 114193548211809700}
   m_Layer: 10
   m_Name: bullet
   m_TagString: Untagged
@@ -207,6 +207,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 10
   timeToDie: 10
+  Damage: 10
+  DamageableLayer: 12
 --- !u!135 &135377794085267984
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -214,7 +216,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1791854876743614}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5

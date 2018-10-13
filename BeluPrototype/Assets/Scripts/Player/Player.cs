@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour, IDamageable {
 	public GameModelManager game;
 	public Camera firstPersonCamera;
+	public int Life;
+	public int MaxLife;
 
 	public float BaseMovementSpeed;
 	public float RunningSpeed;
@@ -24,9 +26,9 @@ public class Player : MonoBehaviour {
 		//Suscribo mis eventos.
 		game.AddHorizontalEvent( InputEventType.Continious, MoveHorizontal );
 		game.AddVerticalEvent( InputEventType.Continious, MoveVertical);
-        game.AddSimpleInputEvent(InputEventType.OnBegin, KeyCode.LeftShift, running);
-        game.AddSimpleInputEvent(InputEventType.OnRelease, KeyCode.LeftShift, running);
-        game.AddMouseTrack(RotateCamera);
+		game.AddSimpleInputEvent(InputEventType.OnBegin, KeyCode.LeftShift, running);
+		game.AddSimpleInputEvent(InputEventType.OnRelease, KeyCode.LeftShift, running);
+		game.AddMouseTrack(RotateCamera);
 	}
 
 	public void MoveHorizontal(float dir)
@@ -49,15 +51,25 @@ public class Player : MonoBehaviour {
 		firstPersonCamera.transform.Rotate(-v, 0, 0);
 	}
 
-    public void running()
-    {
-        isRunning = !isRunning;
-    }
+	public void running()
+	{
+		isRunning = !isRunning;
+	}
 
-    public void Jump()
+	public void Jump()
 	{
 		//Añadir lógica del salto.
 		//Tenemos el rb.
 	}
 
+	public void AddDamage(int Damage)
+	{
+		Life -= Damage;
+		if (Life <= 0)
+		{
+			print("Estas muerto");
+		}
+		game.UpdateLife((float)Life/MaxLife);
+		print("Recibiste daño!");
+	}
 }
