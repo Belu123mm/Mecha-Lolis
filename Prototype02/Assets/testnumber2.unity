@@ -507,19 +507,20 @@ MonoBehaviour:
   oleadas:
   - enemy: {fileID: 114398921257288216, guid: 3c5891374a51d454d826f4d93164ab86, type: 2}
     qt: 2
-    spawntime: 0
+    spawntime: 1
     hasNodes: 0
   - enemy: {fileID: 114508244664116928, guid: 9ba253c921887724fb266196d5bae62d, type: 2}
     qt: 3
-    spawntime: 0
+    spawntime: 2
     hasNodes: 1
   nodeGroups:
   - {fileID: 2099041596}
-  waitToStartTime: 0
+  waitToStartTime: 3
   timer: 0
   start: 0
   finished: 0
   target: {fileID: 911531966}
+  timeBetweenWaves: 10
 --- !u!4 &2030481780
 Transform:
   m_ObjectHideFlags: 0
