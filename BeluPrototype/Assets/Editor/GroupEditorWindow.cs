@@ -9,14 +9,14 @@ public class GroupEditorWindow : EditorWindow {
     [SerializeField]
     public NodeGroup nodegroup;
     public Node nodo;
-    //private string newFolderName = "Bullet prefabs";
-    //static GroupEditorWindow window;
+    private string newFolderName = "Bullet prefabs";
+    static GroupEditorWindow window;
     bool hasFolder;
     private string folderPath;
 
     [MenuItem("IA/Node Group")]
     public static void OpenWindow() {       //Start 
-        //window = (GroupEditorWindow)GetWindow(typeof(GroupEditorWindow));
+        window = (GroupEditorWindow)GetWindow(typeof(GroupEditorWindow));
         
     }
     private void OnEnable() {

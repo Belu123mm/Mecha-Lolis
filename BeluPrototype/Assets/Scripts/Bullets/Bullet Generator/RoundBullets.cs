@@ -7,12 +7,12 @@ public class RoundBullets : BulletGroup
     public int numberOfBullets;
     public Transform canon;
     [Range(0, 360)]
-    public int angle;
     public Bullet circle;
-    public float degrees;
+    float degrees;
     public float radians;
     public float radiusX;
     public float radiusY;
+    public float variation;
 
     [Tooltip("It has to be VERY high, like 100+")]
     public float speedOscilation;
@@ -23,14 +23,17 @@ public class RoundBullets : BulletGroup
 
     public override void Shoot()
     {
-        for (int i = 1; i < angle; i += angle / numberOfBullets)
+        degrees += variation;
+
+        Debug.Log(transform.forward);
+        for (int i = 1; i < 360; i += 360 / numberOfBullets)
         {
 
             Bullet bullets = Instantiate(circle,canon.position,Quaternion.identity);
             Vector3 direction;
-            direction.z = Mathf.Cos((i + degrees) * Mathf.Deg2Rad);
-            direction.y = 0;
-            direction.x = Mathf.Sin((i + degrees) * Mathf.Deg2Rad);
+            direction.x = Mathf.Cos((i + degrees) * Mathf.Deg2Rad);
+            direction.y =
+            direction.z = Mathf.Tan((i + degrees) * Mathf.Deg2Rad);
 
             bullets.transform.forward = direction;
             bullets.degrees = degrees;
@@ -47,9 +50,11 @@ public class RoundBullets : BulletGroup
         }
 
     }
+    public void Update() {
+
+    }
     public void Moving(Bullet b)
     {
-        b.degrees += 1;
         b.center += b.transform.forward * speed * Time.deltaTime;
 
         b.degrees += speedOscilation * Time.deltaTime;
@@ -62,8 +67,9 @@ public class RoundBullets : BulletGroup
 
         b.transform.position = b.center + realPosition;
 
-        b.transform.position += b.transform.forward * Time.deltaTime * speed;
+        //b.transform.position += b.transform.forward * Time.deltaTime * speed;
     }
 
 
 }
+
