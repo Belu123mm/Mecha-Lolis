@@ -10,25 +10,37 @@ public class Spawner : MonoBehaviour {
     public bool start;
     public bool finished;
     public Transform target;
+    public float timeBetweenWaves;
 
-    public void Update() {
+    void Update() {
         timer += Time.deltaTime;
-        if ( timer > waitToStartTime ) start = true;
-        //Hasta aqui todo perfecto
-        if ( start && !finished) {
-            foreach ( var w in oleadas ) {
-                for ( int i = 0; i < w.qt; i++ ) {
-                    print(i);
-                    Turret en = w.enemy;
-                    en.target = target;
-                    if ( w.hasNodes )
-                        en.nodegroup = nodeGroups [ 0 ];
-                    Instantiate(en);
-                }
-            finished = true;
-            start = false;
-            }
+        if ( timer > waitToStartTime && !finished ) {
+            start = true;
         }
-        //asi funciona pero sin timers
+        if ( start ) {
+            StartCoroutine(GenerateEnemy());
+            start = false;
+            finished = true;
+        }
+        //Hasta aqui todo perfecto
     }
+    IEnumerator GenerateEnemy() {
+        foreach ( var w in oleadas ) {
+            for ( int i = 0; i < w.qt; i++ ) {
+                print(i);
+                Turret en = w.enemy;
+                en.target = target;
+                if ( w.hasNodes )
+                    en.nodegroup = nodeGroups [ 0 ];
+                Instantiate(en);
+                yield return new WaitForSeconds(w.spawntime);
+            }
+            yield return new WaitForSeconds(timeBetweenWaves);
+        }
+
+    }
+    //asi funciona pero sin timers
+    //-dab-
+    //Alan <3
 }
+
