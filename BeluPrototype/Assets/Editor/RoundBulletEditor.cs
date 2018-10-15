@@ -15,7 +15,6 @@ public class RoundBulletEditor : Editor {
     public override void OnInspectorGUI() {
         Canon();
         Bullet();
-        Angle();
         Radius();
         Speed();
         Test();
@@ -35,12 +34,6 @@ public class RoundBulletEditor : Editor {
         _round.circle = (Bullet) EditorGUILayout.ObjectField(_round.circle, typeof(Bullet), true);
         EditorGUILayout.LabelField("#", GUILayout.Width(12));
         _round.numberOfBullets = EditorGUILayout.IntField(_round.numberOfBullets,GUILayout.Width(25));
-        EditorGUILayout.EndHorizontal();
-    }
-    void Angle() {
-        EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Angle", GUILayout.Width(40));
-        _round.angle = EditorGUILayout.IntSlider(_round.angle, 0, 360);
         EditorGUILayout.EndHorizontal();
     }
     void Radius() {

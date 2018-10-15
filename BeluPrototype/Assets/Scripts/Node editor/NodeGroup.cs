@@ -63,7 +63,7 @@ public class NodeGroup : MonoBehaviour {
         Debug.Log("NodosLimpiados");
     }
     public Node NewNode() {
-        Node n = Instantiate(nodePrefab);
+        Node n = Instantiate(nodePrefab,this.transform);
         AddLast(n);
         return n;
     }
