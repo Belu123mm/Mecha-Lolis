@@ -22,7 +22,7 @@ public class EnemyBullet : MonoBehaviour {
     public float radiusY;
 
     // Use this for initialization
-    void Start () {
+    void Start() {
         if ( Application.isPlaying )
             Destroy(this.gameObject, 5);
         else
