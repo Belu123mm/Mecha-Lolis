@@ -5,10 +5,12 @@
 public class GameModelManager
 {
 	public static GameModelManager instance;
-	public GameController controller;
-	public GameManagerView gameView;
-
 	public float Points = 0;
+
+    GameController _controller;
+	GameManagerView _gameView;
+    SceneManagement _scenes;
+
 	//Tiempo de juego.
 	//Recuento de oleadas.
 	//Lista de Spawners.(?).
@@ -18,8 +20,9 @@ public class GameModelManager
 	public GameModelManager()
 	{
 		instance = this;
-		gameView = UnityEngine.Object.FindObjectOfType<GameManagerView>();
-		controller = UnityEngine.Object.FindObjectOfType<GameController>();
+		_gameView = UnityEngine.Object.FindObjectOfType<GameManagerView>();
+		_controller = UnityEngine.Object.FindObjectOfType<GameController>();
+        _scenes = UnityEngine.Object.FindObjectOfType<SceneManagement>();
 		UpdatePoints();
 	}
 
@@ -37,9 +40,10 @@ public class GameModelManager
 	/// </summary>
 	public void EndGame()
 	{
-		//Acá iría todo lo que se hace cuando el juego termina.
-		//aca tendriamos una instancia de "SceneManager" por ejemplo y ejecutar su función.
-		//Por ejemplo, decirle a nuestro view que habra la pantalla de derrota. Dejandonos cargar la ultima partida.
+        //Acá iría todo lo que se hace cuando el juego termina.
+        //aca tendriamos una instancia de "SceneManager" por ejemplo y ejecutar su función.
+        //Por ejemplo, decirle a nuestro view que habra la pantalla de derrota. Dejandonos cargar la ultima partida.
+        _scenes.LoadDefeatScene();
 	}
 
 	/// <summary>
@@ -61,13 +65,13 @@ public class GameModelManager
 	public void UpdateLife(float life)
 	{
 		if (life < 0)
-			gameView.LifeDisplay = 0;
+			_gameView.LifeDisplay = 0;
 		else
-			gameView.LifeDisplay = life;
+			_gameView.LifeDisplay = life;
 	}
 	public void UpdatePoints()
 	{
-		gameView.PointDisplay = Points.ToString();
+		_gameView.PointDisplay = Points.ToString();
 	}
 
 	#region Eventos Comunes
@@ -82,16 +86,16 @@ public class GameModelManager
 		switch (type)
 		{
 			case InputEventType.OnBegin:
-				if (controller.OnBeginAxes.ContainsKey(1)) controller.OnBeginAxes[1] += evento;
-				else controller.OnBeginAxes.Add(1, evento);
+				if (_controller.OnBeginAxes.ContainsKey(1)) _controller.OnBeginAxes[1] += evento;
+				else _controller.OnBeginAxes.Add(1, evento);
 				break;
 			case InputEventType.Continious:
-				if (!controller.OnGetAxes.ContainsKey(1)) controller.OnGetAxes.Add(1, evento);
-				else controller.OnGetAxes[1] += evento;
+				if (!_controller.OnGetAxes.ContainsKey(1)) _controller.OnGetAxes.Add(1, evento);
+				else _controller.OnGetAxes[1] += evento;
 				break;
 			case InputEventType.OnRelease:
-				if (!controller.OnReleaseAxes.ContainsKey(1)) controller.OnReleaseAxes.Add(1, evento);
-				else controller.OnReleaseAxes[1] += evento;
+				if (!_controller.OnReleaseAxes.ContainsKey(1)) _controller.OnReleaseAxes.Add(1, evento);
+				else _controller.OnReleaseAxes[1] += evento;
 				break;
 			default:
 				break;
@@ -108,16 +112,16 @@ public class GameModelManager
 		switch (type)
 		{
 			case InputEventType.OnBegin:
-				if (!controller.OnBeginAxes.ContainsKey(2)) controller.OnGetAxes.Add(2, evento);
-				else controller.OnGetAxes[2] += evento;
+				if (!_controller.OnBeginAxes.ContainsKey(2)) _controller.OnGetAxes.Add(2, evento);
+				else _controller.OnGetAxes[2] += evento;
 				break;
 			case InputEventType.Continious:
-				if (!controller.OnGetAxes.ContainsKey(2)) controller.OnGetAxes.Add(2, evento);
-				else controller.OnGetAxes[2] += evento;
+				if (!_controller.OnGetAxes.ContainsKey(2)) _controller.OnGetAxes.Add(2, evento);
+				else _controller.OnGetAxes[2] += evento;
 				break;
 			case InputEventType.OnRelease:
-				if (!controller.OnReleaseAxes.ContainsKey(2)) controller.OnReleaseAxes.Add(2, evento);
-				else controller.OnReleaseAxes[2] += evento;
+				if (!_controller.OnReleaseAxes.ContainsKey(2)) _controller.OnReleaseAxes.Add(2, evento);
+				else _controller.OnReleaseAxes[2] += evento;
 				break;
 			default:
 				break;
@@ -132,21 +136,21 @@ public class GameModelManager
 	/// <param name="Evento">Evento a ejecutar.</param>
 	public void AddSimpleInputEvent(InputEventType type, UnityEngine.KeyCode Input, Action Evento)
 	{
-		if (!controller.keys.Contains(Input)) controller.keys.Add(Input);
+		if (!_controller.keys.Contains(Input)) _controller.keys.Add(Input);
 
 		switch (type)
 		{
 			case InputEventType.OnBegin:
-				if (!controller.OnBeginKeyCode.ContainsKey(Input)) controller.OnBeginKeyCode.Add(Input, Evento);
-				else controller.OnBeginKeyCode[Input] += Evento;
+				if (!_controller.OnBeginKeyCode.ContainsKey(Input)) _controller.OnBeginKeyCode.Add(Input, Evento);
+				else _controller.OnBeginKeyCode[Input] += Evento;
 				break;
 			case InputEventType.Continious:
-				if (!controller.OnKeyCode.ContainsKey(Input)) controller.OnKeyCode.Add(Input, Evento);
-				else controller.OnKeyCode[Input] += Evento;
+				if (!_controller.OnKeyCode.ContainsKey(Input)) _controller.OnKeyCode.Add(Input, Evento);
+				else _controller.OnKeyCode[Input] += Evento;
 				break;
 			case InputEventType.OnRelease:
-				if (!controller.OnReleaseKeyCode.ContainsKey(Input)) controller.OnReleaseKeyCode.Add(Input, Evento);
-				else controller.OnReleaseKeyCode[Input] += Evento;
+				if (!_controller.OnReleaseKeyCode.ContainsKey(Input)) _controller.OnReleaseKeyCode.Add(Input, Evento);
+				else _controller.OnReleaseKeyCode[Input] += Evento;
 				break;
 			default:
 				break;
@@ -164,16 +168,16 @@ public class GameModelManager
 		switch (type)
 		{
 			case InputEventType.OnBegin:
-				if (!controller.OnBeginMouse.ContainsKey(mouseButton)) controller.OnBeginMouse.Add(mouseButton, Evento);
-				else controller.OnBeginMouse[mouseButton] += Evento;
+				if (!_controller.OnBeginMouse.ContainsKey(mouseButton)) _controller.OnBeginMouse.Add(mouseButton, Evento);
+				else _controller.OnBeginMouse[mouseButton] += Evento;
 				break;
 			case InputEventType.Continious:
-				if (!controller.OnMouse.ContainsKey(mouseButton))controller.OnMouse.Add(mouseButton, Evento);
-				else controller.OnMouse[mouseButton] += Evento;
+				if (!_controller.OnMouse.ContainsKey(mouseButton))_controller.OnMouse.Add(mouseButton, Evento);
+				else _controller.OnMouse[mouseButton] += Evento;
 				break;
 			case InputEventType.OnRelease:
-				if (!controller.OnReleaseMouse.ContainsKey(mouseButton)) controller.OnReleaseMouse.Add(mouseButton, Evento);
-				else controller.OnReleaseMouse[mouseButton] += Evento;
+				if (!_controller.OnReleaseMouse.ContainsKey(mouseButton)) _controller.OnReleaseMouse.Add(mouseButton, Evento);
+				else _controller.OnReleaseMouse[mouseButton] += Evento;
 				break;
 			default:
 				break;
@@ -185,7 +189,7 @@ public class GameModelManager
 	/// <param name="MouseTrack">Evento.</param>
 	public void AddMouseTrack(Action<float,float> MouseTrack)
 	{
-		controller.MouseAxisTrack += MouseTrack;
+		_controller.MouseAxisTrack += MouseTrack;
 	}
 	#endregion
 }
