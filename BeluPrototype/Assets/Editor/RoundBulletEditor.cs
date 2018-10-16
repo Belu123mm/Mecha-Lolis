@@ -31,7 +31,7 @@ public class RoundBulletEditor : Editor {
     void Bullet() {
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Bullet", GUILayout.Width(40));
-        _round.circle = (Bullet) EditorGUILayout.ObjectField(_round.circle, typeof(Bullet), true);
+        _round.circle = (EnemyBullet) EditorGUILayout.ObjectField(_round.circle, typeof(EnemyBullet), true);
         EditorGUILayout.LabelField("#", GUILayout.Width(12));
         _round.numberOfBullets = EditorGUILayout.IntField(_round.numberOfBullets,GUILayout.Width(25));
         EditorGUILayout.EndHorizontal();

@@ -7,7 +7,7 @@ public class RoundBullets : BulletGroup
     public int numberOfBullets;
     public Transform canon;
     [Range(0, 360)]
-    public Bullet circle;
+    public EnemyBullet circle;
     float degrees;
     public float radians;
     public float radiusX;
@@ -29,7 +29,7 @@ public class RoundBullets : BulletGroup
         for (int i = 1; i < 360; i += 360 / numberOfBullets)
         {
 
-            Bullet bullets = Instantiate(circle,canon.position,Quaternion.identity);
+            EnemyBullet bullets = Instantiate(circle,canon.position,Quaternion.identity);
             Vector3 direction;
             direction.x = Mathf.Cos((i + degrees) * Mathf.Deg2Rad);
             direction.y =
@@ -53,7 +53,7 @@ public class RoundBullets : BulletGroup
     public void Update() {
 
     }
-    public void Moving(Bullet b)
+    public void Moving(EnemyBullet b)
     {
         b.center += b.transform.forward * speed * Time.deltaTime;
 

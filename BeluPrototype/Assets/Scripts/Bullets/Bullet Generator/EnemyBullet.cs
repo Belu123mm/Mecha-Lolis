@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using UnityEditor;
 [ExecuteInEditMode]
-public class Bullet : MonoBehaviour {
+public class EnemyBullet : MonoBehaviour {
 
     public delegate void OnMovement();
     public OnMovement Movement;

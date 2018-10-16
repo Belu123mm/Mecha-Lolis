@@ -11,7 +11,6 @@ using System;
 public class SimpleTurret : Turret, IEnemy {
     public EventFSM<TurretState> stateMachine;
     public event Action<TurretState> OnInput = delegate { };
-    public float timeToShoot;
     public NodeNavigation navigation;
     public SimpleBullets group;
     public new Rigidbody rigidbody;
@@ -70,10 +69,10 @@ public class SimpleTurret : Turret, IEnemy {
             }
         }
         stateMachine.Update();
-    }
+   }
     public void Shoot() { //TODO corutina de esto xd
         timer += Time.deltaTime;
-        if ( timer > timeToShoot ) {
+        if ( timer > timetoshoot ) {
             group.Shoot();
             timer = 0;
         }

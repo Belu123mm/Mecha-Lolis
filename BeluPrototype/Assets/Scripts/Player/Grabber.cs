@@ -8,8 +8,8 @@ public class Grabber : MonoBehaviour {
     public bool grabbed;
     float timer;
     public float timetograb;
-    public Bullet bullet;
-    private Bullet _grabbed;
+    public EnemyBullet bullet;
+    private EnemyBullet _grabbed;
 	// Use this for initialization
 	void Start () {
 		
@@ -32,7 +32,7 @@ public class Grabber : MonoBehaviour {
                 grabbed = false;
                 canGrab = false;
                 _grabbed = null;
-                Bullet _b = Instantiate(bullet, this.transform.position, Quaternion.identity);
+                EnemyBullet _b = Instantiate(bullet, this.transform.position, Quaternion.identity);
                 _b.transform.forward = this.transform.forward;
                 _b.speedOscilation = 10;
                 _b.Movement += () => _b.transform.position += _b.speedOscilation * _b.transform.forward * Time.deltaTime;
@@ -50,7 +50,7 @@ public class Grabber : MonoBehaviour {
     private void OnTriggerEnter( Collider other ) {
         if (other.gameObject.layer == LayerMask.NameToLayer("Ballz") ) {
             canGrab = true;
-            _grabbed = other.gameObject.GetComponent<Bullet>();
+            _grabbed = other.gameObject.GetComponent<EnemyBullet>();
         } 
     }
 }

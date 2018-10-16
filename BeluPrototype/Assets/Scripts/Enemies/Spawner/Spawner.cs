@@ -16,6 +16,7 @@ public class Spawner : MonoBehaviour {
         timer += Time.deltaTime;
         if ( timer > waitToStartTime && !finished ) {
             start = true;
+            timer = 0;
         }
         if ( start ) {
             StartCoroutine(GenerateEnemy());
@@ -31,8 +32,8 @@ public class Spawner : MonoBehaviour {
                 Turret en = w.enemy;
                 en.target = target;
                 if ( w.hasNodes )
-                    en.nodegroup = nodeGroups [ 0 ];
-                Instantiate(en);
+                    en.nodegroup = nodeGroups [ Random.Range(0,nodeGroups.Count) ];
+                Instantiate(en,en.nodegroup._first.position,Quaternion.identity,this.transform);
                 yield return new WaitForSeconds(w.spawntime);
             }
             yield return new WaitForSeconds(timeBetweenWaves);
