@@ -33,7 +33,11 @@ public class Spawner : MonoBehaviour {
                 en.target = target;
                 if ( w.hasNodes )
                     en.nodegroup = nodeGroups [ Random.Range(0,nodeGroups.Count) ];
-                Instantiate(en,en.nodegroup._first.position,Quaternion.identity,this.transform);
+                print(en.nodegroup + "hey");
+                if ( en.hasNavigation )
+                    Instantiate(en, en.nodegroup._first.position, Quaternion.identity, this.transform);
+                else
+                    Instantiate(en, this.transform);
                 yield return new WaitForSeconds(w.spawntime);
             }
             yield return new WaitForSeconds(timeBetweenWaves);

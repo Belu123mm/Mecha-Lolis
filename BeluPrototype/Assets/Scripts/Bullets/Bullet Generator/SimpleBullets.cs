@@ -6,12 +6,12 @@ public class SimpleBullets : BulletGroup {
 
 
     public Transform canon;
-    public EnemyBullet circle;
+    public EnemyBullet bulletPrefab;
     public float speed;
 
     public override void Shoot()
     {
-        EnemyBullet bullets = Instantiate(circle, canon.position, Quaternion.identity);
+        EnemyBullet bullets = Instantiate(bulletPrefab, canon.position, Quaternion.identity);
 
         Vector3 direction = -bullets.transform.position + target.transform.position;
         bullets.transform.forward = direction;

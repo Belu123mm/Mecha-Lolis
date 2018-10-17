@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-[RequireComponent(typeof(NodeNavigation))]
 [RequireComponent(typeof(SimpleBullets))]
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Sight))]
@@ -11,22 +10,15 @@ using System;
 public class SimpleTurret : Turret, IEnemy {
     public EventFSM<TurretState> stateMachine;
     public event Action<TurretState> OnInput = delegate { };
-    public NodeNavigation navigation;
-    public SimpleBullets group;
-    public new Rigidbody rigidbody;
-    public float distance;
+
+    SimpleBullets bulletGenerator;
 
     float timer;
     // Use this for initialization
-    void Start() {
-        navigation = GetComponent<NodeNavigation>();
-        group = GetComponent<SimpleBullets>();
-        rigidbody = GetComponent<Rigidbody>();
-        sight = GetComponent<Sight>();
-        navigation.currentNode = nodegroup._first;
-        group.target = target;
-        sight.targetTransform = target;
-        navigation.rigidbody = rigidbody;
+    public override void Start() {
+        base.Start();
+        bulletGenerator = GetComponent<SimpleBullets>();
+        bulletGenerator.target = target;
         SetStateMachine();
         OnInput += Input => stateMachine.Feed(Input);
 
@@ -59,7 +51,7 @@ public class SimpleTurret : Turret, IEnemy {
     void Update() {
 
         if ( navigation.currentNode ) {
-            if ( navigation.IsOnDistance(distance) ) {
+            if ( navigation.IsOnDistance() ) {
                 OnInput(TurretState.iterate);
             } else
             if ( sight.GetSight() ) {
@@ -73,7 +65,7 @@ public class SimpleTurret : Turret, IEnemy {
     public void Shoot() { //TODO corutina de esto xd
         timer += Time.deltaTime;
         if ( timer > timetoshoot ) {
-            group.Shoot();
+            bulletGenerator.Shoot();
             timer = 0;
         }
         navigation.mOVEbUTsLOWER();

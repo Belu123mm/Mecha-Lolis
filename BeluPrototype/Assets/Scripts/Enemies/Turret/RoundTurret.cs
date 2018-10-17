@@ -10,19 +10,17 @@ public class RoundTurret : Turret, IEnemy {
     public EventFSM<TurretState> stateMachine;
     public event Action<TurretState> OnInput = delegate { };
 
-    public float timer;
-    public float timetoshot;
-    public RoundBullets group;
+    float timer;
+    RoundBullets bulletGenerator;
 
     public void Awake() {
-        sight = GetComponent<Sight>();
-        group = GetComponent<RoundBullets>();
+        bulletGenerator = GetComponent<RoundBullets>();
     }
-    public void Start() {
+    public override void Start() {
+        base.Start();
         SetStateMachine();
         OnInput += Input => stateMachine.Feed(Input);
-        sight.targetTransform = target;
-        group.target = target;
+        bulletGenerator.target = target;
 
     }
     public void Update() {
@@ -54,9 +52,9 @@ public class RoundTurret : Turret, IEnemy {
 
     }
     public void Shoot() {
-        if ( timer > timetoshot ) {
-            group.target = target;
-            group.Shoot();
+        if ( timer > timetoshoot ) {
+            bulletGenerator.target = target;
+            bulletGenerator.Shoot();
             timer = 0;
         }
     }
