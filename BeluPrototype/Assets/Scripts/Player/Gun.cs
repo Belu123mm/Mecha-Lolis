@@ -31,6 +31,7 @@ public class Gun : MonoBehaviour {
     private void reload()
     {
         print("Reloaded");
+        anim.SetTrigger("Reload");
         bulletCount = maxBullets;
     }
 
@@ -53,12 +54,11 @@ public class Gun : MonoBehaviour {
     private void shoot()
     {
         if (canShoot && bulletCount > 0)
-        {   
+        {
             anim.SetTrigger("Shoot");
             bulletCount--;
             canShoot = false;
-            var newbullet = Instantiate(bullet);
-            newbullet.transform.position = cañon.transform.position;
+            var newbullet = Instantiate(bullet, cañon.transform.position,Quaternion.identity);
             newbullet.transform.forward = cañon.transform.forward;
         }
     }

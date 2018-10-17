@@ -4,6 +4,7 @@
 public class Player : MonoBehaviour, IDamageable {
 	public GameModelManager game;
 	public Camera firstPersonCamera;
+	public Animator anim;
 	public int Life;
 	public int MaxLife;
 
@@ -13,6 +14,7 @@ public class Player : MonoBehaviour, IDamageable {
 	public float VerticalSpeed;
 	public bool isRunning = false;
 
+	int[] axeses = { 0, 0 };
 	float _currentMovementSpeed;
 	Rigidbody rb;
 
@@ -20,26 +22,51 @@ public class Player : MonoBehaviour, IDamageable {
 	{
 		game = new GameModelManager();
 		rb = GetComponent<Rigidbody>();
+		Cursor.visible = false;
 	}
 	private void Start()
 	{
 		//Suscribo mis eventos.
-		game.AddHorizontalEvent( InputEventType.Continious, MoveHorizontal );
-		game.AddVerticalEvent( InputEventType.Continious, MoveVertical);
+		game.AddAxisEvent(InputEventType.OnBegin, Axeses.Horizontal, Moving);
+		game.AddAxisEvent(InputEventType.Continious, Axeses.Horizontal, MoveInAxeses);
+		game.AddAxisEvent(InputEventType.OnRelease, Axeses.Horizontal, Quiet);
+
+		game.AddAxisEvent(InputEventType.OnBegin, Axeses.Vertical, Moving);
+		game.AddAxisEvent(InputEventType.Continious, Axeses.Vertical, MoveInAxeses);
+		game.AddAxisEvent(InputEventType.OnRelease, Axeses.Vertical, Quiet);
+
 		game.AddSimpleInputEvent(InputEventType.OnBegin, KeyCode.LeftShift, running);
 		game.AddSimpleInputEvent(InputEventType.OnRelease, KeyCode.LeftShift, running);
 		game.AddMouseTrack(RotateCamera);
 	}
 
-	public void MoveHorizontal(float dir)
+	public void MoveInAxeses(float dir, int Axis)
 	{
 		_currentMovementSpeed = isRunning ? RunningSpeed : BaseMovementSpeed;
-		transform.position += transform.right * dir * _currentMovementSpeed * Time.deltaTime;
+
+		if (Axis == 0)
+			transform.position += transform.right * dir * _currentMovementSpeed * Time.deltaTime;
+		if (Axis == 1)
+			transform.position += transform.forward * dir * _currentMovementSpeed * Time.deltaTime;
 	}
-	public void MoveVertical(float dir)
+
+	public void Moving(float dir, int Axis)
 	{
-		_currentMovementSpeed = isRunning ? RunningSpeed : BaseMovementSpeed;
-		transform.position += transform.forward * dir * _currentMovementSpeed * Time.deltaTime;
+		if (Axis == 1) axeses[0] = 1;
+		if (Axis == 2) axeses[1] = 1;
+		print("Estoy moviendome");
+			anim.SetBool("IsWalking", true);
+	}
+
+	public void Quiet(float dir, int Axis)
+	{
+		if (Axis == 1) axeses[0] = 0;
+		if (Axis == 2) axeses[1] = 0;
+		if (axeses[0] == 0 && axeses[1] == 0)
+		{
+			print("Estoy Quieto");
+			anim.SetBool("IsWalking", false);
+		}
 	}
 
 	public void RotateCamera(float x, float y)

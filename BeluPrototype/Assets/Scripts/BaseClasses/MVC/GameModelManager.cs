@@ -77,52 +77,28 @@ public class GameModelManager
 	/// </summary>
 	/// <param name="type">1 = OnBegin, 2 = Continuous, 3 = OnRelease.</param>
 	/// <param name="evento">Evento a ejecutar.</param>
-	public void AddHorizontalEvent(InputEventType type, Action<float> evento)
+	public void AddAxisEvent(InputEventType type, Axeses Axis, Action<float,int> evento)
 	{
 		switch (type)
 		{
 			case InputEventType.OnBegin:
-				if (controller.OnBeginAxes.ContainsKey(1)) controller.OnBeginAxes[1] += evento;
-				else controller.OnBeginAxes.Add(1, evento);
+				if (controller.OnBeginAxes.ContainsKey((int)Axis)) controller.OnBeginAxes[(int)Axis] += evento;
+				else controller.OnBeginAxes.Add((int)Axis, evento);
 				break;
 			case InputEventType.Continious:
-				if (!controller.OnGetAxes.ContainsKey(1)) controller.OnGetAxes.Add(1, evento);
-				else controller.OnGetAxes[1] += evento;
+				if (!controller.OnGetAxes.ContainsKey((int)Axis)) controller.OnGetAxes.Add((int)Axis, evento);
+				else controller.OnGetAxes[(int)Axis] += evento;
 				break;
 			case InputEventType.OnRelease:
-				if (!controller.OnReleaseAxes.ContainsKey(1)) controller.OnReleaseAxes.Add(1, evento);
-				else controller.OnReleaseAxes[1] += evento;
+				if (!controller.OnReleaseAxes.ContainsKey((int)Axis)) controller.OnReleaseAxes.Add((int)Axis, evento);
+				else controller.OnReleaseAxes[(int)Axis] += evento;
 				break;
 			default:
 				break;
 		}
 	}
 
-	/// <summary>
-	/// Añade un evento de teclado que responde al Axis "Vertical".
-	/// </summary>
-	/// <param name="type">1 = OnBegin, 2 = Continuous, 3 = OnRelease.</param>
-	/// <param name="evento">Evento a ejecutar.</param>
-	public void AddVerticalEvent(InputEventType type, Action<float> evento)
-	{
-		switch (type)
-		{
-			case InputEventType.OnBegin:
-				if (!controller.OnBeginAxes.ContainsKey(2)) controller.OnGetAxes.Add(2, evento);
-				else controller.OnGetAxes[2] += evento;
-				break;
-			case InputEventType.Continious:
-				if (!controller.OnGetAxes.ContainsKey(2)) controller.OnGetAxes.Add(2, evento);
-				else controller.OnGetAxes[2] += evento;
-				break;
-			case InputEventType.OnRelease:
-				if (!controller.OnReleaseAxes.ContainsKey(2)) controller.OnReleaseAxes.Add(2, evento);
-				else controller.OnReleaseAxes[2] += evento;
-				break;
-			default:
-				break;
-		}
-	}
+	
 
 	/// <summary>
 	/// Añade un evento de teclado que responde a un KeyCode.
@@ -198,4 +174,9 @@ public enum InputEventType
 	OnBegin,
 	Continious,
 	OnRelease
+}
+public enum Axeses
+{
+    Horizontal,
+    Vertical
 }
