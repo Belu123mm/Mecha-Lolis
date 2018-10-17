@@ -55,8 +55,8 @@ Estilo4: Muy oscuro y con luces en el techo. Uso de metales en el piso, paneles 
 
 
 # Arte de NPC
-*Estilo1 : Mecha. Mucha armadura, pintura metalica, sucio y parecer modular. Armas grandes y exageradas. Mucho recall al disparar
-EStilo2; Arañas. finos y delgados en estructura. Armas pequeñas. 
+Estilo1 : Mecha. Mucha armadura, pintura metalica, sucio y parecer modular. Armas grandes y exageradas. Mucho recall al disparar
+*EStilo2; Arañas. finos y delgados en estructura. Armas pequeñas. 
 Estilo3: Droids limpios y con pocos detalles. Luces y armas retractiles. Gran camara como ojo. Inofensivos a primera vista. 
 
 
@@ -64,8 +64,4 @@ Estilo3: Droids limpios y con pocos detalles. Luces y armas retractiles. Gran ca
 (Ingrese diagrama de flujo de cosas)
 
 # Sobre el Git
-
-
-
-
-https://www.photoshop777.com/post-5774/
+Cada cosa que se haga tiene que  ser agregada en una rama aparte. NO TRABAJAR EN EL MASTER. 
