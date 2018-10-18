@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -141,24 +141,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 370466335}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6e869157cf3c664cbbc326e97f4a1a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oleadas:
-  - enemy: {fileID: 114056881578881038, guid: 04237f218ea5bb14490e1a74502e2426, type: 2}
-    qt: 2
-    spawntime: 6
-    hasNodes: 1
-  - enemy: {fileID: 114511032587371284, guid: e3d0bfd4eb48e9e40a26f700a98c8de4, type: 2}
-    qt: 1
-    spawntime: 6
-    hasNodes: 0
-  - enemy: {fileID: 114056881578881038, guid: 04237f218ea5bb14490e1a74502e2426, type: 2}
-    qt: 2
-    spawntime: 2
-    hasNodes: 1
+  waves: []
   nodeGroups:
   - {fileID: 232224237}
   - {fileID: 2090721211}
@@ -549,24 +537,17 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 940494484}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6e869157cf3c664cbbc326e97f4a1a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oleadas:
-  - enemy: {fileID: 114632725694069974, guid: 7b3bc8754762c4b43ad16865c7b89250, type: 2}
-    qt: 2
-    spawntime: 8
-    hasNodes: 1
+  waves:
   - enemy: {fileID: 114934871706035288, guid: c828d2fcf8d99454b9c41fe9477b5d6f, type: 2}
     qt: 1
     spawntime: 1
     hasNodes: 0
-  - enemy: {fileID: 114632725694069974, guid: 7b3bc8754762c4b43ad16865c7b89250, type: 2}
-    qt: 2
-    spawntime: 10
-    hasNodes: 1
+    positions: []
   nodeGroups:
   - {fileID: 1454036713}
   waitToStartTime: 2

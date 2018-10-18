@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour {
-    public List<Wave> oleadas;
+    public List<Wave> waves;
     public List<NodeGroup> nodeGroups;
     public float waitToStartTime;
     public float timer;
@@ -11,6 +11,14 @@ public class Spawner : MonoBehaviour {
     public bool finished;
     public Transform target;
     public float timeBetweenWaves;
+
+    private void Start() {
+        foreach ( var w in waves ) {
+            if ( !w.hasNodes )
+                if ( w.positions.Count == 0 )
+                    w.positions.Add(Vector3.zero);
+        }
+    }
 
     void Update() {
         timer += Time.deltaTime;
@@ -26,18 +34,16 @@ public class Spawner : MonoBehaviour {
         //Hasta aqui todo perfecto
     }
     IEnumerator GenerateEnemy() {
-        foreach ( var w in oleadas ) {
+        foreach ( var w in waves ) {
             for ( int i = 0; i < w.qt; i++ ) {
-                print(i);
                 Turret en = w.enemy;
                 en.target = target;
                 if ( w.hasNodes )
                     en.nodegroup = nodeGroups [ Random.Range(0,nodeGroups.Count) ];
-                print(en.nodegroup + "hey");
                 if ( en.hasNavigation )
                     Instantiate(en, en.nodegroup._first.position, Quaternion.identity, this.transform);
                 else
-                    Instantiate(en, this.transform);
+                    Instantiate(en, w.positions [ Random.Range(0, w.positions.Count) ], Quaternion.identity);
                 yield return new WaitForSeconds(w.spawntime);
             }
             yield return new WaitForSeconds(timeBetweenWaves);
