@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoundBullets : BulletGroup
-{
+public class RoundBullets : BulletGroup {
     public int numberOfBullets;
     public Transform canon;
     [Range(0, 360)]
@@ -21,19 +20,18 @@ public class RoundBullets : BulletGroup
     public float speed;
 
 
-    public override void Shoot()
-    {
+    public override void Shoot() {
         degrees += variation;
 
         Debug.Log(transform.forward);
-        for (int i = 1; i < 360; i += 360 / numberOfBullets)
-        {
+        for ( int i = 1; i < 360; i += 360 / numberOfBullets ) {
 
-            EnemyBullet bullets = Instantiate(circle,canon.position,Quaternion.identity);
+            EnemyBullet bullets = Instantiate(circle, canon.position, Quaternion.identity);
+            print(canon.position);
             Vector3 direction;
-            direction.x = Mathf.Cos((i + degrees) * Mathf.Deg2Rad);
-            direction.y =
-            direction.z = Mathf.Tan((i + degrees) * Mathf.Deg2Rad);
+            direction.x = Mathf.Sin((i + degrees) * Mathf.Deg2Rad);
+            direction.y = 0;
+            direction.z = Mathf.Cos((i + degrees) * Mathf.Deg2Rad);
 
             bullets.transform.forward = direction;
             bullets.degrees = degrees;
@@ -53,8 +51,7 @@ public class RoundBullets : BulletGroup
     public void Update() {
 
     }
-    public void Moving(EnemyBullet b)
-    {
+    public void Moving( EnemyBullet b ) {
         b.center += b.transform.forward * speed * Time.deltaTime;
 
         b.degrees += speedOscilation * Time.deltaTime;
@@ -72,4 +69,3 @@ public class RoundBullets : BulletGroup
 
 
 }
-

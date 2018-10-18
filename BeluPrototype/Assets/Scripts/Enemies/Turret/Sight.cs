@@ -9,6 +9,7 @@ public class Sight : MonoBehaviour {
     private Vector3 _dirToTarget;
     private float _angleToTarget;
     private float _distanceToTarget;
+    [HideInInspector]
     public Transform targetTransform;
     public LayerMask level;
 
