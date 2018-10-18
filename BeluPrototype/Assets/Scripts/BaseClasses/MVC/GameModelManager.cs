@@ -7,9 +7,9 @@ public class GameModelManager
 	public static GameModelManager instance;
 	public float Points = 0;
 
-    GameController _controller;
+	GameController _controller;
 	GameManagerView _gameView;
-    SceneManagement _scenes;
+	SceneManagement _scenes;
 
 	//Tiempo de juego.
 	//Recuento de oleadas.
@@ -22,7 +22,7 @@ public class GameModelManager
 		instance = this;
 		_gameView = UnityEngine.Object.FindObjectOfType<GameManagerView>();
 		_controller = UnityEngine.Object.FindObjectOfType<GameController>();
-        _scenes = UnityEngine.Object.FindObjectOfType<SceneManagement>();
+		_scenes = UnityEngine.Object.FindObjectOfType<SceneManagement>();
 		UpdatePoints();
 	}
 
@@ -40,10 +40,10 @@ public class GameModelManager
 	/// </summary>
 	public void EndGame()
 	{
-        //Acá iría todo lo que se hace cuando el juego termina.
-        //aca tendriamos una instancia de "SceneManager" por ejemplo y ejecutar su función.
-        //Por ejemplo, decirle a nuestro view que habra la pantalla de derrota. Dejandonos cargar la ultima partida.
-        _scenes.LoadDefeatScene();
+		//Acá iría todo lo que se hace cuando el juego termina.
+		//aca tendriamos una instancia de "SceneManager" por ejemplo y ejecutar su función.
+		//Por ejemplo, decirle a nuestro view que habra la pantalla de derrota. Dejandonos cargar la ultima partida.
+		_scenes.LoadDefeatScene();
 	}
 
 	/// <summary>
@@ -87,16 +87,16 @@ public class GameModelManager
 		{
 			case InputEventType.OnBegin:
 
-				if (controller.OnBeginAxes.ContainsKey((int)Axis)) controller.OnBeginAxes[(int)Axis] += evento;
-				else controller.OnBeginAxes.Add((int)Axis, evento);
+				if (_controller.OnBeginAxes.ContainsKey((int)Axis)) _controller.OnBeginAxes[(int)Axis] += evento;
+				else _controller.OnBeginAxes.Add((int)Axis, evento);
 				break;
 			case InputEventType.Continious:
-				if (!controller.OnGetAxes.ContainsKey((int)Axis)) controller.OnGetAxes.Add((int)Axis, evento);
-				else controller.OnGetAxes[(int)Axis] += evento;
+				if (!_controller.OnGetAxes.ContainsKey((int)Axis)) _controller.OnGetAxes.Add((int)Axis, evento);
+				else _controller.OnGetAxes[(int)Axis] += evento;
 				break;
 			case InputEventType.OnRelease:
-				if (!controller.OnReleaseAxes.ContainsKey((int)Axis)) controller.OnReleaseAxes.Add((int)Axis, evento);
-				else controller.OnReleaseAxes[(int)Axis] += evento;
+				if (!_controller.OnReleaseAxes.ContainsKey((int)Axis)) _controller.OnReleaseAxes.Add((int)Axis, evento);
+				else _controller.OnReleaseAxes[(int)Axis] += evento;
 				break;
 			default:
 				break;
@@ -179,6 +179,6 @@ public enum InputEventType
 }
 public enum Axeses
 {
-    Horizontal,
-    Vertical
+	Horizontal,
+	Vertical
 }
