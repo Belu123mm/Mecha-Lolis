@@ -95,7 +95,7 @@ public class Player : MonoBehaviour, IDamageable {
 		if (Life <= 0)
 		{
 			print("Estas muerto");
-            game.EndGame();
+			game.EndGame();
 		}
 		game.UpdateLife((float)Life/MaxLife);
 		print("Recibiste daño!");
