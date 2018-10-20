@@ -6,29 +6,33 @@
 //El enfriamiento marcaria el tanto el tiempo de activación del teletransportado. Por otro lado pickear el la granada reduciría el enfriamiento.
 
 public class TPGranade : MonoBehaviour {
-	public float Cooldown;
 	public GameObject Pointer;
 	public GameObject grenadePrefab;
+	GameObject _activeGrenade;
+	Player _player;
+	Gun _activeGun;
+
+	public float Cooldown;
 	public float force;
 	public bool Triggereable = false;
-
-	GameObject activeGrenade;
+	public int Ammounts = 1;
 	float TimeToRecast;
-	int uses = 0;
+	int uses = 1;
 
 	private void Start()
 	{
 		TimeToRecast = Cooldown;
-		
+		_player = GetComponent<Player>();
+		_activeGun = GetComponent<Gun>();
 		//Action de la clase.
-		GameModelManager.instance.AddSimpleInputEvent(InputEventType.OnBegin, KeyCode.E, Teleport);
-		GameModelManager.instance.AddSimpleInputEvent(InputEventType.OnBegin, KeyCode.Alpha3, Selection);
-		GameModelManager.instance.AddMouseEvent(InputEventType.OnBegin, 0, ThrowGrenade);
+		_player.game.AddSimpleInputEvent(InputEventType.OnBegin, KeyCode.E, Teleport);
+		_player.game.AddSimpleInputEvent(InputEventType.OnBegin, KeyCode.Alpha3, Selection);
+		_player.game.AddMouseEvent(InputEventType.OnBegin, 0, ThrowGrenade);
 	}
 
 	private void Update()
 	{
-		if (Triggereable && uses == 0) CooldownCount();
+		if (Triggereable && uses == 0 && Ammounts > 0) CooldownCount();
 	}
 
 	void CooldownCount()
@@ -44,34 +48,41 @@ public class TPGranade : MonoBehaviour {
 		}
 	}
 
-
 	void Selection()
 	{
 		if (!Triggereable)
 		{
-            uses = 1;
-			TimeToRecast = Cooldown;
 			Triggereable = true;
-			print(Triggereable ? "Granada esta seleccionada" : "La Granda fue deseleccionada");
+			_activeGun.lockShoot = true;
 		}
+		else
+		{
+			Triggereable = false;
+			_activeGun.lockShoot = false;
+		}
+		print(Triggereable ? "Granada esta seleccionada" : "La Granda fue deseleccionada");
 	}
 
 	void ThrowGrenade()
 	{
-		if (Triggereable && uses == 1)
+		if (Triggereable)
 		{
-			activeGrenade = Instantiate(grenadePrefab, transform.position + new Vector3(1, 1, 0), Quaternion.identity);
-			activeGrenade.GetComponent<Rigidbody>().AddForce(Pointer.transform.forward * force, ForceMode.Impulse);
+			uses = 1;
+			TimeToRecast = Cooldown;
+			Ammounts--;
+
+			_activeGrenade = Instantiate(grenadePrefab, transform.position + new Vector3(1, 1, 0), Quaternion.identity);
+			_activeGrenade.GetComponent<Rigidbody>().AddForce(Pointer.transform.forward * force, ForceMode.Impulse);
 		}
 	}
 
 	void Teleport()
 	{
-        print("Teleport y uses: " + uses);
 		if (uses == 1)
 		{
 			uses = 0;
-			transform.position = activeGrenade.transform.localPosition;
+			transform.position = _activeGrenade.transform.localPosition;
 		}
+		print("Teleport y uses: " + uses);
 	}
 }

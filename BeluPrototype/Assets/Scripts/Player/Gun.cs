@@ -12,12 +12,13 @@ public class Gun : MonoBehaviour {
     public float cooldown;
     public int bulletCount;
     public int maxBullets;
-
-    bool canShoot = false;
+    public bool canShoot = false;
+    public bool lockShoot = false;
 
     private void Start()
     {
         canShoot = true;
+
 
         GameModelManager.instance.AddMouseEvent(InputEventType.Continious, 0, shoot);
         GameModelManager.instance.AddSimpleInputEvent(InputEventType.OnBegin, KeyCode.R,reload);
@@ -53,7 +54,7 @@ public class Gun : MonoBehaviour {
 
     private void shoot()
     {
-        if (canShoot && bulletCount > 0)
+        if (canShoot && bulletCount > 0 && !lockShoot)
         {
             anim.SetTrigger("Shoot");
             bulletCount--;

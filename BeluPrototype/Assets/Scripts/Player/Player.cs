@@ -23,6 +23,7 @@ public class Player : MonoBehaviour, IDamageable {
 		game = new GameModelManager();
 		rb = GetComponent<Rigidbody>();
 		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
 	}
 	private void Start()
 	{
@@ -78,10 +79,7 @@ public class Player : MonoBehaviour, IDamageable {
 		firstPersonCamera.transform.Rotate(-v, 0, 0);
 	}
 
-	public void running()
-	{
-		isRunning = !isRunning;
-	}
+	public void running() { isRunning = !isRunning; }
 
 	public void Jump()
 	{
