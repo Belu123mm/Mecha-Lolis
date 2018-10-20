@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 32ff2cfaa58ad4a4b98939147b02cdc3
-timeCreated: 1540046114
+guid: f0d2f14b5e0e02d41b714a0a92095bd7
+timeCreated: 1540069301
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -29,34 +29,29 @@ ModelImporter:
     100042: Cylinder009
     100044: Cylinder010
     100046: Cylinder011
-    100048: Cylinder012
-    100050: PhysCamera001
-    100052: PhysCamera001.Target
-    100054: Plane001
-    100056: Plane002
-    100058: Sphere001
-    100060: Spider
-    100062: SpiderHub
-    100064: SpiderHub001
-    100066: SpiderLLeg21
-    100068: SpiderLLeg22
-    100070: SpiderLLeg2Platform
-    100072: SpiderLLeg31
-    100074: SpiderLLeg32
-    100076: SpiderLLeg3Platform
-    100078: SpiderLLeg41
-    100080: SpiderLLeg42
-    100082: SpiderLLeg4Platform
-    100084: SpiderRLeg21
-    100086: SpiderRLeg22
-    100088: SpiderRLeg2Platform
-    100090: SpiderRLeg31
-    100092: SpiderRLeg32
-    100094: SpiderRLeg3Platform
-    100096: SpiderRLeg41
-    100098: SpiderRLeg42
-    100100: SpiderRLeg4Platform
-    100102: SpiderSpine
+    100048: Sphere001
+    100050: Spider
+    100052: SpiderHub
+    100054: SpiderHub001
+    100056: SpiderLLeg21
+    100058: SpiderLLeg22
+    100060: SpiderLLeg2Platform
+    100062: SpiderLLeg31
+    100064: SpiderLLeg32
+    100066: SpiderLLeg3Platform
+    100068: SpiderLLeg41
+    100070: SpiderLLeg42
+    100072: SpiderLLeg4Platform
+    100074: SpiderRLeg21
+    100076: SpiderRLeg22
+    100078: SpiderRLeg2Platform
+    100080: SpiderRLeg31
+    100082: SpiderRLeg32
+    100084: SpiderRLeg3Platform
+    100086: SpiderRLeg41
+    100088: SpiderRLeg42
+    100090: SpiderRLeg4Platform
+    100092: SpiderSpine
     400000: //RootNode
     400002: Box002
     400004: Box004
@@ -81,68 +76,53 @@ ModelImporter:
     400042: Cylinder009
     400044: Cylinder010
     400046: Cylinder011
-    400048: Cylinder012
-    400050: PhysCamera001
-    400052: PhysCamera001.Target
-    400054: Plane001
-    400056: Plane002
-    400058: Sphere001
-    400060: Spider
-    400062: SpiderHub
-    400064: SpiderHub001
-    400066: SpiderLLeg21
-    400068: SpiderLLeg22
-    400070: SpiderLLeg2Platform
-    400072: SpiderLLeg31
-    400074: SpiderLLeg32
-    400076: SpiderLLeg3Platform
-    400078: SpiderLLeg41
-    400080: SpiderLLeg42
-    400082: SpiderLLeg4Platform
-    400084: SpiderRLeg21
-    400086: SpiderRLeg22
-    400088: SpiderRLeg2Platform
-    400090: SpiderRLeg31
-    400092: SpiderRLeg32
-    400094: SpiderRLeg3Platform
-    400096: SpiderRLeg41
-    400098: SpiderRLeg42
-    400100: SpiderRLeg4Platform
-    400102: SpiderSpine
-    2100000: 'Material #25'
-    2100002: No Name
-    2300000: Cylinder012
-    2300002: Plane001
-    2300004: Plane002
-    3300000: Cylinder012
-    3300002: Plane001
-    3300004: Plane002
-    4300000: Plane001
-    4300002: Plane002
-    4300004: Sphere001
-    4300006: Cylinder009
-    4300008: Box013
-    4300010: Box014
-    4300012: Box002
-    4300014: Cylinder002
-    4300016: Box008
-    4300018: Box015
-    4300020: Cylinder008
-    4300022: Cylinder003
-    4300024: Box004
-    4300026: Cylinder005
-    4300028: Cylinder004
-    4300030: Box010
-    4300032: Box011
-    4300034: Box012
-    4300036: Cylinder011
-    4300038: Cylinder007
-    4300040: Box005
-    4300042: Cylinder006
-    4300044: Box007
-    4300046: Box006
-    4300048: Cylinder001
-    4300050: Cylinder012
+    400048: Sphere001
+    400050: Spider
+    400052: SpiderHub
+    400054: SpiderHub001
+    400056: SpiderLLeg21
+    400058: SpiderLLeg22
+    400060: SpiderLLeg2Platform
+    400062: SpiderLLeg31
+    400064: SpiderLLeg32
+    400066: SpiderLLeg3Platform
+    400068: SpiderLLeg41
+    400070: SpiderLLeg42
+    400072: SpiderLLeg4Platform
+    400074: SpiderRLeg21
+    400076: SpiderRLeg22
+    400078: SpiderRLeg2Platform
+    400080: SpiderRLeg31
+    400082: SpiderRLeg32
+    400084: SpiderRLeg3Platform
+    400086: SpiderRLeg41
+    400088: SpiderRLeg42
+    400090: SpiderRLeg4Platform
+    400092: SpiderSpine
+    2100000: No Name
+    4300000: Sphere001
+    4300002: Cylinder009
+    4300004: Box013
+    4300006: Box014
+    4300008: Box002
+    4300010: Cylinder002
+    4300012: Box008
+    4300014: Box015
+    4300016: Cylinder008
+    4300018: Cylinder003
+    4300020: Box004
+    4300022: Cylinder005
+    4300024: Cylinder004
+    4300026: Box010
+    4300028: Box011
+    4300030: Box012
+    4300032: Cylinder011
+    4300034: Cylinder007
+    4300036: Box005
+    4300038: Cylinder006
+    4300040: Box007
+    4300042: Box006
+    4300044: Cylinder001
     7400000: Take 001
     9500000: //RootNode
     13700000: Box002

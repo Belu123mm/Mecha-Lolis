@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - enemy: {fileID: 114655284658109208, guid: 515fd5e869a2ab04aab9f1b62a99070b, type: 2}
+  - enemy: {fileID: 114845605297167114, guid: 8833760e640683b48ab323aa56e5b279, type: 2}
     qt: 1
     spawntime: 0
     hasNodes: 1
