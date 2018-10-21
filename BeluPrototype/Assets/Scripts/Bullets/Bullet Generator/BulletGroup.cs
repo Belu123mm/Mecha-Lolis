@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletGroup : MonoBehaviour
 {
-    [HideInInspector]
+    //[HideInInspector]
     public Transform target;
     public virtual void Shoot()
     {

@@ -1,15 +1,18 @@
 ﻿using System;
+using UnityEngine;
 /// <summary>
 /// Esta clase maneja datos nativos. Clases y Operaciones del juego.
 /// </summary>
 public class GameModelManager
 {
 	public static GameModelManager instance;
+	public Pool<GameObject> PlayerBulletPool;
 	public float Points = 0;
 
 	GameController _controller;
 	GameManagerView _gameView;
 	SceneManagement _scenes;
+
 
 	//Tiempo de juego.
 	//Recuento de oleadas.
@@ -22,7 +25,6 @@ public class GameModelManager
 		instance = this;
 		_gameView = UnityEngine.Object.FindObjectOfType<GameManagerView>();
 		_controller = UnityEngine.Object.FindObjectOfType<GameController>();
-		_scenes = UnityEngine.Object.FindObjectOfType<SceneManagement>();
 		UpdatePoints();
 	}
 

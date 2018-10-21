@@ -24,10 +24,10 @@ public class Pool<T> {
 			_obj = obj;
 			_initializationCallback = init;
 			_finalizationCallback = finit;
-			_isActive = false;
+			isActive = false;
 		}
 
-		public R GetObj
+		public R Object
 		{
 			get { return _obj; }
 		}
@@ -38,10 +38,8 @@ public class Pool<T> {
 			set
 			{
 				_isActive = value;
-				if (_isActive && _initializationCallback != null)
-					_initializationCallback(_obj);
-				else if (_finalizationCallback != null)
-					_finalizationCallback(_obj);
+				if (_isActive) _initializationCallback(_obj);
+				else _finalizationCallback(_obj);
 			}
 		}
 	}
@@ -60,30 +58,32 @@ public class Pool<T> {
 			_poolList.Add(new PoolObject<T>(_FactoryMethod(), _init, _finit));
 	}
 
+	public int Count { get { return _count; } }
+
 	public T GetObjectFromPool()
 	{
 		for (int i = 0; i < _count; i++)
 			if (!_poolList[i].isActive)
 			{
 				_poolList[i].isActive = true;
-				return _poolList[i].GetObj;
+				return _poolList[i].Object;
 			}
 
 		if (_isDinamic)
 		{
-			var po = new PoolObject<T>(_FactoryMethod(), _init, _finit);
-			po.isActive = true;
-			_poolList.Add(po);
+			var PoolItem = new PoolObject<T>(_FactoryMethod(), _init, _finit);
+			PoolItem.isActive = true;
+			_poolList.Add(PoolItem);
 			_count++;
-			return po.GetObj;
+			return PoolItem.Object;
 		}
 		return default(T);
 	}
 
-	public void DisablePoolObject(T obj)
+	public void ReturnObjectToPool(T obj)
 	{
 		foreach (var item in _poolList)
-			if (item.GetObj.Equals(obj))
+			if (item.Object.Equals(obj))
 			{
 				item.isActive = false;
 				return;

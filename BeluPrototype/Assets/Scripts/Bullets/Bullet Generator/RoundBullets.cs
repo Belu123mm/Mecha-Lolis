@@ -48,9 +48,6 @@ public class RoundBullets : BulletGroup {
         }
 
     }
-    public void Update() {
-
-    }
     public void Moving( EnemyBullet b ) {
         b.center += b.transform.forward * speed * Time.deltaTime;
 

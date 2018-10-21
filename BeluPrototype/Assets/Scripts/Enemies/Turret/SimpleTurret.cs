@@ -10,7 +10,6 @@ public class SimpleTurret : Turret, IEnemy {
 	public event Action<TurretState> OnInput = delegate { };
 	SimpleBullets bulletGenerator;
 
-
 	float timer;
 	// Use this for initialization
 	public override void Start() {
