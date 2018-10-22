@@ -27,7 +27,6 @@ public class RoundBullets : BulletGroup {
         for ( int i = 1; i < 360; i += 360 / numberOfBullets ) {
 
             EnemyBullet bullets = Instantiate(circle, canon.position, Quaternion.identity);
-            print(canon.position);
             Vector3 direction;
             direction.x = Mathf.Sin((i + degrees) * Mathf.Deg2Rad);
             direction.y = 0;
