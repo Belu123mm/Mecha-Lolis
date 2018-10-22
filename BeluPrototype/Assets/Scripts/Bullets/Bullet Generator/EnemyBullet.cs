@@ -20,12 +20,12 @@ public class EnemyBullet : MonoBehaviour {
     public float radians;
     public float radiusX;
     public float radiusY;
+    public LayerMask DamagableLayer;
+    public int damage;
 
     // Use this for initialization
     void Start() {
-        if ( Application.isPlaying )
-            Destroy(this.gameObject, 5);
-        else
+        if ( !Application.isPlaying )
             Selection.activeGameObject = this.gameObject;
 
     }
@@ -37,7 +37,11 @@ public class EnemyBullet : MonoBehaviour {
         Gizmos.DrawSphere(center, 1);
     }
     public void OnTriggerEnter( Collider other ) {
-        //Destroy(this.gameObject);
-        print("hit");
+        var obj = other.gameObject;
+        if ( obj.layer == DamagableLayer ) {
+            obj.GetComponent<IDamageable>().AddDamage(damage);
+            Destroy(this.gameObject);
+        }
+
     }
 }
