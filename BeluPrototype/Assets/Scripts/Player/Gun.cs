@@ -76,7 +76,6 @@ public class Gun : MonoBehaviour {
 			anim.SetTrigger("Shoot");
 			bulletCount--;
 			canShoot = false;
-			//var newbullet = Instantiate(bulletPrefab, cañon.transform.position,Quaternion.identity);
 			var newBullet = GameModelManager.instance.PlayerBulletPool.GetObjectFromPool();
 			if (newBullet) newBullet.GetComponent<Bullet>()
 					.Fly(cañon.transform.position, cañon.transform.forward);
