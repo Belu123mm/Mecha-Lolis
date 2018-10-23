@@ -9,6 +9,7 @@ public class SimpleTurret : Turret, IEnemy {
 	public EventFSM<TurretState> stateMachine;
 	public event Action<TurretState> OnInput = delegate { };
 	SimpleBullets bulletGenerator;
+    public TurretVFX vfx;
 
 	float timer;
 	// Use this for initialization
@@ -20,11 +21,12 @@ public class SimpleTurret : Turret, IEnemy {
 		OnInput += Input => stateMachine.Feed(Input);
 	}
 
-	public void SetStateMachine() {
-		var moving = new State<TurretState>("MOVE");
-		var shooting = new State<TurretState>("SHOOT");
-		var iterate = new State<TurretState>("ITERATE");
-		var quiet = new State<TurretState>("QUIET");
+    public void SetStateMachine() {
+        var moving = new State<TurretState>("MOVE");
+        var shooting = new State<TurretState>("SHOOT");
+        var iterate = new State<TurretState>("ITERATE");
+        var quiet = new State<TurretState>("QUIET");
+        var dying = new State<TurretState>("DYING");
 
 		moving.AddTransition(TurretState.shooting, shooting);
 		moving.AddTransition(TurretState.iterate, iterate);
@@ -35,14 +37,19 @@ public class SimpleTurret : Turret, IEnemy {
 		iterate.AddTransition(TurretState.shooting, shooting);
 		quiet.AddTransition(TurretState.shooting, shooting);
 
-		moving.OnUpdate = () => navigation.MoveToNext();
+		moving.OnUpdate += () => navigation.MoveToNext();
+        moving.OnUpdate += () => vfx.OnMovement(navigation.rigidbody.velocity.magnitude);
 
 		shooting.OnUpdate = () => Shoot();
 
-		if(hasNavigation)
-		iterate.OnEnter = () => navigation.NextNode();
+        if ( hasNavigation ) {
+		iterate.OnEnter += () => navigation.NextNode();
+            iterate.OnEnter += () => vfx.Rotate();
+        }
 
-		stateMachine = new EventFSM<TurretState>(iterate);
+        quiet.OnEnter = () => vfx.Quiet();
+
+        stateMachine = new EventFSM<TurretState>(iterate);
 	}
 
 	// Update is called once per frame
@@ -69,6 +76,7 @@ public class SimpleTurret : Turret, IEnemy {
 		if ( timer > timetoshoot ) {
 			bulletGenerator.Shoot();
 			timer = 0;
+            vfx.Shooting();
 		}
 		if (hasNavigation)
 		navigation.mOVEbUTsLOWER();

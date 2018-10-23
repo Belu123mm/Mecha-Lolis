@@ -9,6 +9,7 @@ using System;
 public class RoundTurret : Turret, IEnemy {
     public EventFSM<TurretState> stateMachine;
     public event Action<TurretState> OnInput = delegate { };
+    public TurretVFX vfx;
 
     float timer;
     RoundBullets bulletGenerator;
@@ -71,11 +72,23 @@ public class RoundTurret : Turret, IEnemy {
 
 
         quiet.OnUpdate += () => Quiet();
+        quiet.OnEnter += () => vfx.ClearAnimations();
+        quiet.OnEnter += () => vfx.Quiet();
+
 
         shooting.OnUpdate += () => Shoot();
+        shooting.OnUpdate += () => vfx.OnMovement(navigation.speed);
 
-        if ( hasNavigation )
-            iterate.OnEnter = () => navigation.NextNode();
+        moving.OnEnter = () => vfx.ClearAnimations();
+        moving.OnUpdate += () => navigation.MoveToNext();
+        moving.OnUpdate += () => vfx.OnMovement(navigation.speed);
+
+
+        if ( hasNavigation ) {
+            iterate.OnEnter += () => navigation.NextNode();
+            iterate.OnEnter += () => vfx.ClearAnimations();
+            iterate.OnEnter += () => vfx.Rotate();
+        }
 
 
         stateMachine = new EventFSM<TurretState>(quiet);
@@ -86,6 +99,7 @@ public class RoundTurret : Turret, IEnemy {
             bulletGenerator.target = target;
             bulletGenerator.Shoot();
             timer = 0;
+            vfx.Shooting();
         }
         if ( hasNavigation )
             navigation.mOVEbUTsLOWER();
@@ -101,5 +115,6 @@ public enum TurretState {
     shooting,
     quiet,
     moving,
-    iterate
+    iterate,
+    dying
 }

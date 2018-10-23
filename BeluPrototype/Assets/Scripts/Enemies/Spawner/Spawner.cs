@@ -43,7 +43,7 @@ public class Spawner : MonoBehaviour {
                 if ( en.hasNavigation )
                     Instantiate(en, en.nodegroup._first.position, Quaternion.identity, this.transform);
                 else
-                    Instantiate(en, w.positions [ Random.Range(0, w.positions.Count) ], Quaternion.identity);
+                    Instantiate(en, w.positions [ Random.Range(0, w.positions.Count) ], Quaternion.identity,this.transform);
                 yield return new WaitForSeconds(w.spawntime);
             }
             yield return new WaitForSeconds(timeBetweenWaves);
