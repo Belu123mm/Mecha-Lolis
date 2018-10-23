@@ -50,6 +50,14 @@ public class Spawner : MonoBehaviour {
         }
 
     }
+
+    public void OnDrawGizmos() {
+        foreach ( var w in waves ) {
+            foreach ( var n in w.positions ) {
+                Gizmos.DrawCube(n, new Vector3(1, 1, 1));
+            }
+        }
+    }
     //asi funciona pero sin timers
     //-dab-
     //Alan <3
