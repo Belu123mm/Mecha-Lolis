@@ -1,0 +1,154 @@
+fileFormatVersion: 2
+guid: 5611a30ca2f7e2d47881d9a58ccfb34d
+timeCreated: 1540344448
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Arrow
+    100002: ArrowCore
+    100004: ArrowCoreGizmo
+    100006: ArrowLeftArm1
+    100008: ArrowLeftArm1Gizmo
+    100010: ArrowLeftArmCollarbone
+    100012: ArrowLeftArmDigit11
+    100014: ArrowLeftArmDigit11Gizmo
+    100016: ArrowLeftArmPalm
+    100018: ArrowLeftArmPalmGizmo
+    100020: ArrowRightArm1
+    100022: ArrowRightArm1Gizmo
+    100024: ArrowRightArmCollarbone
+    100026: ArrowRightArmWingsHolder
+    100028: ArrowRightArmWingsHolderGizmo
+    100030: ArrowRightArmWingsRotator1
+    100032: ArrowRightArmWingsRotator1Gizmo
+    100034: ArrowWeapon1
+    100036: ArrowWeapon1Gizmo
+    100038: ArrowWeapon2
+    100040: ArrowWeaponPlatform
+    100042: //RootNode
+    100044: Object012
+    100046: Object013
+    100048: Object014
+    100050: Object015
+    400000: Arrow
+    400002: ArrowCore
+    400004: ArrowCoreGizmo
+    400006: ArrowLeftArm1
+    400008: ArrowLeftArm1Gizmo
+    400010: ArrowLeftArmCollarbone
+    400012: ArrowLeftArmDigit11
+    400014: ArrowLeftArmDigit11Gizmo
+    400016: ArrowLeftArmPalm
+    400018: ArrowLeftArmPalmGizmo
+    400020: ArrowRightArm1
+    400022: ArrowRightArm1Gizmo
+    400024: ArrowRightArmCollarbone
+    400026: ArrowRightArmWingsHolder
+    400028: ArrowRightArmWingsHolderGizmo
+    400030: ArrowRightArmWingsRotator1
+    400032: ArrowRightArmWingsRotator1Gizmo
+    400034: ArrowWeapon1
+    400036: ArrowWeapon1Gizmo
+    400038: ArrowWeapon2
+    400040: ArrowWeaponPlatform
+    400042: //RootNode
+    400044: Object012
+    400046: Object013
+    400048: Object014
+    400050: Object015
+    2100000: No Name
+    4300000: Object012
+    4300002: Object013
+    4300004: Object014
+    4300006: Object015
+    7400000: propeller
+    7400002: fly_in
+    7400004: fly_prep
+    7400006: fly_out
+    7400008: die
+    9500000: //RootNode
+    13700000: Object012
+    13700002: Object013
+    13700004: Object014
+    13700006: Object015
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
