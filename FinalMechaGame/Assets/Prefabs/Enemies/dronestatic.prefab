@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4536693380423858}
   - component: {fileID: 114943380983203210}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +35,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4476990915170358}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4958476453155604}
   - component: {fileID: 137625906082032010}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Object014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +66,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4617845182618692}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ArrowRightArmCollarbone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4338027074029816}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ArrowRightArmWingsHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4540122545278652}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ArrowWeapon1Gizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4434343425159542}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ArrowRightArmWingsRotator1Gizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4488638695850908}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ArrowLeftArm1Gizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4550833531773054}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ArrowWeapon2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4350694045085148}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ArrowWeapon1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4186587681918434}
   - component: {fileID: 137947267879089126}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Object013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4037139147211640}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ArrowRightArmWingsRotator1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4084147741892562}
   - component: {fileID: 95804958895016586}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: enemigo01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4809720477895010}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ArrowLeftArmDigit11Gizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,7 +233,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4456781677334498}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Canon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4124338678159248}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ArrowCoreGizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +264,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4341301301031640}
   - component: {fileID: 136198484811778376}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 54984369393708480}
   - component: {fileID: 114687381232899404}
   - component: {fileID: 114611655302334518}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: dronestatic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +298,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4742019192354096}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ArrowLeftArmPalm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -313,7 +313,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4509088608984262}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ArrowCore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +328,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4927082233953928}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ArrowRightArm1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +344,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4501456383974372}
   - component: {fileID: 137660531139020544}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Object015
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -359,7 +359,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4604239034228914}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ArrowLeftArmPalmGizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -374,7 +374,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4088343450081568}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ArrowRightArmWingsHolderGizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -389,7 +389,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4699122154432370}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ArrowLeftArm1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -404,7 +404,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4800985186252322}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ArrowWeaponPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -419,7 +419,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4638040310505858}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ArrowLeftArmDigit11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -435,7 +435,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4190061401186470}
   - component: {fileID: 137375864266015644}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Object012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -450,7 +450,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4700954135859860}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ArrowRightArm1Gizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -465,7 +465,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4752340540945302}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ArrowLeftArmCollarbone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
