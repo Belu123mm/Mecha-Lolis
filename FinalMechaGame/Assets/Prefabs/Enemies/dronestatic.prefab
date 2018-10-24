@@ -939,7 +939,7 @@ MonoBehaviour:
   target: {fileID: 0}
   sight: {fileID: 0}
   navigation: {fileID: 0}
-  timetoshoot: 0
+  timetoshoot: 0.2
   Life: 0
   vfx: {fileID: 114943380983203210}
 --- !u!114 &114646037922407272
@@ -953,8 +953,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9f62d14c2c9b245b10c3fbfe6dcdc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewAngle: 0
-  viewDistance: 0
+  viewAngle: 50
+  viewDistance: 50
   targetTransform: {fileID: 0}
   level:
     serializedVersion: 2
@@ -974,7 +974,7 @@ MonoBehaviour:
   canon: {fileID: 4456781677334498}
   bulletPrefab: {fileID: 114783160078131488, guid: 5c29cb8561605f841aad453f612e7cec,
     type: 2}
-  speed: 0
+  speed: 15
 --- !u!114 &114943380983203210
 MonoBehaviour:
   m_ObjectHideFlags: 1

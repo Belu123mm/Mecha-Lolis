@@ -75,7 +75,6 @@ public class RoundTurret : Turret, IEnemy {
 
         shooting.OnEnter = () => vfx.ClearAnimations();
         shooting.OnUpdate += () => Shoot();
-        //shooting.OnUpdate += () => vfx.OnMovement(navigation.speed);
         shooting.OnExit = () => vfx.ClearAnimations();
 
         moving.OnEnter = () => vfx.ClearAnimations();
