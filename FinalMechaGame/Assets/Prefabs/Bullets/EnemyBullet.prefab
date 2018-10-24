@@ -279,9 +279,7 @@ MonoBehaviour:
   radians: 0
   radiusX: 0
   radiusY: 0
-  DamagableLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  DamagableLayer: 0
   damage: 0
 --- !u!135 &135648229599588124
 SphereCollider:

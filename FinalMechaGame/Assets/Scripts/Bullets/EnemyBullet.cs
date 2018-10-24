@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
+﻿using UnityEngine;
 using UnityEditor;
 [ExecuteInEditMode]
 public class EnemyBullet : MonoBehaviour {
 
     public delegate void OnMovement();
-    public OnMovement Movement;
+    public OnMovement Movement = delegate { };
     public float speedOscilation;
     public Vector3 center;
     public int bulletsCount;
@@ -20,14 +17,13 @@ public class EnemyBullet : MonoBehaviour {
     public float radians;
     public float radiusX;
     public float radiusY;
-    public LayerMask DamagableLayer;
+    public int DamagableLayer;
     public int damage;
 
     // Use this for initialization
     void Start() {
         if ( !Application.isPlaying )
             Selection.activeGameObject = this.gameObject;
-
     }
     void Update() {
         Movement();
@@ -40,7 +36,7 @@ public class EnemyBullet : MonoBehaviour {
         var obj = other.gameObject;
         if ( obj.layer == DamagableLayer ) {
             obj.GetComponent<IDamageable>().AddDamage(damage);
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
 
     }

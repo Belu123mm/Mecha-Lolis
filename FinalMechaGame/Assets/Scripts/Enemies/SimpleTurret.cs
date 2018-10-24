@@ -21,12 +21,12 @@ public class SimpleTurret : Turret, IEnemy {
 		OnInput += Input => stateMachine.Feed(Input);
 	}
 
-    public void SetStateMachine() {
-        var moving = new State<TurretState>("MOVE");
-        var shooting = new State<TurretState>("SHOOT");
-        var iterate = new State<TurretState>("ITERATE");
-        var quiet = new State<TurretState>("QUIET");
-        var dying = new State<TurretState>("DYING");
+	public void SetStateMachine() {
+		var moving = new State<TurretState>("MOVE");
+		var shooting = new State<TurretState>("SHOOT");
+		var iterate = new State<TurretState>("ITERATE");
+		var quiet = new State<TurretState>("QUIET");
+		var dying = new State<TurretState>("DYING");
 
 		moving.AddTransition(TurretState.shooting, shooting);
 		moving.AddTransition(TurretState.iterate, iterate);
@@ -38,24 +38,24 @@ public class SimpleTurret : Turret, IEnemy {
 		quiet.AddTransition(TurretState.shooting, shooting);
 
 		moving.OnUpdate += () => navigation.MoveToNext();
-        moving.OnUpdate += () => vfx.OnMovement(navigation.rigidbody.velocity.magnitude);
+		moving.OnUpdate += () => vfx.OnMovement(navigation.rigidbody.velocity.magnitude);
 
 		shooting.OnUpdate = () => Shoot();
 
-        if ( hasNavigation ) {
+		if ( hasNavigation ) {
 		iterate.OnEnter += () => navigation.NextNode();
-            iterate.OnEnter += () => vfx.Rotate();
-        }
+			iterate.OnEnter += () => vfx.Rotate();
+		}
 
-        quiet.OnEnter = () => vfx.Quiet();
+		quiet.OnEnter = () => vfx.Quiet();
 
-        stateMachine = new EventFSM<TurretState>(iterate);
+		stateMachine = new EventFSM<TurretState>(iterate);
 	}
 
 	// Update is called once per frame
 	void Update() {
 		if (!hasNavigation) {
-			if ( sight.GetSight() )
+			if ( sight.isEnemyOnSigh() )
 				OnInput(TurretState.shooting);
 			else
 				OnInput(TurretState.quiet);
@@ -64,7 +64,7 @@ public class SimpleTurret : Turret, IEnemy {
 		{
 			if ( navigation.IsOnDistance())
 				OnInput(TurretState.iterate);
-			else if ( sight.GetSight())
+			else if ( sight.isEnemyOnSigh())
 				OnInput(TurretState.shooting);
 			else
 				OnInput(TurretState.moving);
@@ -76,7 +76,7 @@ public class SimpleTurret : Turret, IEnemy {
 		if ( timer > timetoshoot ) {
 			bulletGenerator.Shoot();
 			timer = 0;
-            vfx.Shooting();
+			vfx.Shooting();
 		}
 		if (hasNavigation)
 		navigation.mOVEbUTsLOWER();

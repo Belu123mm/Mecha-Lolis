@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class TurretVFX : MonoBehaviour {
@@ -11,7 +10,6 @@ public class TurretVFX : MonoBehaviour {
         animator.SetTrigger("start");
         Quiet();
     }
-
 
     //Funciones
     public void OnMovement(float velocity) {
@@ -37,6 +35,5 @@ public class TurretVFX : MonoBehaviour {
     public void ClearAnimations() {
         animator.SetBool("QUIET", false);
         animator.SetBool("DYING", false);
-
     }
 }

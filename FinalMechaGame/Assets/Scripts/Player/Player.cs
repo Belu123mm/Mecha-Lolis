@@ -16,12 +16,12 @@ public class Player : MonoBehaviour, IDamageable {
 
 	int[] axeses = { 0, 0 };
 	float _currentMovementSpeed;
-	Rigidbody rb;
+	//Rigidbody rb;
 
 	private void Awake()
 	{
 		game = new GameModelManager();
-		rb = GetComponent<Rigidbody>();
+		//rb = GetComponent<Rigidbody>();
 		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
 	}

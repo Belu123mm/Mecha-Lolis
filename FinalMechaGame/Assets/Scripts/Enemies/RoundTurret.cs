@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 
 [RequireComponent(typeof(RoundBullets))]
@@ -17,37 +15,36 @@ public class RoundTurret : Turret, IEnemy {
     public void Awake() {
         bulletGenerator = GetComponent<RoundBullets>();
     }
+
     public override void Start() {
         base.Start();
         SetStateMachine();
         OnInput += Input => stateMachine.Feed(Input);
         bulletGenerator.target = target;
-
     }
+
+    //Esto hay que chequearlo.
     public void Update() {
         timer += Time.deltaTime;
 
-
-        if ( !hasNavigation ) {
-            if ( sight.GetSight() )
+        if ( !hasNavigation )
+        {
+            if ( sight.isEnemyOnSigh() )
                 OnInput(TurretState.shooting);
             else
                 OnInput(TurretState.quiet);
-        } else if ( navigation.currentNode ) {
-            if ( navigation.IsOnDistance() ) {
+        }
+        else if ( navigation.currentNode )
+        {
+            if ( navigation.IsOnDistance() )
                 OnInput(TurretState.iterate);
-            } else
-            if ( sight.GetSight() ) {
-                OnInput(TurretState.shooting);
-            } else {
-                OnInput(TurretState.moving);
-            }
+            else if ( sight.isEnemyOnSigh() )
+                    OnInput(TurretState.shooting);
+            else OnInput(TurretState.moving);
         }
         stateMachine.Update();
         Debug.Log(stateMachine.current.name);
         Debug.Log(hasNavigation);
-
-
     }
 
     public void SetStateMachine() {
@@ -78,7 +75,7 @@ public class RoundTurret : Turret, IEnemy {
 
         shooting.OnEnter = () => vfx.ClearAnimations();
         shooting.OnUpdate += () => Shoot();
-        shooting.OnUpdate += () => vfx.OnMovement(navigation.speed);
+        //shooting.OnUpdate += () => vfx.OnMovement(navigation.speed);
         shooting.OnExit = () => vfx.ClearAnimations();
 
         moving.OnEnter = () => vfx.ClearAnimations();
@@ -92,9 +89,7 @@ public class RoundTurret : Turret, IEnemy {
             iterate.OnEnter += () => vfx.Rotate();
         }
 
-
         stateMachine = new EventFSM<TurretState>(quiet);
-
     }
     public void Shoot() {
         if ( timer > timetoshoot ) {
@@ -105,18 +100,14 @@ public class RoundTurret : Turret, IEnemy {
         if ( hasNavigation ) {
             navigation.mOVEbUTsLOWER();
             vfx.OnMovement(navigation.speed * navigation.percent);
-        }else {
-
-        vfx.Quiet();
-        }
-
+        }else 
+            vfx.Quiet();
     }
     public void Quiet() {
 
     }
-
-
 }
+
 public enum TurretState {
     shooting,
     quiet,
