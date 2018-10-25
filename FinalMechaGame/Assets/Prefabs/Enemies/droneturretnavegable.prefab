@@ -2029,7 +2029,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 95185183640847080}
-  particles: []
+  particles:
+  - {fileID: 198621727433419414, guid: 4327391a5c0ee8d4499c684de8b61db3, type: 2}
   movementMultiplyer: 10
 --- !u!114 &114726993888548676
 MonoBehaviour:

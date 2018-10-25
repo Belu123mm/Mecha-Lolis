@@ -987,7 +987,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 95804958895016586}
-  particles: []
+  particles:
+  - {fileID: 198621727433419414, guid: 4327391a5c0ee8d4499c684de8b61db3, type: 2}
   movementMultiplyer: 0
 --- !u!136 &136198484811778376
 CapsuleCollider:
