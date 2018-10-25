@@ -4,7 +4,7 @@ using System;
 [RequireComponent(typeof(RoundBullets))]
 [RequireComponent(typeof(Sight))]
 
-public class RoundTurret : Turret, IEnemy {
+public class RoundTurret : Turret, IEnemy, IDamageable {
     public EventFSM<TurretState> stateMachine;
     public event Action<TurretState> OnInput = delegate { };
     public TurretVFX vfx;
@@ -43,8 +43,6 @@ public class RoundTurret : Turret, IEnemy {
             else OnInput(TurretState.moving);
         }
         stateMachine.Update();
-        Debug.Log(stateMachine.current.name);
-        Debug.Log(hasNavigation);
     }
 
     public void SetStateMachine() {
@@ -75,7 +73,6 @@ public class RoundTurret : Turret, IEnemy {
 
         shooting.OnEnter = () => vfx.ClearAnimations();
         shooting.OnUpdate += () => Shoot();
-        //shooting.OnUpdate += () => vfx.OnMovement(navigation.speed);
         shooting.OnExit = () => vfx.ClearAnimations();
 
         moving.OnEnter = () => vfx.ClearAnimations();
@@ -105,6 +102,19 @@ public class RoundTurret : Turret, IEnemy {
     }
     public void Quiet() {
 
+    }
+
+    public void AddDamage(int Damage)
+    {
+        Life -= Damage;
+        if (Life <= 0)
+        {
+            GameModelManager.instance.Points += 10;
+            GameModelManager.instance.UpdatePoints();
+            print(gameObject.name + " Se ha morido");
+            OnInput(TurretState.dying);
+        }
+        print(name + " ha recibido " + Damage + " puntos de daño!");
     }
 }
 

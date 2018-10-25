@@ -7,6 +7,7 @@ public class GameModelManager
 {
 	public static GameModelManager instance;
 	public Pool<GameObject> PlayerBulletPool;
+	public Pool<GameObject> EnemyBulletPool;
 	public float Points = 0;
 
 	GameController _controller;
@@ -22,25 +23,41 @@ public class GameModelManager
 
 	public GameModelManager()
 	{
-		instance = this;
+		if (instance == null) instance = this;
 		_gameView = UnityEngine.Object.FindObjectOfType<GameManagerView>();
 		_controller = UnityEngine.Object.FindObjectOfType<GameController>();
+        _scenes = UnityEngine.Object.FindObjectOfType<SceneManagement>();
 		UpdatePoints();
 	}
 
-	/// <summary>
-	/// Inicia el juego.
-	/// </summary>
-	public void StartGame()
-	{
-		//Acá iría todo lo que se hace cuando el juego Empieza.
-		//Si el juego comienza desde cero no cargamos nada, pero si el jugador lo desea puede cargar una partida en cualquier momento.
-	}
+    public void InitializeEnemyBulletPool(int ammount,GameObject bulletPrefab, Action<GameObject> init, Action<GameObject> finit, bool isDinamic = false)
+    {
+        //Factory
+        Func<GameObject> factory = () => 
+        { return UnityEngine.Object.Instantiate(bulletPrefab, Vector3.zero, Quaternion.identity); };
 
-	/// <summary>
-	/// Termina el juego.
-	/// </summary>
-	public void EndGame()
+        //Bullet Pool
+        EnemyBulletPool = new Pool<GameObject>(ammount, factory, init, finit
+            , isDinamic);
+
+        //Método de reemplazo para Destroy()
+        EnemyBullet.OnDeactivate = EnemyBulletPool.ReturnObjectToPool;
+        //MonoBehaviour.print("Ammount of bullets is: " + EnemyBulletPool.Count);
+    }
+
+    /// <summary>
+    /// Inicia el juego.
+    /// </summary>
+    public void StartGame()
+	{
+        //Acá iría todo lo que se hace cuando el juego Empieza.
+        //Si el juego comienza desde cero no cargamos nada, pero si el jugador lo desea puede cargar una partida en cualquier momento.
+    }
+
+    /// <summary>
+    /// Termina el juego.
+    /// </summary>
+    public void EndGame()
 	{
 		//Acá iría todo lo que se hace cuando el juego termina.
 		//aca tendriamos una instancia de "SceneManager" por ejemplo y ejecutar su función.
@@ -75,7 +92,6 @@ public class GameModelManager
 	{
 		_gameView.PointDisplay = Points.ToString();
 	}
-
 	#region Eventos Comunes
 	//Añadir eventos de teclado
 	/// <summary>

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Gun : MonoBehaviour {
 	//public TPGranade granadeHability;
@@ -42,8 +39,6 @@ public class Gun : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		SmoothShoot();
-
-		print("Current ammount of bullets in pool is: " + GameModelManager.instance.PlayerBulletPool.Count);
 	}
 
 	private void reload()

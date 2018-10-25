@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RoundBullets : BulletGroup {
     public int numberOfBullets;
@@ -12,21 +10,21 @@ public class RoundBullets : BulletGroup {
     public float radiusY;
     public float variation;
 
-
     [Tooltip("It has to be VERY high, like 100+")]
     public float speedOscilation;
     public Vector3 center;
 
     public float speed;
 
-
     public override void Shoot() {
         degrees += variation;
 
-        Debug.Log(transform.forward);
+        var Manager = GameModelManager.instance;
+
+        //Debug.Log(transform.forward);
         for ( int i = 1; i < 360; i += 360 / numberOfBullets ) {
 
-            EnemyBullet bullets = Instantiate(circle, canon.position, Quaternion.identity);
+            EnemyBullet bullets = Manager.EnemyBulletPool.GetObjectFromPool().GetComponent<EnemyBullet>();
             Vector3 direction;
             direction.x = Mathf.Sin((i + degrees) * Mathf.Deg2Rad);
             direction.y = 0;
@@ -62,6 +60,4 @@ public class RoundBullets : BulletGroup {
 
         //b.transform.position += b.transform.forward * Time.deltaTime * speed;
     }
-
-
 }

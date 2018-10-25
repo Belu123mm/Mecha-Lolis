@@ -5,7 +5,7 @@ using System;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Sight))]
 
-public class SimpleTurret : Turret, IEnemy {
+public class SimpleTurret : Turret, IEnemy, IDamageable {
 	public EventFSM<TurretState> stateMachine;
 	public event Action<TurretState> OnInput = delegate { };
 	SimpleBullets bulletGenerator;
@@ -81,4 +81,17 @@ public class SimpleTurret : Turret, IEnemy {
 		if (hasNavigation)
 		navigation.mOVEbUTsLOWER();
 	}
+
+    public void AddDamage(int Damage)
+    {
+        Life -= Damage;
+        if (Life <= 0)
+        {
+            GameModelManager.instance.Points += 10;
+            GameModelManager.instance.UpdatePoints();
+            print(gameObject.name + " Se ha morido");
+            //OnInput(TurretState.dying);
+        }
+        print(name + " ha recibido " + Damage + " puntos de daño!");
+    }
 }

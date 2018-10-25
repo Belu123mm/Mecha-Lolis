@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4751821339878082}
   - component: {fileID: 137075463546095198}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Sphere001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4398383178396894}
   - component: {fileID: 137831849442374560}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Box015
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4707986726735182}
   - component: {fileID: 33776377628663376}
   - component: {fileID: 23515619152946372}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpiderRLeg21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4059452546276670}
   - component: {fileID: 137067608889739550}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4798891893245038}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Canon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4312364326934140}
   - component: {fileID: 137377535728988404}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Box008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4895815751532376}
   - component: {fileID: 137484384192653736}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4760831863270766}
   - component: {fileID: 137936201519946450}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Box005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 4234940835296914}
   - component: {fileID: 33042738057435752}
   - component: {fileID: 23285222311283656}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpiderRLeg42
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4807952162215298}
   - component: {fileID: 137932403620048162}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Box006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 4229477913936726}
   - component: {fileID: 33397542764097930}
   - component: {fileID: 23785796506140750}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpiderRLeg41
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 4798691466192412}
   - component: {fileID: 33328979598332142}
   - component: {fileID: 23175889923375490}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpiderLLeg42
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 4463718935585844}
   - component: {fileID: 33399081955228350}
   - component: {fileID: 23204013119358060}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpiderLLeg21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4966962133887752}
   - component: {fileID: 137620713020168250}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4915694319123088}
   - component: {fileID: 137641283557542918}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,7 +263,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4110257851489028}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +279,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4105939120980296}
   - component: {fileID: 137593042704987894}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Box011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4740760556416546}
   - component: {fileID: 137211248963274820}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,7 +311,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4820077944171330}
   - component: {fileID: 137255021317639466}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Box010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 4682321781619840}
   - component: {fileID: 33657962625095626}
   - component: {fileID: 23930339890289938}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpiderSpine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 4779420485906062}
   - component: {fileID: 33746000785419394}
   - component: {fileID: 23461166090389884}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpiderLLeg32
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +361,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4780109383840878}
   - component: {fileID: 137134415935048848}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 4549386222962794}
   - component: {fileID: 33887577852954214}
   - component: {fileID: 23539189444751254}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpiderRLeg31
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -394,7 +394,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4670767173045216}
   - component: {fileID: 95185183640847080}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: enemigo02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -411,7 +411,7 @@ GameObject:
   - component: {fileID: 4317925863529834}
   - component: {fileID: 33643438615587240}
   - component: {fileID: 23399462404982210}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpiderHub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -427,7 +427,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4770286057671362}
   - component: {fileID: 137149416399685670}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -444,7 +444,7 @@ GameObject:
   - component: {fileID: 4154522238135274}
   - component: {fileID: 33031697381120752}
   - component: {fileID: 23847683710970806}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpiderLLeg31
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,7 +460,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4198415930438802}
   - component: {fileID: 137313812573897188}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Box012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -476,7 +476,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4003844987964666}
   - component: {fileID: 137402410267683112}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -492,7 +492,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4334089475915826}
   - component: {fileID: 137142244507638758}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,12 +507,13 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4372975617369328}
+  - component: {fileID: 54860904943546336}
+  - component: {fileID: 136422329472151954}
   - component: {fileID: 114789337901394676}
   - component: {fileID: 114085376115433522}
   - component: {fileID: 114726993888548676}
   - component: {fileID: 114858169018660742}
-  - component: {fileID: 54860904943546336}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: droneturretnavegable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -528,7 +529,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4123199063529372}
   - component: {fileID: 137311692857869292}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Box014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -545,7 +546,7 @@ GameObject:
   - component: {fileID: 4330774039342160}
   - component: {fileID: 33204287685029404}
   - component: {fileID: 23637086343522964}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpiderRLeg22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -562,24 +563,8 @@ GameObject:
   - component: {fileID: 4939193747475578}
   - component: {fileID: 33439827940057654}
   - component: {fileID: 23276387380081408}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpiderLLeg41
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1717453510337246
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4843285660303146}
-  - component: {fileID: 136659438900610758}
-  m_Layer: 0
-  m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -594,7 +579,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4580145314975222}
   - component: {fileID: 137219015787532540}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Box004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -610,7 +595,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4353414236604358}
   - component: {fileID: 137475011334676744}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Box002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -626,7 +611,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4265851913375928}
   - component: {fileID: 137838326472829594}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Box013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -642,7 +627,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4894490965748220}
   - component: {fileID: 137786923546083014}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Box007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -659,7 +644,7 @@ GameObject:
   - component: {fileID: 4305348267894172}
   - component: {fileID: 33269556939548782}
   - component: {fileID: 23485249463687832}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpiderRLeg32
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -676,7 +661,7 @@ GameObject:
   - component: {fileID: 4760890753270496}
   - component: {fileID: 33314813382574824}
   - component: {fileID: 23506305601946470}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpiderHub001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -693,7 +678,7 @@ GameObject:
   - component: {fileID: 4227789533514862}
   - component: {fileID: 33291745566140094}
   - component: {fileID: 23407516270541350}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpiderLLeg22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -709,7 +694,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4499640563398854}
   - component: {fileID: 137703461117926278}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -725,7 +710,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4225217356217214}
   - component: {fileID: 114663817496177932}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -837,7 +822,7 @@ Transform:
   m_Children:
   - {fileID: 4670767173045216}
   m_Father: {fileID: 4372975617369328}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4227789533514862
 Transform:
@@ -984,11 +969,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1663978785309748}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.8044016, y: 0.03496033, z: -11.975901}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4798891893245038}
-  - {fileID: 4843285660303146}
   - {fileID: 4225217356217214}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1268,19 +1252,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4751821339878082}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4843285660303146
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1717453510337246}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4372975617369328}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4894490965748220
 Transform:
@@ -2030,7 +2001,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 95185183640847080}
   particles: []
-  movementMultiplyer: 0
+  movementMultiplyer: 10
 --- !u!114 &114726993888548676
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2048,7 +2019,7 @@ MonoBehaviour:
   sight: {fileID: 0}
   navigation: {fileID: 0}
   timetoshoot: 1.5
-  Life: 0
+  Life: 100
   vfx: {fileID: 114663817496177932}
 --- !u!114 &114789337901394676
 MonoBehaviour:
@@ -2083,19 +2054,19 @@ MonoBehaviour:
   rigidbody: {fileID: 0}
   percent: 0.7
   distance: 1
---- !u!136 &136659438900610758
+--- !u!136 &136422329472151954
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1717453510337246}
+  m_GameObject: {fileID: 1663978785309748}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.44675186
-  m_Height: 1.2595954
+  m_Radius: 0.53
+  m_Height: 1.88
   m_Direction: 1
-  m_Center: {x: 0, y: 1.1263111, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!137 &137067608889739550
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

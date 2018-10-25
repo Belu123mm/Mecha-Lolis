@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using System;
+
 [ExecuteInEditMode]
 public class EnemyBullet : MonoBehaviour {
+    public static Action<GameObject> OnDeactivate;
 
-    public delegate void OnMovement();
-    public OnMovement Movement = delegate { };
+    public Action Movement = delegate { };
     public float speedOscilation;
     public Vector3 center;
     public int bulletsCount;
-
 
     public int numberOfBullets;
     [Range(0, 360)]
@@ -20,24 +21,42 @@ public class EnemyBullet : MonoBehaviour {
     public int DamagableLayer;
     public int damage;
 
-    // Use this for initialization
+    public static void InitializeBullet(GameObject bulletObj)
+    {
+        bulletObj.gameObject.SetActive(true);
+    }
+    public static void DeactivateBullet(GameObject bulletObj)
+    {
+        bulletObj.gameObject.SetActive(false);
+        //bulletObj.GetComponent<TrailRenderer>().Clear();
+        bulletObj.transform.position = Vector3.zero;
+        bulletObj.transform.rotation = Quaternion.identity;
+    }
+
+
     void Start() {
         if ( !Application.isPlaying )
-            Selection.activeGameObject = this.gameObject;
+            Selection.activeGameObject = gameObject;
     }
     void Update() {
         Movement();
     }
-    private void OnDrawGizmos() {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(center, 1);
-    }
+
     public void OnTriggerEnter( Collider other ) {
         var obj = other.gameObject;
-        if ( obj.layer == DamagableLayer ) {
-            obj.GetComponent<IDamageable>().AddDamage(damage);
-            Destroy(gameObject);
+        if (obj.layer == 0) OnDeactivate(gameObject); //Si la bala coliciona con el mundo.
+        //Si coliciona con el player.
+        if ( obj.tag == "Player")
+        {
+            obj.GetComponentInParent<IDamageable>().AddDamage(damage);
+            OnDeactivate(gameObject);
         }
-
     }
+
+    #region Visualización en Editor.
+    //private void OnDrawGizmos() {
+    //    Gizmos.color = Color.blue;
+    //    Gizmos.DrawSphere(center, 1);
+    //}
+    #endregion
 }

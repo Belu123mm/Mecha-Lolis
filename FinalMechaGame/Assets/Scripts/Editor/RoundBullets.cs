@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RoundBullets : BulletGroup {
     public int numberOfBullets;
@@ -23,10 +21,14 @@ public class RoundBullets : BulletGroup {
     public override void Shoot() {
         degrees += variation;
 
+        //Obtengo el GameManager
+        var Manager = GameModelManager.instance;
+
         Debug.Log(transform.forward);
         for ( int i = 1; i < 360; i += 360 / numberOfBullets ) {
 
-            EnemyBullet bullets = Instantiate(circle, canon.position, Quaternion.identity);
+            //Chequea esto.
+            EnemyBullet bullets = Manager.EnemyBulletPool.GetObjectFromPool().GetComponent<EnemyBullet>();
             Vector3 direction;
             direction.x = Mathf.Sin((i + degrees) * Mathf.Deg2Rad);
             direction.y = 0;

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretVFX : MonoBehaviour {
+public class TurretVFX : MonoBehaviour{
     public Animator animator;
     public List<ParticleSystem> particles;
     public float movementMultiplyer;
@@ -14,14 +14,14 @@ public class TurretVFX : MonoBehaviour {
     //Funciones
     public void OnMovement(float velocity) {
         animator.SetFloat("MOVING", velocity * movementMultiplyer);
-        Debug.Log("called"); 
+        //Debug.Log("called"); 
     }
     public void OnDamage() {
 
     }
     public void Dying() {
         animator.SetBool("DYING",true);
-        Instantiate(particles [ 0 ],transform.position,Quaternion.identity,this.transform);
+        Instantiate(particles [ 0 ],transform.position,Quaternion.identity,transform);
     }
     public void Rotate() {
         animator.SetTrigger("ITERATE");

@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Turret : MonoBehaviour {
 	public bool hasNavigation;
-
 	[HideInInspector]
 	public NodeGroup nodegroup;
 	[HideInInspector]
@@ -28,17 +25,5 @@ public class Turret : MonoBehaviour {
 		}
 		sight = GetComponent<Sight>();
 		sight.targetTransform = target;
-	}
-
-	public void AddDamage(int Damage)
-	{
-		Life -= Damage;
-		if (Life <= 0)
-		{
-			GameModelManager.instance.Points += 10;
-			GameModelManager.instance.UpdatePoints();
-			Destroy(gameObject);
-		}
-		print(name + " ha recibido " + Damage + " puntos de daño!");
 	}
 }

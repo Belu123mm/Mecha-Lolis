@@ -2,10 +2,10 @@
 using UnityEngine;
 
 public class Bullet : MonoBehaviour{
-	public static Func<GameObject> Factory;
-	public static Action<GameObject> OnDeactivate;
+    public static Func<GameObject> Factory;
+    public static Action<GameObject> OnDeactivate;
 
-	public int Damage;
+    public int Damage;
 	public int DamageableLayer;
 	public int WorldLayer;
 	public float force;
@@ -43,11 +43,16 @@ public class Bullet : MonoBehaviour{
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.layer == WorldLayer)
+        var item = other.gameObject;
+        if (item.layer == WorldLayer)
 			OnDeactivate(gameObject);
-		if (other.gameObject.layer == DamageableLayer)
+		if (item.layer == DamageableLayer)
 		{
-			other.gameObject.GetComponentInParent<IDamageable>().AddDamage(Damage);
+            if (item.GetComponent(typeof(IDamageable)))
+            {
+                print("Funciona en teoría");
+                other.gameObject.GetComponent<IDamageable>().AddDamage(Damage);
+            }
 			OnDeactivate(gameObject);
 		}
 	}

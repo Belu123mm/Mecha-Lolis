@@ -1,13 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BulletGroup : MonoBehaviour
 {
     //[HideInInspector]
     public Transform target;
-    public virtual void Shoot()
-    {
-
-    }
+    public virtual void Shoot() { }
 }

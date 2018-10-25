@@ -3,6 +3,7 @@
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour, IDamageable {
 	public GameModelManager game;
+    public GameObject EnemyBulletPrefab;
 	public Camera firstPersonCamera;
 	public Animator anim;
 	public int Life;
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour, IDamageable {
 	private void Awake()
 	{
 		game = new GameModelManager();
+		game.InitializeEnemyBulletPool(60, EnemyBulletPrefab, EnemyBullet.InitializeBullet, EnemyBullet.DeactivateBullet, true);
 		//rb = GetComponent<Rigidbody>();
 		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
@@ -39,6 +41,8 @@ public class Player : MonoBehaviour, IDamageable {
 		game.AddSimpleInputEvent(InputEventType.OnBegin, KeyCode.LeftShift, running);
 		game.AddSimpleInputEvent(InputEventType.OnRelease, KeyCode.LeftShift, running);
 		game.AddMouseTrack(RotateCamera);
+
+        game.StartGame();
 	}
 
 	public void MoveInAxeses(float dir, int Axis)
@@ -55,7 +59,7 @@ public class Player : MonoBehaviour, IDamageable {
 	{
 		if (Axis == 1) axeses[0] = 1;
 		if (Axis == 2) axeses[1] = 1;
-		print("Estoy moviendome");
+		//print("Estoy moviendome");
 			anim.SetBool("IsWalking", true);
 	}
 
@@ -65,7 +69,7 @@ public class Player : MonoBehaviour, IDamageable {
 		if (Axis == 2) axeses[1] = 0;
 		if (axeses[0] == 0 && axeses[1] == 0)
 		{
-			print("Estoy Quieto");
+			//print("Estoy Quieto");
 			anim.SetBool("IsWalking", false);
 		}
 	}
