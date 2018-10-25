@@ -362,6 +362,7 @@ GameObject:
   - component: {fileID: 65121676417458052}
   - component: {fileID: 65905852589605208}
   - component: {fileID: 65414748865689596}
+  - component: {fileID: 65462287448056436}
   m_Layer: 12
   m_Name: dronenavegable
   m_TagString: Untagged
@@ -858,7 +859,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1736710632032480}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 2.944}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4403036385026468}
@@ -933,6 +934,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.32, y: 0.4, z: 1.28}
   m_Center: {x: -1, y: 1.56, z: 0.11}
+--- !u!65 &65462287448056436
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1736710632032480}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.77, y: 0.057297707, z: 1.6}
+  m_Center: {x: 0, y: 0.6136489, z: 0}
 --- !u!65 &65905852589605208
 BoxCollider:
   m_ObjectHideFlags: 1

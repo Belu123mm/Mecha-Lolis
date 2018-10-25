@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class TurretVFX : MonoBehaviour{
     public Animator animator;
@@ -17,7 +18,7 @@ public class TurretVFX : MonoBehaviour{
         //Debug.Log("called"); 
     }
     public void OnDamage() {
-
+        StartCoroutine(Damage());
     }
     public void Dying() {
         animator.SetTrigger("DYING");
@@ -38,5 +39,10 @@ public class TurretVFX : MonoBehaviour{
     public void ClearAnimations() {
         animator.SetBool("QUIET", false);
         animator.SetBool("DYING", false);
+    }
+    IEnumerator Damage() {
+        ParticleSystem pt = Instantiate(particles [ 0 ], transform.position + Vector3.up, Quaternion.identity, transform);
+        yield return new WaitForSeconds(3);
+        Destroy(pt.gameObject);
     }
 }
