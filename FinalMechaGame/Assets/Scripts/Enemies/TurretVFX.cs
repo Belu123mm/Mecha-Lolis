@@ -20,8 +20,11 @@ public class TurretVFX : MonoBehaviour{
 
     }
     public void Dying() {
-        animator.SetBool("DYING",true);
+        animator.SetTrigger("DYING");
         Instantiate(particles [ 0 ],transform.position,Quaternion.identity,transform);
+        Instantiate(particles [ 1 ], transform.position, Quaternion.identity, transform);
+        print("die");
+
     }
     public void Rotate() {
         animator.SetTrigger("ITERATE");

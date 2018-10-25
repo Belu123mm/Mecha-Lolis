@@ -997,7 +997,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1663978785309748}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.8044016, y: 0.03496033, z: -11.975901}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4798891893245038}
@@ -2030,6 +2030,7 @@ MonoBehaviour:
   animator: {fileID: 95185183640847080}
   particles:
   - {fileID: 198621727433419414, guid: 4327391a5c0ee8d4499c684de8b61db3, type: 2}
+  - {fileID: 198916708760358310, guid: d73f4ffcf6654ee43bac85849b11b876, type: 2}
   movementMultiplyer: 10
 --- !u!114 &114726993888548676
 MonoBehaviour:
