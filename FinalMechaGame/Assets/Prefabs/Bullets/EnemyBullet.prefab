@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4813135036139694}
   - component: {fileID: 114783160078131488}
   - component: {fileID: 96729085914564494}
+  - component: {fileID: 136836975531223122}
   m_Layer: 0
   m_Name: EnemyBullet
   m_TagString: Untagged
@@ -374,7 +375,7 @@ MonoBehaviour:
   damage: 12
 --- !u!136 &136836975531223122
 CapsuleCollider:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1048041016096276}

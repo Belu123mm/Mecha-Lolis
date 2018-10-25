@@ -255,7 +255,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-
 --- !u!1 &1589391870074128
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,8 +262,7 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4341301301031640}
-  - component: {fileID: 136198484811778376}
+  - component: {fileID: 4915518952077612}
   m_Layer: 12
   m_Name: Collider
   m_TagString: Untagged
@@ -272,7 +270,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-
 --- !u!1 &1624098070468386
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,7 +285,6 @@ GameObject:
   - component: {fileID: 65837592225021218}
   - component: {fileID: 65428733538120470}
   - component: {fileID: 65872709015773156}
-
   m_Layer: 12
   m_Name: dronestatic
   m_TagString: Untagged
@@ -853,6 +849,19 @@ Transform:
   m_Children:
   - {fileID: 4456781677334498}
   - {fileID: 4536693380423858}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4915518952077612
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1589391870074128}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
