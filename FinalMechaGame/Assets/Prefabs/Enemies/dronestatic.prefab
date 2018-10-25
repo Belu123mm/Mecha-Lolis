@@ -255,6 +255,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+
+--- !u!1 &1589391870074128
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4341301301031640}
+  - component: {fileID: 136198484811778376}
+  m_Layer: 12
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+
 --- !u!1 &1624098070468386
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,6 +288,7 @@ GameObject:
   - component: {fileID: 65837592225021218}
   - component: {fileID: 65428733538120470}
   - component: {fileID: 65872709015773156}
+
   m_Layer: 12
   m_Name: dronestatic
   m_TagString: Untagged
@@ -996,7 +1015,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 95804958895016586}
-  particles: []
+  particles:
+  - {fileID: 198621727433419414, guid: 4327391a5c0ee8d4499c684de8b61db3, type: 2}
   movementMultiplyer: 0
 --- !u!137 &137375864266015644
 SkinnedMeshRenderer:

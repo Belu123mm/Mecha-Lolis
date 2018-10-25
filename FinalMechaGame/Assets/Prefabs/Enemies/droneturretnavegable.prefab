@@ -513,6 +513,7 @@ GameObject:
   - component: {fileID: 114085376115433522}
   - component: {fileID: 114726993888548676}
   - component: {fileID: 114858169018660742}
+  - component: {fileID: 54860904943546336}
   m_Layer: 12
   m_Name: droneturretnavegable
   m_TagString: Untagged
@@ -565,6 +566,22 @@ GameObject:
   - component: {fileID: 23276387380081408}
   m_Layer: 12
   m_Name: SpiderLLeg41
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1717453510337246
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4843285660303146}
+  - component: {fileID: 136659438900610758}
+  m_Layer: 12
+  m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2000,7 +2017,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 95185183640847080}
-  particles: []
+  particles:
+  - {fileID: 198621727433419414, guid: 4327391a5c0ee8d4499c684de8b61db3, type: 2}
   movementMultiplyer: 10
 --- !u!114 &114726993888548676
 MonoBehaviour:
