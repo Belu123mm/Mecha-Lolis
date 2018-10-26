@@ -22,6 +22,7 @@ public class Player : MonoBehaviour, IDamageable {
 	private void Awake()
 	{
 		game = new GameModelManager();
+        game.BulletParent = GameObject.Find("Bullets");
 		game.InitializeEnemyBulletPool(60, EnemyBulletPrefab, EnemyBullet.InitializeBullet, EnemyBullet.DeactivateBullet, true);
 		//rb = GetComponent<Rigidbody>();
 		Cursor.visible = false;

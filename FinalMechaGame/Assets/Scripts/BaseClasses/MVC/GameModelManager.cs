@@ -8,6 +8,7 @@ public class GameModelManager
 	public static GameModelManager instance;
 	public Pool<GameObject> PlayerBulletPool;
 	public Pool<GameObject> EnemyBulletPool;
+    public GameObject BulletParent;
 	public float Points = 0;
 
 	GameController _controller;
@@ -34,7 +35,12 @@ public class GameModelManager
     {
         //Factory
         Func<GameObject> factory = () => 
-        { return UnityEngine.Object.Instantiate(bulletPrefab, Vector3.zero, Quaternion.identity); };
+        { return UnityEngine.Object.Instantiate(
+            bulletPrefab, 
+            Vector3.zero, 
+            Quaternion.identity,
+            BulletParent.transform);
+        };
 
         //Bullet Pool
         EnemyBulletPool = new Pool<GameObject>(ammount, factory, init, finit
