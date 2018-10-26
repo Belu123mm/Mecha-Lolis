@@ -23,11 +23,11 @@ public class Gun : MonoBehaviour {
 		//Bullet Factory
 		Bullet.Factory =
 			() => { return Instantiate(
-                bulletPrefab,
-                Vector3.zero,
-                Quaternion.identity,
-                GameModelManager.instance.BulletParent.transform);
-            };
+				bulletPrefab,
+				Vector3.zero,
+				Quaternion.identity,
+				GameModelManager.instance.BulletParent.transform);
+			};
 
 		//Bullet Pool
 		GameModelManager.instance.PlayerBulletPool = new Pool<GameObject>(

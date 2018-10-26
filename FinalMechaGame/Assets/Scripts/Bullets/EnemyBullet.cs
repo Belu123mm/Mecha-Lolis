@@ -28,7 +28,7 @@ public class EnemyBullet : MonoBehaviour {
     public static void DeactivateBullet(GameObject bulletObj)
     {
         bulletObj.gameObject.SetActive(false);
-        //bulletObj.GetComponent<TrailRenderer>().Clear();
+        bulletObj.GetComponent<TrailRenderer>().Clear();
         bulletObj.transform.position = Vector3.zero;
         bulletObj.transform.rotation = Quaternion.identity;
     }
@@ -48,8 +48,8 @@ public class EnemyBullet : MonoBehaviour {
         //Si coliciona con el player.
         if ( obj.tag == "Player")
         {
-            obj.GetComponentInParent<IDamageable>().AddDamage(damage);
             OnDeactivate(gameObject);
+            obj.GetComponentInParent<IDamageable>().AddDamage(damage);
         }
     }
 

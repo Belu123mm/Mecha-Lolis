@@ -1,11 +1,18 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.PostProcessing;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour, IDamageable {
 	public GameModelManager game;
     public GameObject EnemyBulletPrefab;
-	public Camera firstPersonCamera;
+	public Transform firstPersonContainer;
+    public Animator CameraAnims;
 	public Animator anim;
+    public PostProcessingProfile myProfile;
+    public Color NormalVignette;
+    public Color DamageVignette;
+    public float VignetteTime;
 	public int Life;
 	public int MaxLife;
 
@@ -17,6 +24,7 @@ public class Player : MonoBehaviour, IDamageable {
 
 	int[] axeses = { 0, 0 };
 	float _currentMovementSpeed;
+    float _vignetteEffectMax;
 	//Rigidbody rb;
 
 	private void Awake()
@@ -24,6 +32,7 @@ public class Player : MonoBehaviour, IDamageable {
 		game = new GameModelManager();
         game.BulletParent = GameObject.Find("Bullets");
 		game.InitializeEnemyBulletPool(60, EnemyBulletPrefab, EnemyBullet.InitializeBullet, EnemyBullet.DeactivateBullet, true);
+        _vignetteEffectMax = myProfile.vignette.settings.intensity;
 		//rb = GetComponent<Rigidbody>();
 		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
@@ -81,7 +90,7 @@ public class Player : MonoBehaviour, IDamageable {
 		var v = VerticalSpeed * y;
 
 		transform.Rotate(0, h, 0);
-		firstPersonCamera.transform.Rotate(-v, 0, 0);
+		firstPersonContainer.Rotate(-v, 0, 0);
 	}
 
 	public void running() { isRunning = !isRunning; }
@@ -94,7 +103,10 @@ public class Player : MonoBehaviour, IDamageable {
 
 	public void AddDamage(int Damage)
 	{
+		CameraAnims.SetTrigger("CameraShake");
 		Life -= Damage;
+		StartCoroutine(ShowDamage());
+
 		if (Life <= 0)
 		{
 			print("Estas muerto");
@@ -103,4 +115,26 @@ public class Player : MonoBehaviour, IDamageable {
 		game.UpdateLife((float)Life/MaxLife);
 		print("Recibiste daño!");
 	}
+
+    IEnumerator ShowDamage()
+    {
+        myProfile.vignette.enabled = true;
+        myProfile.chromaticAberration.enabled = true;
+        myProfile.grain.enabled = true;
+        var sets = myProfile.vignette.settings;
+        sets.color = DamageVignette;
+        while (sets.intensity >= 0)
+        {
+            sets.intensity -= 0.008f;
+            myProfile.vignette.settings = sets;
+            yield return new WaitForEndOfFrame();
+        }
+
+        myProfile.vignette.enabled = false;
+        myProfile.chromaticAberration.enabled = false;
+        myProfile.grain.enabled = false;
+        sets.intensity = _vignetteEffectMax;
+        sets.color = NormalVignette;
+        myProfile.vignette.settings = sets;
+    }
 }
