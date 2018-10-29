@@ -97,6 +97,14 @@ public class GameModelManager
 	{
 		_gameView.PointDisplay = Points.ToString();
 	}
+	public void UpdateBullets(float bullets, float maxBullets)
+	{
+		_gameView.BulletDisplay = bullets.ToString();
+
+		if (maxBullets.ToString() != _gameView.MaxBulletDisplay)
+			_gameView.MaxBulletDisplay = maxBullets.ToString();
+	}
+
 	#region Eventos Comunes
 	//Añadir eventos de teclado
 	/// <summary>

@@ -12,33 +12,35 @@ public class Gun : MonoBehaviour {
 	public bool canShoot = false;
 	public bool lockShoot = false;
 
+	GameModelManager game;
 	private void Start()
 	{
+		game = GameModelManager.instance;
 		canShoot = true;
 
-		GameModelManager.instance.AddMouseEvent(InputEventType.Continious, 0, shoot);
-		GameModelManager.instance.AddSimpleInputEvent(InputEventType.OnBegin, KeyCode.R,reload);
-
+		game.AddMouseEvent(InputEventType.Continious, 0, shoot);
+		game.AddSimpleInputEvent(InputEventType.OnBegin, KeyCode.R,reload);
 
 		//Bullet Factory
-		Bullet.Factory =
-			() => { return Instantiate(
+		Bullet.Factory = () => 
+			{ return Instantiate(
 				bulletPrefab,
 				Vector3.zero,
 				Quaternion.identity,
-				GameModelManager.instance.BulletParent.transform);
+				game.BulletParent.transform);
 			};
 
 		//Bullet Pool
-		GameModelManager.instance.PlayerBulletPool = new Pool<GameObject>(
-			10,
+		game.PlayerBulletPool = new Pool<GameObject>(
+			50,
 			Bullet.Factory,
 			Bullet.InitializeBullet,
 			Bullet.DeactivateBullet,
-			false );
+			true );
 
 		//Método de reemplazo para Destroy()
-		Bullet.OnDeactivate = GameModelManager.instance.PlayerBulletPool.ReturnObjectToPool;
+		Bullet.OnDeactivate = game.PlayerBulletPool.ReturnObjectToPool;
+		game.UpdateBullets(bulletCount,maxBullets);
 	}
 
 	// Update is called once per frame
@@ -51,6 +53,7 @@ public class Gun : MonoBehaviour {
 		print("Reloaded");
 		anim.SetTrigger("Reload");
 		bulletCount = maxBullets;
+		game.UpdateBullets(bulletCount,maxBullets);
 	}
 
 	void SmoothShoot()
@@ -76,6 +79,7 @@ public class Gun : MonoBehaviour {
 			anim.SetTrigger("Shoot");
 			bulletCount--;
 			canShoot = false;
+            GameModelManager.instance.UpdateBullets(bulletCount,maxBullets);
 			var newBullet = GameModelManager.instance.PlayerBulletPool.GetObjectFromPool();
 			if (newBullet) newBullet.GetComponent<Bullet>()
 					.Fly(cañon.transform.position, cañon.transform.forward);

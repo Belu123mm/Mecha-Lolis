@@ -208,7 +208,7 @@ MonoBehaviour:
   Damage: 10
   DamageableLayer: 12
   WorldLayer: 0
-  force: 100
+  force: 170
   timeToDie: 3
 --- !u!135 &135377794085267984
 SphereCollider:

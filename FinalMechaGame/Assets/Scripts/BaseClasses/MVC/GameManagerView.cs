@@ -7,7 +7,13 @@ using UnityEngine.UI;
 public class GameManagerView : MonoBehaviour {
     public LifeBarrController barraDeVida;
     public Text Points_T;
+    [SerializeField]
+    protected Text Bullets;
+    [SerializeField]
+    protected Text MaxBullets;
 
     public string PointDisplay { set { Points_T.text = value; } }
     public float LifeDisplay { set { barraDeVida.HPDisplay = value; } }
+    public string BulletDisplay { set { Bullets.text = value; } }
+    public string MaxBulletDisplay { get { return MaxBullets.text; }  set { MaxBullets.text = value; } }
 }

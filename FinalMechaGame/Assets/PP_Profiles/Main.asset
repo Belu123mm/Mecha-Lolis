@@ -33,7 +33,7 @@ MonoBehaviour:
     m_Settings:
       method: 0
       fxaaSettings:
-        preset: 2
+        preset: 3
       taaSettings:
         jitterSpread: 0.75
         sharpen: 0.3
@@ -102,8 +102,8 @@ MonoBehaviour:
       bloom:
         intensity: 0.5
         threshold: 1.1
-        softKnee: 0.789
-        radius: 3.85
+        softKnee: 0.856
+        radius: 4.21
         antiFlicker: 0
       lensDirt:
         texture: {fileID: 0}
@@ -293,10 +293,10 @@ MonoBehaviour:
       size: 1.213
       luminanceContribution: 0.178
   vignette:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       mode: 0
-      color: {r: 0.8235294, g: 0.012110738, b: 0.012110738, a: 1}
+      color: {r: 0.11764705, g: 0.091695495, b: 0.091695495, a: 1}
       center: {x: 0.5, y: 0.5}
       intensity: 0.2370004
       smoothness: 0.41
