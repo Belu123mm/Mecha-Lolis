@@ -79,7 +79,7 @@ public class Gun : MonoBehaviour {
 			anim.SetTrigger("Shoot");
 			bulletCount--;
 			canShoot = false;
-            GameModelManager.instance.UpdateBullets(bulletCount,maxBullets);
+			GameModelManager.instance.UpdateBullets(bulletCount,maxBullets);
 			var newBullet = GameModelManager.instance.PlayerBulletPool.GetObjectFromPool();
 			if (newBullet) newBullet.GetComponent<Bullet>()
 					.Fly(cañon.transform.position, cañon.transform.forward);
