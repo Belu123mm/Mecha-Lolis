@@ -22,8 +22,9 @@ public class TurretVFX : MonoBehaviour{
     }
     public void Dying() {
         animator.SetTrigger("DYING");
-        Instantiate(particles [ 0 ],transform.position,Quaternion.identity,transform);
+        Instantiate(particles [ 2 ],transform.position,Quaternion.identity,transform);
         Instantiate(particles [ 1 ], transform.position, Quaternion.identity, transform);
+        Instantiate(particles [ 3 ], transform.position, Quaternion.identity, transform);
         print("die");
 
     }

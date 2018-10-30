@@ -111,6 +111,14 @@ public class RoundTurret : Turret, IEnemy, IDamageable {
 
     }
     IEnumerator Dying() {
+        var rb = GetComponent<Rigidbody>();
+        if ( rb ) {
+            rb.velocity = Vector3.zero;
+        }
+        Collider[] cls = GetComponents<Collider>();
+        foreach ( var c in cls ) {
+            c.enabled = false;
+        }
         vfx.Dying();
         yield return new WaitForSeconds(4);
         Destroy(this.gameObject);
