@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: eeb2d6815e53fd2478c5991ca961162c
-timeCreated: 1539744871
+guid: 1ae58461271f85346bf01e5144e8797b
+timeCreated: 1540866408
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -8,10 +8,10 @@ ModelImporter:
     100000: //RootNode
     100002: AnteBraDer
     100004: AnteBrazoIzq
-    100006: braDer
-    100008: BraIzq
-    100010: brazoD
-    100012: BrazoI
+    100006: bra
+    100008: braDer
+    100010: BraIzq
+    100012: Character001
     100014: cuello
     100016: ElDelFakiuDer
     100018: ElDelFakiuIzq
@@ -31,9 +31,9 @@ ModelImporter:
     100046: ElqueNadieUsapuntaIzq
     100048: ElqueNadieUsarMedioDer
     100050: ElqueNadieUsarMedioIzq
-    100052: Geometria
-    100054: hder
-    100056: Hizq
+    100052: hder
+    100054: Hizq
+    100056: mano011
     100058: ManoDer
     100060: ManoIzq
     100062: meniqueDer
@@ -48,15 +48,14 @@ ModelImporter:
     100080: pulgarmedioIzq
     100082: PulgarpuntDer
     100084: PulgarpuntIzq
-    100086: Root
-    100088: WeaponPlaceHolder
+    100086: WeaponPlaceHolder
     400000: //RootNode
     400002: AnteBraDer
     400004: AnteBrazoIzq
-    400006: braDer
-    400008: BraIzq
-    400010: brazoD
-    400012: BrazoI
+    400006: bra
+    400008: braDer
+    400010: BraIzq
+    400012: Character001
     400014: cuello
     400016: ElDelFakiuDer
     400018: ElDelFakiuIzq
@@ -76,9 +75,9 @@ ModelImporter:
     400046: ElqueNadieUsapuntaIzq
     400048: ElqueNadieUsarMedioDer
     400050: ElqueNadieUsarMedioIzq
-    400052: Geometria
-    400054: hder
-    400056: Hizq
+    400052: hder
+    400054: Hizq
+    400056: mano011
     400058: ManoDer
     400060: ManoIzq
     400062: meniqueDer
@@ -93,29 +92,23 @@ ModelImporter:
     400080: pulgarmedioIzq
     400082: PulgarpuntDer
     400084: PulgarpuntIzq
-    400086: Root
-    400088: WeaponPlaceHolder
+    400086: WeaponPlaceHolder
     2100000: No Name
-    4300000: brazoD
-    4300002: BrazoI
-    7400000: Caminando
-    7400002: Disparo
-    7400004: Recarga
+    4300000: mano011
+    4300002: bra
+    7400000: Disparo
+    7400002: Recargar
+    7400004: Walk
     7400006: Granada
     7400008: Idlle
     9500000: //RootNode
-    13700000: brazoD
-    13700002: BrazoI
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: No Name
-    second: {fileID: 2100000, guid: 9432bba6654a1df4697b39d9ded88bbb, type: 2}
+    13700000: bra
+    13700002: mano011
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
-    materialSearch: 0
+    materialSearch: 1
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
@@ -142,7 +135,7 @@ ModelImporter:
       name: Disparo
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 14
+      lastFrame: 7
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -167,17 +160,17 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Caminando
+      name: Recargar
       takeName: Take 001
-      firstFrame: 16
-      lastFrame: 36
+      firstFrame: 7
+      lastFrame: 47
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -195,10 +188,10 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Recarga
+      name: Walk
       takeName: Take 001
-      firstFrame: 38
-      lastFrame: 85
+      firstFrame: 50
+      lastFrame: 80
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -225,8 +218,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Granada
       takeName: Take 001
-      firstFrame: 87
-      lastFrame: 122
+      firstFrame: 85
+      lastFrame: 120
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -261,7 +254,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
