@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4841638307613908}
   - component: {fileID: 114060967562905422}
   - component: {fileID: 114117481278366298}
+  - component: {fileID: 114748581757300522}
   m_Layer: 0
   m_Name: Game Start
   m_TagString: Untagged
@@ -54,6 +55,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barraDeVida: {fileID: 0}
   Points_T: {fileID: 0}
+  Bullets: {fileID: 0}
+  MaxBullets: {fileID: 0}
 --- !u!114 &114117481278366298
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -66,3 +69,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keys: 
+--- !u!114 &114748581757300522
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1871931923949836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b729fcb4fe1c554c85b7b6057a0ca62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
