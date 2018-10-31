@@ -4,16 +4,18 @@ using UnityEngine.PostProcessing;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour, IDamageable {
-	public GameModelManager game;
-    public GameObject EnemyBulletPrefab;
+	public GameModelManager game; //Esto deberia sacarlo de acá.
+	public GameObject EnemyBulletPrefab; //Esto igual.
 	public Transform firstPersonContainer;
-    public Animator CameraAnims;
-	public Animator anim;
-    public PostProcessingProfile myProfile;
-    public Color NormalVignette;
-    public Color DamageVignette;
-    public float VignetteTime;
-	public int Life;
+	public Animator CameraAnims; //Quizas esto ponerlo en otro componente.
+	public Animator anim; //Mismo que el de arriba.
+	public PostProcessingProfile myProfile; //Esto quizás vuele.
+	public Color NormalVignette; //Mismo de arriba.
+	public Color DamageVignette; //Mismo de arriba.
+    public float VignetteTime; //Mismo de arriba.
+
+    [Header("Player Stats")]
+    public int Life;
 	public int MaxLife;
 
 	public float BaseMovementSpeed;
@@ -24,16 +26,17 @@ public class Player : MonoBehaviour, IDamageable {
 
 	int[] axeses = { 0, 0 };
 	float _currentMovementSpeed;
-    float _vignetteEffectMax;
-	//Rigidbody rb;
-
+	float _vignetteEffectMax;
+	float rotation = 0;
+	int Jumps = 1;
+	Rigidbody rb;
 	private void Awake()
 	{
 		game = new GameModelManager();
-        game.BulletParent = GameObject.Find("Bullets");
+		game.BulletParent = GameObject.Find("Bullets");
 		game.InitializeEnemyBulletPool(60, EnemyBulletPrefab, EnemyBullet.InitializeBullet, EnemyBullet.DeactivateBullet, true);
-        _vignetteEffectMax = myProfile.vignette.settings.intensity;
-		//rb = GetComponent<Rigidbody>();
+		_vignetteEffectMax = myProfile.vignette.settings.intensity;
+		rb = GetComponent<Rigidbody>();
 		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
 	}
@@ -50,9 +53,11 @@ public class Player : MonoBehaviour, IDamageable {
 
 		game.AddSimpleInputEvent(InputEventType.OnBegin, KeyCode.LeftShift, running);
 		game.AddSimpleInputEvent(InputEventType.OnRelease, KeyCode.LeftShift, running);
+		game.AddSimpleInputEvent(InputEventType.OnRelease, KeyCode.Space, Jump);
+
 		game.AddMouseTrack(RotateCamera);
 
-        game.StartGame();
+		game.StartGame();
 	}
 
 	public void MoveInAxeses(float dir, int Axis)
@@ -86,19 +91,25 @@ public class Player : MonoBehaviour, IDamageable {
 
 	public void RotateCamera(float x, float y)
 	{
-		var h = HorizontalSpeed * x;
-		var v = VerticalSpeed * y;
+		//Roto el personaje en horizontal.
+		transform.Rotate(0, HorizontalSpeed * x, 0);
 
-		transform.Rotate(0, h, 0);
-		firstPersonContainer.Rotate(-v, 0, 0);
+		//Roto la cámara del personaje en vertical
+		rotation += VerticalSpeed * y;
+		rotation = Mathf.Clamp(rotation, -40, 90);
+		var myNewRot = new Vector3( rotation, 0, firstPersonContainer.transform.localEulerAngles.z);
+		firstPersonContainer.localEulerAngles = -myNewRot;
 	}
 
 	public void running() { isRunning = !isRunning; }
 
 	public void Jump()
 	{
-		//Añadir lógica del salto.
-		//Tenemos el rb.
+		if (Jumps == 1)
+		{
+			rb.AddForce(transform.up * 400);
+			Jumps--;
+		}
 	}
 
 	public void AddDamage(int Damage)
@@ -116,25 +127,29 @@ public class Player : MonoBehaviour, IDamageable {
 		print("Recibiste daño!");
 	}
 
-    IEnumerator ShowDamage()
-    {
-        myProfile.vignette.enabled = true;
-        myProfile.chromaticAberration.enabled = true;
-        myProfile.grain.enabled = true;
-        var sets = myProfile.vignette.settings;
-        sets.color = DamageVignette;
-        while (sets.intensity >= 0)
-        {
-            sets.intensity -= 0.008f;
-            myProfile.vignette.settings = sets;
-            yield return new WaitForEndOfFrame();
-        }
+	IEnumerator ShowDamage()
+	{
+		myProfile.vignette.enabled = true;
+		myProfile.chromaticAberration.enabled = true;
+		myProfile.grain.enabled = true;
+		var sets = myProfile.vignette.settings;
+		sets.color = DamageVignette;
+		while (sets.intensity >= 0)
+		{
+			sets.intensity -= 0.008f;
+			myProfile.vignette.settings = sets;
+			yield return new WaitForEndOfFrame();
+		}
 
-        myProfile.vignette.enabled = false;
-        myProfile.chromaticAberration.enabled = false;
-        myProfile.grain.enabled = false;
-        sets.intensity = _vignetteEffectMax;
-        sets.color = NormalVignette;
-        myProfile.vignette.settings = sets;
-    }
+		myProfile.vignette.enabled = false;
+		myProfile.chromaticAberration.enabled = false;
+		myProfile.grain.enabled = false;
+		sets.intensity = _vignetteEffectMax;
+		sets.color = NormalVignette;
+		myProfile.vignette.settings = sets;
+	}
+	private void OnCollisionEnter(Collision collision)
+	{
+		if (collision.gameObject.layer == 8) Jumps = 1;
+	}
 }

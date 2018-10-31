@@ -14,8 +14,8 @@ public class SceneManagement : MonoBehaviour
     {
         SceneManager.LoadScene("Defeat");
     }
-    public void LoadGame()
+    public void LoadGame(int level)
     {
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("Level0" + level);
     }
 }

@@ -28,6 +28,7 @@ public class GameModelManager
 		_controller = UnityEngine.Object.FindObjectOfType<GameController>();
 		_scenes = UnityEngine.Object.FindObjectOfType<SceneManagement>();
 		UpdatePoints();
+        BulletParent = UnityEngine.GameObject.Find("Bullets");
 	}
 
 	public void InitializeEnemyBulletPool(int ammount,GameObject bulletPrefab, Action<GameObject> init, Action<GameObject> finit, bool isDinamic = false)
@@ -64,9 +65,11 @@ public class GameModelManager
 	/// </summary>
 	public void EndGame()
 	{
-		//Acá iría todo lo que se hace cuando el juego termina.
-		//aca tendriamos una instancia de "SceneManager" por ejemplo y ejecutar su función.
-		//Por ejemplo, decirle a nuestro view que habra la pantalla de derrota. Dejandonos cargar la ultima partida.
+        //Acá iría todo lo que se hace cuando el juego termina.
+        //aca tendriamos una instancia de "SceneManager" por ejemplo y ejecutar su función.
+        //Por ejemplo, decirle a nuestro view que habra la pantalla de derrota. Dejandonos cargar la ultima partida.
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 		_scenes.LoadDefeatScene();
 	}
 

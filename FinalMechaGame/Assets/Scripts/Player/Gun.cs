@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Gun : MonoBehaviour {
 	//public TPGranade granadeHability;
@@ -10,12 +11,12 @@ public class Gun : MonoBehaviour {
 	public int bulletCount;
 	public int maxBullets;
 	public bool canShoot = false;
-	public bool lockShoot = false;
 
 	GameModelManager game;
+	bool isReloading;
 	private void Start()
 	{
-		game = GameModelManager.instance;
+		game = GetComponent<Player>().game;
 		canShoot = true;
 
 		game.AddMouseEvent(InputEventType.Continious, 0, shoot);
@@ -50,10 +51,7 @@ public class Gun : MonoBehaviour {
 
 	private void reload()
 	{
-		print("Reloaded");
-		anim.SetTrigger("Reload");
-		bulletCount = maxBullets;
-		game.UpdateBullets(bulletCount,maxBullets);
+		if (!isReloading) StartCoroutine(reloading());
 	}
 
 	void SmoothShoot()
@@ -74,7 +72,7 @@ public class Gun : MonoBehaviour {
 
 	private void shoot()
 	{
-		if (canShoot && bulletCount > 0 && !lockShoot)
+		if (canShoot && bulletCount > 0 && !isReloading)
 		{
 			anim.SetTrigger("Shoot");
 			bulletCount--;
@@ -84,5 +82,19 @@ public class Gun : MonoBehaviour {
 			if (newBullet) newBullet.GetComponent<Bullet>()
 					.Fly(cañon.transform.position, cañon.transform.forward);
 		}
+		else if (canShoot && bulletCount <= 0)
+			reload();
+	}
+
+	IEnumerator reloading()
+	{
+		isReloading = true;
+		anim.SetTrigger("Reload");
+		canShoot = false;
+		yield return new WaitForSeconds(1.4f);
+		bulletCount = maxBullets;
+		canShoot = true;
+		isReloading = false;
+		game.UpdateBullets(bulletCount, maxBullets);
 	}
 }
