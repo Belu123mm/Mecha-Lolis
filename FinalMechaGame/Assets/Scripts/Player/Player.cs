@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.PostProcessing;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour, IDamageable {
@@ -9,7 +8,7 @@ public class Player : MonoBehaviour, IDamageable {
 	public Transform firstPersonContainer;
 	public Animator CameraAnims; //Quizas esto ponerlo en otro componente.
 	public Animator anim; //Mismo que el de arriba.
-	public PostProcessingProfile myProfile; //Esto quizás vuele.
+	//public PostProcessingProfile myProfile; //Esto quizás vuele.
 	public Color NormalVignette; //Mismo de arriba.
 	public Color DamageVignette; //Mismo de arriba.
     public float VignetteTime; //Mismo de arriba.
@@ -35,7 +34,7 @@ public class Player : MonoBehaviour, IDamageable {
 		game = new GameModelManager();
 		game.BulletParent = GameObject.Find("Bullets");
 		game.InitializeEnemyBulletPool(60, EnemyBulletPrefab, EnemyBullet.InitializeBullet, EnemyBullet.DeactivateBullet, true);
-		_vignetteEffectMax = myProfile.vignette.settings.intensity;
+		//_vignetteEffectMax = myProfile.vignette.settings.intensity;
 		rb = GetComponent<Rigidbody>();
 		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
@@ -116,7 +115,7 @@ public class Player : MonoBehaviour, IDamageable {
 	{
 		CameraAnims.SetTrigger("CameraShake");
 		Life -= Damage;
-		StartCoroutine(ShowDamage());
+		//StartCoroutine(ShowDamage());
 
 		if (Life <= 0)
 		{
@@ -127,27 +126,27 @@ public class Player : MonoBehaviour, IDamageable {
 		print("Recibiste daño!");
 	}
 
-	IEnumerator ShowDamage()
-	{
-		myProfile.vignette.enabled = true;
-		myProfile.chromaticAberration.enabled = true;
-		myProfile.grain.enabled = true;
-		var sets = myProfile.vignette.settings;
-		sets.color = DamageVignette;
-		while (sets.intensity >= 0)
-		{
-			sets.intensity -= 0.008f;
-			myProfile.vignette.settings = sets;
-			yield return new WaitForEndOfFrame();
-		}
+	//IEnumerator ShowDamage()
+	//{
+	//	myProfile.vignette.enabled = true;
+	//	myProfile.chromaticAberration.enabled = true;
+	//	myProfile.grain.enabled = true;
+	//	var sets = myProfile.vignette.settings;
+	//	sets.color = DamageVignette;
+	//	while (sets.intensity >= 0)
+	//	{
+	//		sets.intensity -= 0.008f;
+	//		myProfile.vignette.settings = sets;
+	//		yield return new WaitForEndOfFrame();
+	//	}
 
-		myProfile.vignette.enabled = false;
-		myProfile.chromaticAberration.enabled = false;
-		myProfile.grain.enabled = false;
-		sets.intensity = _vignetteEffectMax;
-		sets.color = NormalVignette;
-		myProfile.vignette.settings = sets;
-	}
+	//	myProfile.vignette.enabled = false;
+	//	myProfile.chromaticAberration.enabled = false;
+	//	myProfile.grain.enabled = false;
+	//	sets.intensity = _vignetteEffectMax;
+	//	sets.color = NormalVignette;
+	//	myProfile.vignette.settings = sets;
+	//}
 	private void OnCollisionEnter(Collision collision)
 	{
 		if (collision.gameObject.layer == 8) Jumps = 1;
