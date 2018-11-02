@@ -11,6 +11,9 @@ public class GameManagerView : MonoBehaviour {
     protected Text Bullets;
     [SerializeField]
     protected Text MaxBullets;
+    public GameObject ReloadAdvice;
+    public GameObject LowAmmoAdvice;
+    public GameObject PauseMenu;
 
     public string PointDisplay { set { Points_T.text = value; } }
     public float LifeDisplay { set { barraDeVida.HPDisplay = value; } }

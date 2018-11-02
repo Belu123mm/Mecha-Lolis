@@ -67,6 +67,7 @@ GameObject:
   - component: {fileID: 54354547200631322}
   - component: {fileID: 95616586955810096}
   - component: {fileID: 136663475517086314}
+  - component: {fileID: 114330859305720248}
   - component: {fileID: 114419503513734866}
   - component: {fileID: 114234756068578338}
   m_Layer: 0
@@ -283,7 +284,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4808728284419856}
   - component: {fileID: 20840565603722950}
-  - component: {fileID: 114452535649414774}
   - component: {fileID: 124716025850550738}
   - component: {fileID: 81327045389959204}
   - component: {fileID: 95589592788732404}
@@ -1667,12 +1667,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1791854876743614, guid: 1ce107934ae99db45b0dcd7aba68fa4c,
     type: 2}
   "ca\xF1on": {fileID: 1698717525070930}
-  recoil: 0.5
-  cooldown: 0.16
   bulletCount: 50
   maxBullets: 50
-  canShoot: 0
-  lockShoot: 0
+  recoil: 0.1
 --- !u!114 &114299489387954510
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1687,6 +1684,17 @@ MonoBehaviour:
   m_EffectColor: {r: 0.36224046, g: 0.90794957, b: 0.9852941, a: 0.5}
   m_EffectDistance: {x: 2, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!114 &114330859305720248
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1056065510007430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd46db7b160c3cf45a95448a8113ef50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114419503513734866
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1698,15 +1706,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 032e5943b3b5cff4cb7e837ba97947ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyBulletPrefab: {fileID: 1048041016096276, guid: 5c29cb8561605f841aad453f612e7cec,
-    type: 2}
+  game: {fileID: 0}
   firstPersonContainer: {fileID: 4543599495090258}
   CameraAnims: {fileID: 95589592788732404}
   anim: {fileID: 95616586955810096}
-  myProfile: {fileID: 11400000, guid: b8d2ac5db3621ac42a9eb1e1c7a81539, type: 2}
   NormalVignette: {r: 0.11764705, g: 0.091695495, b: 0.091695495, a: 1}
   DamageVignette: {r: 0.8235294, g: 0.012110738, b: 0.012110738, a: 1}
   VignetteTime: 0.2
+  controller: {fileID: 0}
   Life: 100
   MaxLife: 100
   BaseMovementSpeed: 10
@@ -1730,18 +1737,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114452535649414774
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1407798877070590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: b8d2ac5db3621ac42a9eb1e1c7a81539, type: 2}
 --- !u!114 &114506364511715754
 MonoBehaviour:
   m_ObjectHideFlags: 1

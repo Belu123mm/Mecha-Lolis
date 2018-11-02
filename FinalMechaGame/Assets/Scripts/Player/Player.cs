@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(InputController))]
 public class Player : MonoBehaviour, IDamageable {
-	public GameModelManager game; //Esto deberia sacarlo de acá.
-	public GameObject EnemyBulletPrefab; //Esto igual.
+	[HideInInspector]
+    public GameModelManager game;
 	public Transform firstPersonContainer;
 	public Animator CameraAnims; //Quizas esto ponerlo en otro componente.
 	public Animator anim; //Mismo que el de arriba.
@@ -12,6 +12,9 @@ public class Player : MonoBehaviour, IDamageable {
 	public Color NormalVignette; //Mismo de arriba.
 	public Color DamageVignette; //Mismo de arriba.
     public float VignetteTime; //Mismo de arriba.
+
+    [HideInInspector]
+    public InputController controller;
 
     [Header("Player Stats")]
     public int Life;
@@ -23,70 +26,55 @@ public class Player : MonoBehaviour, IDamageable {
 	public float VerticalSpeed;
 	public bool isRunning = false;
 
-	int[] axeses = { 0, 0 };
 	float _currentMovementSpeed;
 	float _vignetteEffectMax;
 	float rotation = 0;
 	int Jumps = 1;
 	Rigidbody rb;
-	private void Awake()
+    private void Awake()
+    {
+        game = FindObjectOfType<GameModelManager>();
+        controller = GetComponent<InputController>();
+        rb = GetComponent<Rigidbody>();
+        game.PlayerList.Add(gameObject);
+    }
+
+    private void Start()
 	{
-		game = new GameModelManager();
-		game.BulletParent = GameObject.Find("Bullets");
-		game.InitializeEnemyBulletPool(60, EnemyBulletPrefab, EnemyBullet.InitializeBullet, EnemyBullet.DeactivateBullet, true);
-		//_vignetteEffectMax = myProfile.vignette.settings.intensity;
-		rb = GetComponent<Rigidbody>();
+        //Suscribo mis eventos.
+        controller.Bind(Input.GetButtonDown, Input.GetAxis, "Horizontal", "Vertical", Moving);
+        controller.Bind(Input.GetButton, Input.GetAxis, "Horizontal", "Vertical", MoveInAxeses);
+        controller.Bind(Input.GetButtonUp, Input.GetAxis,"Horizontal","Vertical", Quiet);
+        controller.Bind(Input.GetButtonDown, "Run", running);
+        controller.Bind(Input.GetButtonUp, "Run", running);
+        controller.Bind(Input.GetButtonUp, "Jump", Jump);
+        controller.Bind(Input.GetAxis, "Mouse X", "Mouse Y", RotateCamera);
+        controller.Bind(Input.GetButtonDown, "Cancel", game.OpenClosePauseMenu);
+
+        //_vignetteEffectMax = myProfile.vignette.settings.intensity;
 		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
 	}
-	private void Start()
+
+	public void MoveInAxeses(float horizontal, float vertical)
 	{
-		//Suscribo mis eventos.
-		game.AddAxisEvent(InputEventType.OnBegin, Axeses.Horizontal, Moving);
-		game.AddAxisEvent(InputEventType.Continious, Axeses.Horizontal, MoveInAxeses);
-		game.AddAxisEvent(InputEventType.OnRelease, Axeses.Horizontal, Quiet);
-
-		game.AddAxisEvent(InputEventType.OnBegin, Axeses.Vertical, Moving);
-		game.AddAxisEvent(InputEventType.Continious, Axeses.Vertical, MoveInAxeses);
-		game.AddAxisEvent(InputEventType.OnRelease, Axeses.Vertical, Quiet);
-
-		game.AddSimpleInputEvent(InputEventType.OnBegin, KeyCode.LeftShift, running);
-		game.AddSimpleInputEvent(InputEventType.OnRelease, KeyCode.LeftShift, running);
-		game.AddSimpleInputEvent(InputEventType.OnRelease, KeyCode.Space, Jump);
-
-		game.AddMouseTrack(RotateCamera);
-
-		game.StartGame();
-	}
-
-	public void MoveInAxeses(float dir, int Axis)
-	{
+		//Movement Speed.
 		_currentMovementSpeed = isRunning ? RunningSpeed : BaseMovementSpeed;
 
-		if (Axis == 0)
-			transform.position += transform.right * dir * _currentMovementSpeed * Time.deltaTime;
-		if (Axis == 1)
-			transform.position += transform.forward * dir * _currentMovementSpeed * Time.deltaTime;
+		//Fix movimiento en Diagonal.
+		var movement = (transform.right * horizontal) + (transform.forward * vertical);
+		transform.position +=  movement * _currentMovementSpeed * Time.deltaTime;
 	}
-
-	public void Moving(float dir, int Axis)
+	public void Moving(float Horizontal, float Vertical)
 	{
-		if (Axis == 1) axeses[0] = 1;
-		if (Axis == 2) axeses[1] = 1;
 		//print("Estoy moviendome");
 			anim.SetBool("IsWalking", true);
 	}
-
-	public void Quiet(float dir, int Axis)
+	public void Quiet(float Horizontal, float Vertical)
 	{
-		if (Axis == 1) axeses[0] = 0;
-		if (Axis == 2) axeses[1] = 0;
-		if (axeses[0] == 0 && axeses[1] == 0)
-		{
-			//print("Estoy Quieto");
-			anim.SetBool("IsWalking", false);
-		}
-	}
+        //print("Estoy Quieto");
+        anim.SetBool("IsWalking", false);
+    }
 
 	public void RotateCamera(float x, float y)
 	{
@@ -100,7 +88,11 @@ public class Player : MonoBehaviour, IDamageable {
 		firstPersonContainer.localEulerAngles = -myNewRot;
 	}
 
-	public void running() { isRunning = !isRunning; }
+	public void running()
+    {
+        isRunning = !isRunning;
+        print(isRunning ? "Estoy corriendo" : "No estoy corriendo");
+    }
 
 	public void Jump()
 	{
