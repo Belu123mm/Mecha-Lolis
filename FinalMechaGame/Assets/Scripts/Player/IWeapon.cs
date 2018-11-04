@@ -8,4 +8,8 @@ interface IWeapon
     /// Activa el disparo del arma.
     /// </summary>
     void Shoot();
+    /// <summary>
+    /// Permite recargar el arma.
+    /// </summary>
+    void Reload();
 }

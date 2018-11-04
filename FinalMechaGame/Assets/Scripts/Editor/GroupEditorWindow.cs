@@ -9,7 +9,7 @@ public class GroupEditorWindow : EditorWindow {
     [SerializeField]
     public NodeGroup nodegroup;
     public Node nodo;
-    private string newFolderName = "Bullet prefabs";
+    //private string newFolderName = "Bullet prefabs";
     bool hasFolder;
     private string folderPath;
 

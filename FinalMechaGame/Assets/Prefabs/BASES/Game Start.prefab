@@ -53,8 +53,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9effd2dd122a2cb4e9376cb72c3d9410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletParent: {fileID: 0}
+  PlayerList: []
+  bulletParent: {fileID: 0}
+  bulletPrefab: {fileID: 1791854876743614, guid: 1ce107934ae99db45b0dcd7aba68fa4c,
+    type: 2}
+  enemyBulletPrefab: {fileID: 1048041016096276, guid: 5c29cb8561605f841aad453f612e7cec,
+    type: 2}
   Points: 0
+  Paused: 0
 --- !u!114 &114060967562905422
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -70,6 +76,9 @@ MonoBehaviour:
   Points_T: {fileID: 0}
   Bullets: {fileID: 0}
   MaxBullets: {fileID: 0}
+  ReloadAdvice: {fileID: 0}
+  LowAmmoAdvice: {fileID: 0}
+  PauseMenu: {fileID: 0}
 --- !u!114 &114748581757300522
 MonoBehaviour:
   m_ObjectHideFlags: 1

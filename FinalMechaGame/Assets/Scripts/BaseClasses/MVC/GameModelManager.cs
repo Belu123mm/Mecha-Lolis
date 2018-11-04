@@ -7,51 +7,80 @@ using UnityEngine;
 public class GameModelManager : MonoBehaviour
 {
 	public static GameModelManager instance;
-    public List<GameObject> PlayerList;
-	public Pool<GameObject> PlayerBulletPool;
+	public List<GameObject> PlayerList;
+    public Pool<GameObject> PlayerBulletPool;
 	public Pool<GameObject> EnemyBulletPool;
-	public GameObject BulletParent;
-    public GameObject EnemyBulletPrefab;
+    [Header("Bullet Pools")]
+	public GameObject bulletParent;
+	public GameObject bulletPrefab;
+	public GameObject enemyBulletPrefab;
+    [Header("Game Stat")]
     public float Points = 0;
-    public bool Paused = false;
+	public bool Paused = false;
 
 	GameManagerView _gameView;
 	SceneManagement _scenes;
 
-    //Tiempo de juego.
-    //Recuento de oleadas.
-    //Lista de Spawners.(?).
-    //Lista de enemigos. (?).
-    //public static List<Player> Player; //PlayerSerializable.
+	//Tiempo de juego.
+	//Recuento de oleadas.
+	//Lista de Spawners.(?).
+	//Lista de enemigos. (?).
+	//public static List<Player> Player; //PlayerSerializable.
 
-    private void Awake()
-    {
-        if (instance == null) instance = this;
-        _gameView = FindObjectOfType<GameManagerView>();
-        _scenes = FindObjectOfType<SceneManagement>();
-        UpdatePoints();
-        BulletParent = GameObject.Find("Bullets");
-        InitializeEnemyBulletPool(60, EnemyBulletPrefab, EnemyBullet.InitializeBullet, EnemyBullet.DeactivateBullet, true);
-    }
+	private void Awake()
+	{
+		if (instance == null) instance = this;
+		_gameView = FindObjectOfType<GameManagerView>();
+		_scenes = FindObjectOfType<SceneManagement>();
+		UpdatePoints();
+		InitializePlayerBulletPool(50, bulletPrefab, true);
+		InitializeEnemyBulletPool(60, enemyBulletPrefab, true);
+	}
 
-	public void InitializeEnemyBulletPool(int ammount,GameObject bulletPrefab, Action<GameObject> init, Action<GameObject> finit, bool isDinamic = false)
+	public void InitializeEnemyBulletPool(int ammount,GameObject bulletPrefab,bool isDinamic = false)
 	{
 		//Factory
 		Func<GameObject> factory = () => 
-		{ return UnityEngine.Object.Instantiate(
+		{ return Instantiate(
 			bulletPrefab, 
 			Vector3.zero, 
 			Quaternion.identity,
-			BulletParent.transform);
+			bulletParent.transform);
 		};
 
 		//Bullet Pool
-		EnemyBulletPool = new Pool<GameObject>(ammount, factory, init, finit
-			, isDinamic);
+		EnemyBulletPool = new Pool<GameObject>(
+			ammount,
+			factory,
+			  EnemyBullet.InitializeBullet,
+			  EnemyBullet.DeactivateBullet,
+			isDinamic);
 
 		//Método de reemplazo para Destroy()
 		EnemyBullet.OnDeactivate = EnemyBulletPool.ReturnObjectToPool;
-		//MonoBehaviour.print("Ammount of bullets is: " + EnemyBulletPool.Count);
+	}
+	public void InitializePlayerBulletPool(int Ammount, GameObject bulletPrefab, bool CanExpand)
+	{
+		//Factory
+		Func<GameObject> factory = () =>
+		{
+			return Instantiate(
+			  bulletPrefab,
+			  Vector3.zero,
+			  Quaternion.identity,
+			  bulletParent.transform);
+		};
+
+		// *Create the Bullet Pool
+		PlayerBulletPool = new Pool<GameObject>(
+			Ammount,
+			factory,
+			Bullet.InitializeBullet,
+			Bullet.DeactivateBullet,
+			CanExpand);
+
+		//Método de reemplazo para Destroy()
+		Bullet.OnDeactivate = PlayerBulletPool.ReturnObjectToPool;
 	}
 
 	/// <summary>
@@ -68,11 +97,11 @@ public class GameModelManager : MonoBehaviour
 	/// </summary>
 	public void EndGame()
 	{
-        //Acá iría todo lo que se hace cuando el juego termina.
-        //aca tendriamos una instancia de "SceneManager" por ejemplo y ejecutar su función.
-        //Por ejemplo, decirle a nuestro view que habra la pantalla de derrota. Dejandonos cargar la ultima partida.
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+		//Acá iría todo lo que se hace cuando el juego termina.
+		//aca tendriamos una instancia de "SceneManager" por ejemplo y ejecutar su función.
+		//Por ejemplo, decirle a nuestro view que habra la pantalla de derrota. Dejandonos cargar la ultima partida.
+		Cursor.lockState = CursorLockMode.None;
+		Cursor.visible = true;
 		_scenes.LoadDefeatScene();
 	}
 
@@ -92,28 +121,28 @@ public class GameModelManager : MonoBehaviour
 		//Serializa el estado del juego y lo guarda en disco.
 	}
 
-    public void OpenClosePauseMenu()
-    {
-        Paused = !Paused;
-        //if (Paused)
-        //{
-        //    PlayerList[0].GetComponent<Player>();
-        //}
-        //else
-        //{
-        //    PlayerList[0].SetActive(true);
-        //}
-        _gameView.PauseMenu.SetActive(_gameView.PauseMenu.activeSelf);
-    }
-    public void AdviceReload(bool show)
-    {
-        if (_gameView.LowAmmoAdvice.activeSelf) _gameView.LowAmmoAdvice.SetActive(false);
-        _gameView.ReloadAdvice.SetActive(show);
-    }
-    public void AdviceLowAmmo(bool show)
-    {
-        _gameView.LowAmmoAdvice.SetActive(true);
-    }
+	public void OpenClosePauseMenu()
+	{
+		Paused = !Paused;
+		//if (Paused)
+		//{
+		//    PlayerList[0].GetComponent<Player>();
+		//}
+		//else
+		//{
+		//    PlayerList[0].SetActive(true);
+		//}
+		_gameView.PauseMenu.SetActive(_gameView.PauseMenu.activeSelf);
+	}
+	public void AdviceReload(bool show)
+	{
+		if (_gameView.LowAmmoAdvice.activeSelf) _gameView.LowAmmoAdvice.SetActive(false);
+		_gameView.ReloadAdvice.SetActive(show);
+	}
+	public void AdviceLowAmmo(bool show)
+	{
+		_gameView.LowAmmoAdvice.SetActive(true);
+	}
 	public void UpdateLife(float life)
 	{
 		if (life < 0)

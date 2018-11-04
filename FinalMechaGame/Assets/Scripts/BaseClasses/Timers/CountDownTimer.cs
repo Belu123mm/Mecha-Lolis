@@ -4,21 +4,33 @@ using UnityEngine;
 
 namespace Utility.Timers
 {
+	/// <summary>
+	/// Esta clase se encarga permite ejecutar una acción al terminar el contador específicado.
+	/// </summary>
 	[Serializable]
 	public class CountDownTimer : Timer
 	{
+		/// <summary>
+		/// This action is executed when the count down is over.
+		/// </summary>
+		public Action OnTimesUp = delegate { };
+		public MonoBehaviour _mono;
 		public float CoolDown;
-		MonoBehaviour _mono;
 
 		//Constructores
-		public CountDownTimer(GameObject MonoObject, float Presition = 0.01f)
-		{
-			this.Presition = Presition;
-			_mono = MonoObject.GetComponent<MonoBehaviour>();
-		}
-		public CountDownTimer SetCoolDown(float CoolDown)
+		public CountDownTimer() { }
+		public CountDownTimer(GameObject MonoObject, float CoolDown)
 		{
 			this.CoolDown = CoolDown;
+			_mono = MonoObject.GetComponent<MonoBehaviour>();
+		}
+		/// <summary>
+		/// Allows to Set the ammount of times that the courrutine is executed per second.
+		/// </summary>
+		/// <param name="Presition">The fraction of time that takes the function to be executed, in one second.</param>
+		public CountDownTimer SetPrestion(float Presition)
+		{
+			this.Presition = Presition;
 			return this;
 		}
 
@@ -27,7 +39,6 @@ namespace Utility.Timers
 			if (isReady)
 			{
 				isReady = false;
-				Time = CoolDown;
 				_mono.StartCoroutine(CountDown());
 			}
 		}
@@ -36,56 +47,30 @@ namespace Utility.Timers
 			if (isReady)
 			{
 				isReady = false;
-				Time = CoolDown;
-				_mono.StartCoroutine(CountDown(From));
+				_currentTime = CoolDown;
+				_currentTime -= From;
+				_mono.StartCoroutine(CountDown());
 			}
 		}
-
 		public override void Reset()
 		{
 			isReady = true;
-			Time = CoolDown;
-			_mono.StopAllCoroutines();
-		}
-		public override void Pause()
-		{
-			_mono.StopAllCoroutines();
-		}
-		public override void Continue()
-		{
-			_mono.StartCoroutine(CountDown(Time));
+			_currentTime = CoolDown;
+			_mono.StopCoroutine(CountDown());
 		}
 
 		IEnumerator CountDown()
 		{
-			while( Time >= 0)
+			//CountDown.
+			while( _currentTime >= 0)
 			{
-				Time -= Presition;
+				_currentTime -= Presition;
 				yield return new WaitForSeconds(Presition);
 			}
-			if (Time <= 0)
-			{
-				isReady = true;
-				Time = CoolDown;
-				OnTimesUp();
-				_mono.StopCoroutine(CountDown());
-			}
-		}
-		IEnumerator CountDown(float From)
-		{
-			while ( Time >= 0)
-			{
-				Time = From;
-				Time -= Presition;
-				yield return new WaitForSeconds(Presition);
-			}
-			if (Time <= 0)
-			{
-				isReady = true;
-				Time = CoolDown;
-				OnTimesUp();
-				_mono.StopCoroutine(CountDown(From));
-			}
+
+			isReady = true;
+			_currentTime = CoolDown;
+			OnTimesUp?.Invoke();
 		}
 	}
 }

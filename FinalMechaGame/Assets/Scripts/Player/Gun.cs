@@ -5,92 +5,77 @@ using Utility.Timers;
 
 [Serializable]
 public class Gun : MonoBehaviour, IWeapon {
-	//public TPGranade granadeHability;
 	public Animator anim;
-	public GameObject bulletPrefab;
 	public GameObject cañon;
+	public CountDownTimer gunRecoil;
 
-    CountDownTimer gunRecoil;
-	GameModelManager game;
-
-    [Header("Gun Stats")]
+	[Header("Gun Stats")]
 	public int bulletCount;
 	public int maxBullets;
 	public float recoil;
+	[Tooltip("WhenEver this Gun can reload when BulletCount is 0(Empty).")]
+	public bool CanReload;
 
-	bool isReloading;
-	private void Start()
+	bool isReloading = false;
+
+    //------------------------------Monobehaviour Methods---------------------------------------
+    private void Awake()
+    {
+        //gunRecoil = new CountDownTimer(gameObject, 0.1f, 0.01f);
+    }
+    //-------------------------------------Methods----------------------------------------------
+
+    public void OnSelect()
 	{
-		game = GetComponent<Player>().game;
-        gunRecoil = new CountDownTimer(gameObject).SetCoolDown(recoil);
-
-        var controller = GetComponent<Player>().controller;
-        controller.Bind(Input.GetButton, "Shoot", Shoot);
-        controller.Bind(Input.GetButton, "Reload", reload);
-
-        //Bullet Factory
-        Bullet.Factory = () => 
-			{ return Instantiate(
-				bulletPrefab,
-				Vector3.zero,
-				Quaternion.identity,
-				game.BulletParent.transform);
-			};
-
-		//Bullet Pool
-		game.PlayerBulletPool = new Pool<GameObject>(
-			50,
-			Bullet.Factory,
-			Bullet.InitializeBullet,
-			Bullet.DeactivateBullet,
-			true );
-
-		//Método de reemplazo para Destroy()
-		Bullet.OnDeactivate = game.PlayerBulletPool.ReturnObjectToPool;
-		game.UpdateBullets(bulletCount,maxBullets);
+		print("La ametralladora ha sido seleccionada.");
+		
 	}
-
-	private void reload()
-	{
-		if (!isReloading) StartCoroutine(reloading());
-	}
-
 	public void Shoot()
 	{
-		if (gunRecoil.Ready && bulletCount > 0 && !isReloading)
+        if (isReloading) return;
+
+		if (bulletCount <= 0)
 		{
+			Reload();
+			return;
+		}
+        else if (gunRecoil.isReady)
+		{
+
+            print(isReloading);
+
 			anim.SetTrigger("Shoot");
 			bulletCount--;
-            gunRecoil.StartCount();
+
 			GameModelManager.instance.UpdateBullets(bulletCount,maxBullets);
 			var newBullet = GameModelManager.instance.PlayerBulletPool.GetObjectFromPool();
 			if (newBullet) newBullet.GetComponent<Bullet>()
-					.Fly(cañon.transform.position, cañon.transform.forward);
+				.Fly(cañon.transform.position, cañon.transform.forward);
+
+			gunRecoil.StartCount();
 		}
-		else if (gunRecoil.Ready && bulletCount <= 0)
-			reload();
-        if (bulletCount < (maxBullets * 0.3))
-            game.AdviceLowAmmo(true);
 
-        if (bulletCount == 0)
-            game.AdviceReload(true);
+		if (bulletCount < (maxBullets * 0.3)) GameModelManager.instance.AdviceLowAmmo(true);
+		if (bulletCount == 0) GameModelManager.instance.AdviceReload(true);
 	}
+	public void Reload()
+	{
+		if (!isReloading && CanReload && bulletCount < maxBullets)
+        {
+            isReloading = true;
+            anim.SetTrigger("Reload");
+            StartCoroutine(reloading());
+        }
 
+	}
 	IEnumerator reloading()
 	{
-		isReloading = true;
-		anim.SetTrigger("Reload");
 		yield return new WaitForSeconds(1.4f);
-		bulletCount = maxBullets;
-        gunRecoil.Reset();
-        isReloading = false;
-		game.UpdateBullets(bulletCount, maxBullets);
-        game.AdviceLowAmmo(false);
-        game.AdviceReload(false);
-	}
 
-    public void OnSelect()
-    {
-        throw new System.NotImplementedException("No implementaste esta función todavía");
-    }
+		bulletCount = maxBullets;
+		isReloading = false;
+		GameModelManager.instance.UpdateBullets(bulletCount, maxBullets);
+		GameModelManager.instance.AdviceLowAmmo(false);
+		GameModelManager.instance.AdviceReload(false);
+	}
 }
