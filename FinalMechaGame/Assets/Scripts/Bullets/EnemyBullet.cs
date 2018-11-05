@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 using System;
 
 [ExecuteInEditMode]
@@ -35,8 +34,6 @@ public class EnemyBullet : MonoBehaviour {
 
 
     void Start() {
-        if ( !Application.isPlaying )
-            Selection.activeGameObject = gameObject;
     }
     void Update() {
         Movement();
@@ -52,11 +49,4 @@ public class EnemyBullet : MonoBehaviour {
             obj.GetComponentInParent<IDamageable>().AddDamage(damage);
         }
     }
-
-    #region Visualización en Editor.
-    //private void OnDrawGizmos() {
-    //    Gizmos.color = Color.blue;
-    //    Gizmos.DrawSphere(center, 1);
-    //}
-    #endregion
 }
