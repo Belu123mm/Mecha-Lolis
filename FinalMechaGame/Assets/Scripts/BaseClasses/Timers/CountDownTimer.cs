@@ -70,7 +70,7 @@ namespace Utility.Timers
 
 			isReady = true;
 			_currentTime = CoolDown;
-			OnTimesUp?.Invoke();
+			OnTimesUp();
 		}
 	}
 }

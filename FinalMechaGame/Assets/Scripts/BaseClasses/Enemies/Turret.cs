@@ -21,7 +21,7 @@ public class Turret : MonoBehaviour {
 		{
 			navigation = GetComponent<NodeNavigation>();
 			navigation.currentNode = nodegroup._first;
-			navigation.rigidbody = GetComponent<Rigidbody>();
+			navigation.myRigidBody = GetComponent<Rigidbody>();
 		}
 		sight = GetComponent<Sight>();
 		sight.targetTransform = target;

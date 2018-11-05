@@ -45,7 +45,7 @@ public class SimpleTurret : Turret, IEnemy, IDamageable {
         quiet.AddTransition(TurretState.dying, dying);
 
         moving.OnUpdate += () => navigation.MoveToNext();
-        moving.OnUpdate += () => vfx.OnMovement(navigation.rigidbody.velocity.magnitude);
+        moving.OnUpdate += () => vfx.OnMovement(navigation.myRigidBody.velocity.magnitude);
 
         shooting.OnUpdate = () => Shoot();
 

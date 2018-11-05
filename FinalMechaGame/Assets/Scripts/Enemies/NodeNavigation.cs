@@ -7,15 +7,15 @@ public class NodeNavigation : MonoBehaviour {
     public Node currentNode;
     public float speed;
     [HideInInspector]
-    public new Rigidbody rigidbody;
+    public Rigidbody myRigidBody;
     public float percent;
     public float distance;
 
     public void MoveToNext() {
-        rigidbody.velocity = rigidbody.transform.forward * speed;
+        myRigidBody.velocity = myRigidBody.transform.forward * speed;
     }
     public void mOVEbUTsLOWER() {
-        rigidbody.velocity = rigidbody.transform.forward * (speed * percent);
+        myRigidBody.velocity = myRigidBody.transform.forward * (speed * percent);
     }
 
     public bool IsOnDistance() {
@@ -26,12 +26,12 @@ public class NodeNavigation : MonoBehaviour {
     }
     public Vector3 position {
         get {
-            return rigidbody.transform.position;
+            return myRigidBody.transform.position;
         }
     }
     public void NextNode() {
         currentNode = currentNode.next;
-        rigidbody.transform.forward = -rigidbody.transform.position + currentNode.position;
+        myRigidBody.transform.forward = -myRigidBody.transform.position + currentNode.position;
     }
 
 }

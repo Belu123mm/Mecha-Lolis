@@ -18,32 +18,29 @@ public class Gun : MonoBehaviour, IWeapon {
 
 	bool isReloading = false;
 
-    //------------------------------Monobehaviour Methods---------------------------------------
-    private void Awake()
-    {
-        //gunRecoil = new CountDownTimer(gameObject, 0.1f, 0.01f);
-    }
-    //-------------------------------------Methods----------------------------------------------
+	//------------------------------Monobehaviour Methods---------------------------------------
+	private void Start()
+	{
+		GameModelManager.instance.UpdateBullets(bulletCount, maxBullets);
+	}
+	//-------------------------------------Methods----------------------------------------------
 
-    public void OnSelect()
+	public void OnSelect()
 	{
 		print("La ametralladora ha sido seleccionada.");
 		
 	}
 	public void Shoot()
 	{
-        if (isReloading) return;
+		if (isReloading) return;
 
 		if (bulletCount <= 0)
 		{
 			Reload();
 			return;
 		}
-        else if (gunRecoil.isReady)
+		else if (gunRecoil.isReady)
 		{
-
-            print(isReloading);
-
 			anim.SetTrigger("Shoot");
 			bulletCount--;
 
@@ -61,15 +58,16 @@ public class Gun : MonoBehaviour, IWeapon {
 	public void Reload()
 	{
 		if (!isReloading && CanReload && bulletCount < maxBullets)
-        {
-            isReloading = true;
-            anim.SetTrigger("Reload");
-            StartCoroutine(reloading());
-        }
+		{
+			StartCoroutine(reloading());
+		}
 
 	}
 	IEnumerator reloading()
 	{
+		isReloading = true;
+		anim.SetTrigger("Reload");
+
 		yield return new WaitForSeconds(1.4f);
 
 		bulletCount = maxBullets;

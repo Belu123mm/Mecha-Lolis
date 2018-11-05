@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
-using System;
 
 [ExecuteInEditMode]
+#endif
 public class EnemyBullet : MonoBehaviour {
     public static Action<GameObject> OnDeactivate;
 
@@ -35,8 +37,10 @@ public class EnemyBullet : MonoBehaviour {
 
 
     void Start() {
+#if UNITY_EDITOR
         if ( !Application.isPlaying )
             Selection.activeGameObject = gameObject;
+#endif
     }
     void Update() {
         Movement();

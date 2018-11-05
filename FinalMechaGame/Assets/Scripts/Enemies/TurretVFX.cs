@@ -25,7 +25,7 @@ public class TurretVFX : MonoBehaviour{
         Instantiate(particles [ 2 ],transform.position,Quaternion.identity,transform);
         Instantiate(particles [ 1 ], transform.position, Quaternion.identity, transform);
         Instantiate(particles [ 3 ], transform.position, Quaternion.identity, transform);
-        print("die");
+        //print("die");
 
     }
     public void Rotate() {

@@ -8,14 +8,14 @@ public class GameModelManager : MonoBehaviour
 {
 	public static GameModelManager instance;
 	public List<GameObject> PlayerList;
-    public Pool<GameObject> PlayerBulletPool;
+	public Pool<GameObject> PlayerBulletPool;
 	public Pool<GameObject> EnemyBulletPool;
-    [Header("Bullet Pools")]
+	[Header("Bullet Pools")]
 	public GameObject bulletParent;
 	public GameObject bulletPrefab;
 	public GameObject enemyBulletPrefab;
-    [Header("Game Stat")]
-    public float Points = 0;
+	[Header("Game Stat")]
+	public float Points = 0;
 	public bool Paused = false;
 
 	GameManagerView _gameView;
@@ -121,19 +121,6 @@ public class GameModelManager : MonoBehaviour
 		//Serializa el estado del juego y lo guarda en disco.
 	}
 
-	public void OpenClosePauseMenu()
-	{
-		Paused = !Paused;
-		//if (Paused)
-		//{
-		//    PlayerList[0].GetComponent<Player>();
-		//}
-		//else
-		//{
-		//    PlayerList[0].SetActive(true);
-		//}
-		_gameView.PauseMenu.SetActive(_gameView.PauseMenu.activeSelf);
-	}
 	public void AdviceReload(bool show)
 	{
 		if (_gameView.LowAmmoAdvice.activeSelf) _gameView.LowAmmoAdvice.SetActive(false);
@@ -160,5 +147,33 @@ public class GameModelManager : MonoBehaviour
 
 		if (maxBullets.ToString() != _gameView.MaxBulletDisplay)
 			_gameView.MaxBulletDisplay = maxBullets.ToString();
+	}
+	public void Pause()
+	{
+		Cursor.visible = true;
+		Cursor.lockState = CursorLockMode.Confined;
+
+		foreach (var Player in PlayerList)
+		{
+			Player.GetComponent<InputController>().enabled = false;
+		}
+
+		//Esto no va a funcionar con el player.
+		Time.timeScale = 0;
+		_gameView.PauseMenu.SetActive(true);
+	}
+	public void Continue()
+	{
+		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
+
+		foreach (var Player in PlayerList)
+		{
+			Player.GetComponent<InputController>().enabled = true;
+		}
+
+		//Esto no va a funcionar con el player.
+		Time.timeScale = 1;
+		_gameView.PauseMenu.SetActive(false);
 	}
 }

@@ -136,7 +136,7 @@ public class RoundTurret : Turret, IEnemy, IDamageable {
             print(gameObject.name + " Se ha morido");
             OnInput(TurretState.dying);
         }
-        print(name + " ha recibido " + Damage + " puntos de daño!");
+        //print(name + " ha recibido " + Damage + " puntos de daño!");
     }
 }
 

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using Utility.Timers;
+﻿using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(InputController))]
@@ -9,11 +9,13 @@ public class Player : MonoBehaviour, IDamageable {
 	public GameModelManager game;
 	public Transform firstPersonContainer;
 	public Animator CameraAnims; //Quizas esto ponerlo en otro componente.
-	public Animator anim; //Mismo que el de arriba.
-	//public PostProcessingProfile myProfile; //Esto quizás vuele.
-	public Color NormalVignette; //Mismo de arriba.
-	public Color DamageVignette; //Mismo de arriba.
-	public float VignetteTime; //Mismo de arriba.
+	public Animator PlayerAnims; //Mismo que el de arriba.
+
+	[Header("PostProcess Settings")]
+	public PostProcessProfile myProfile;
+	public Color NormalVignette;
+	public Color DamageVignette;
+	public float _vignetteEffectOriginal;
 
 	[HideInInspector]
 	public InputController controller;
@@ -21,7 +23,6 @@ public class Player : MonoBehaviour, IDamageable {
 	[Header("Player Stats")]
 	public int Life;
 	public int MaxLife;
-	public CountDownTimer DamageShowOff;
 
 	public float BaseMovementSpeed;
 	public float RunningSpeed;
@@ -33,7 +34,6 @@ public class Player : MonoBehaviour, IDamageable {
 	public Gun MainGun;
 
 	float _currentMovementSpeed;
-	float _vignetteEffectMax;
 	float rotation = 0;
 	int Jumps = 1;
 	Rigidbody rb;
@@ -45,11 +45,20 @@ public class Player : MonoBehaviour, IDamageable {
 		controller = GetComponent<InputController>();
 		rb = GetComponent<Rigidbody>();
 		game.PlayerList.Add(gameObject);
+
 		_currentWeapon = MainGun;
+
+		var vignetteSet = myProfile.GetSetting<Vignette>();
+		vignetteSet.color.value = NormalVignette;
+		vignetteSet.intensity.Override(_vignetteEffectOriginal);
+		vignetteSet.active = true;
 	}
 
 	private void Start()
 	{
+		//Me registro al manager.
+		GameModelManager.instance.PlayerList.Add(gameObject);
+
 		//Suscribo mis eventos.
 		controller.Bind(Input.GetButton, Input.GetAxis, "Horizontal", "Vertical", MoveInAxeses);
 		controller.Bind(Input.GetButtonUp, Input.GetAxis,"Horizontal","Vertical", Quiet);
@@ -59,23 +68,21 @@ public class Player : MonoBehaviour, IDamageable {
 		controller.Bind(Input.GetButtonUp, "Jump", Jump);
 
 		controller.Bind(Input.GetAxis, "Mouse X", "Mouse Y", RotateCamera);
-		controller.Bind(Input.GetButtonDown, "Cancel", game.OpenClosePauseMenu);
 
 		controller.Bind(Input.GetButton, "Shoot", Shoot);
 		controller.Bind(Input.GetButtonDown, "Reload", Reload);
+		controller.Bind(Input.GetButtonUp, "Pause", GameModelManager.instance.Pause);
 
-		//_vignetteEffectMax = myProfile.vignette.settings.intensity;
 		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
 	}
 
 	public void MoveInAxeses(float horizontal, float vertical)
 	{
-        if (!anim.GetBool("IsWalking"))
-            anim.SetBool("IsWalking", true);
+		if (!PlayerAnims.GetBool("IsWalking"))
+			PlayerAnims.SetBool("IsWalking", true);
 		//Movement Speed.
 		_currentMovementSpeed = isRunning ? RunningSpeed : BaseMovementSpeed;
-
 
 		//Fix movimiento en Diagonal.
 		var movement = (transform.right * horizontal) + (transform.forward * vertical);
@@ -83,10 +90,9 @@ public class Player : MonoBehaviour, IDamageable {
 	}
 	public void Quiet(float Horizontal, float Vertical)
 	{
-        //print("Horizontal is :" + Horizontal + " and Vertical is: " + Vertical + ".");
-        if ((int)Horizontal == 0 && (int)Vertical == 0) anim.SetBool("IsWalking", false);
+		//print("Horizontal is :" + Horizontal + " and Vertical is: " + Vertical + ".");
+		if ((int)Horizontal == 0 && (int)Vertical == 0) PlayerAnims.SetBool("IsWalking", false);
 	}
-
 	public void RotateCamera(float x, float y)
 	{
 		//Roto el personaje en horizontal.
@@ -98,13 +104,10 @@ public class Player : MonoBehaviour, IDamageable {
 		var myNewRot = new Vector3( rotation, 0, firstPersonContainer.transform.localEulerAngles.z);
 		firstPersonContainer.localEulerAngles = -myNewRot;
 	}
-
 	public void running()
 	{
 		isRunning = !isRunning;
-		print(isRunning ? "Estoy corriendo" : "No estoy corriendo");
 	}
-
 	public void Jump()
 	{
 		if (Jumps == 1)
@@ -112,27 +115,6 @@ public class Player : MonoBehaviour, IDamageable {
 			rb.AddForce(transform.up * 400);
 			Jumps--;
 		}
-	}
-
-	public void AddDamage(int Damage)
-	{
-		CameraAnims.SetTrigger("CameraShake");
-		Life -= Damage;
-		//StartCoroutine(ShowDamage());
-
-		if (Life <= 0)
-		{
-			print("Estas muerto");
-			game.EndGame();
-		}
-		game.UpdateLife((float)Life/MaxLife);
-		print("Recibiste daño!");
-	}
-
-	public void SwitchToMainWeapon()
-	{
-		_currentWeapon = MainGun;
-		_currentWeapon.OnSelect();
 	}
 	public void Shoot()
 	{
@@ -143,27 +125,72 @@ public class Player : MonoBehaviour, IDamageable {
 		_currentWeapon.Reload();
 	}
 
-	//IEnumerator ShowDamage()
-	//{
-	//	myProfile.vignette.enabled = true;
-	//	myProfile.chromaticAberration.enabled = true;
-	//	myProfile.grain.enabled = true;
-	//	var sets = myProfile.vignette.settings;
-	//	sets.color = DamageVignette;
-	//	while (sets.intensity >= 0)
-	//	{
-	//		sets.intensity -= 0.008f;
-	//		myProfile.vignette.settings = sets;
-	//		yield return new WaitForEndOfFrame();
-	//	}
+	public void SwitchToMainWeapon()
+	{
+		_currentWeapon = MainGun;
+		_currentWeapon.OnSelect();
+	}
 
-	//	myProfile.vignette.enabled = false;
-	//	myProfile.chromaticAberration.enabled = false;
-	//	myProfile.grain.enabled = false;
-	//	sets.intensity = _vignetteEffectMax;
-	//	sets.color = NormalVignette;
-	//	myProfile.vignette.settings = sets;
-	//}
+	public void AddDamage(int Damage)
+	{
+		CameraAnims.SetTrigger("CameraShake");
+		Life -= Damage;
+		StartCoroutine(ShowDamage());
+
+		if (Life <= 0)
+		{
+			print("Estas muerto");
+			OnDie();
+			game.EndGame();
+		}
+		game.UpdateLife((float)Life/MaxLife);
+		print("Recibiste daño!");
+	}
+	public void OnDie()
+	{
+		ResetPostProcessing(myProfile.GetSetting<Vignette>(), myProfile.GetSetting<ChromaticAberration>(), myProfile.GetSetting<Grain>());
+	}
+
+	IEnumerator ShowDamage()
+	{
+		var MyVignette = myProfile.GetSetting<Vignette>();
+		var MyChromaticAberration = myProfile.GetSetting<ChromaticAberration>();
+		var MyGrain = myProfile.GetSetting<Grain>();
+
+		MyVignette.enabled.overrideState = true;
+		MyChromaticAberration.active = true;
+		MyGrain.active = true;
+
+		//Intensidad va de 0 a 1;
+		MyVignette.intensity.Override(0.48f);
+		MyVignette.color.value = DamageVignette;
+
+		while (MyVignette.intensity > _vignetteEffectOriginal)
+		{
+			float intencity = MyVignette.intensity;
+			intencity -= 0.008f;
+			MyVignette.intensity.Override(intencity);
+			yield return new WaitForEndOfFrame();
+		}
+
+		ResetPostProcessing(MyVignette,MyChromaticAberration,MyGrain);
+	}
+	public void ResetPostProcessing(Vignette vignette, ChromaticAberration chromaticAberration, Grain grain)
+	{
+		chromaticAberration.active = false;
+		grain.active = false;
+
+		vignette.intensity.Override(_vignetteEffectOriginal);
+		vignette.color.value = NormalVignette;
+	}
+
+#if UNITY_EDITOR
+	void OnApplicationQuit()
+	{
+		ResetPostProcessing(myProfile.GetSetting<Vignette>(), myProfile.GetSetting<ChromaticAberration>(), myProfile.GetSetting<Grain>());
+	}
+#endif
+
 	private void OnCollisionEnter(Collision collision)
 	{
 		if (collision.gameObject.layer == 8) Jumps = 1;

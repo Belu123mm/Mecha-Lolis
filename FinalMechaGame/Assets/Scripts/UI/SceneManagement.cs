@@ -1,21 +1,30 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// This class is used for General UI Buttons.
+/// </summary>
 public class SceneManagement : MonoBehaviour
 {
-    public static SceneManagement instance;
+	public static SceneManagement instance;
 
-    public SceneManagement()
-    {
-        if (!instance) instance = this;
-    }
+	//Constructores.
+	public SceneManagement()
+	{
+		if (!instance) instance = this;
+	}
 
-    public void LoadDefeatScene()
-    {
-        SceneManager.LoadScene("Defeat");
-    }
-    public void LoadGame(int level)
-    {
-        SceneManager.LoadScene("Level0" + level);
-    }
+	//----------------------------------Methods----------------------------------
+	public void LoadDefeatScene()
+	{
+		SceneManager.LoadScene("Defeat");
+	}
+	public void LoadGame(int level)
+	{
+		SceneManager.LoadScene("Level0" + level);
+	}
+	public void ExitGame()
+	{
+		Application.Quit();
+	}
 }

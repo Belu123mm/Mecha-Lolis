@@ -50,7 +50,7 @@ public class Bullet : MonoBehaviour{
 		{
             if (item.GetComponent(typeof(IDamageable)))
             {
-                print("Funciona en teoría");
+                //print("Funciona en teoría");
                 other.gameObject.GetComponent<IDamageable>().AddDamage(Damage);
             }
 			OnDeactivate(gameObject);
