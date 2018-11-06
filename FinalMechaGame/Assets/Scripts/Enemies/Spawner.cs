@@ -16,7 +16,7 @@ public class Spawner : MonoBehaviour {
 		foreach ( var w in waves ) {
 			if ( !w.hasNodes )
 				if ( w.positions.Count == 0 )
-					w.positions.Add(Vector3.zero);
+					w.positions.Add(new Positions(Vector3.zero,false));
 		}
 	}
 
@@ -42,19 +42,27 @@ public class Spawner : MonoBehaviour {
 					en.nodegroup = nodeGroups [ Random.Range(0,nodeGroups.Count) ];
 				if ( en.hasNavigation )
 					Instantiate(en, en.nodegroup._first.position, Quaternion.identity, this.transform);
-				else
-					Instantiate(en, w.positions [ Random.Range(0, w.positions.Count) ], Quaternion.identity,this.transform);
+                else {
+                    Instantiate(en, GetPositionToSpawn(w,0), Quaternion.identity,this.transform);
+                }
 				yield return new WaitForSeconds(w.spawntime);
 			}
 			yield return new WaitForSeconds(timeBetweenWaves);
 		}
 
 	}
+    Vector3 GetPositionToSpawn(Wave w,int index) {
+        if(w.positions[index].visited == true ) {
+            return GetPositionToSpawn(w, index + 1);
+        }
+        w.positions[ index ].visited = true;
+        return w.positions [ index ].position;
+    }
 
 	public void OnDrawGizmos() {
 		foreach ( var w in waves ) {
 			foreach ( var n in w.positions ) {
-				Gizmos.DrawCube(n, new Vector3(1, 1, 1));
+				Gizmos.DrawCube(n.position, new Vector3(1, 1, 1));
 			}
 		}
 	}
@@ -62,4 +70,3 @@ public class Spawner : MonoBehaviour {
 	//-dab-
 	//Alan <3
 }
-
