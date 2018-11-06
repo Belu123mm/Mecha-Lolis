@@ -10,7 +10,6 @@ public class RoundTurret : Turret, IEnemy, IDamageable {
     public event Action<TurretState> OnInput = delegate { };
     public TurretVFX vfx;
 
-    float timer;
     RoundBullets bulletGenerator;
 
     public void Awake() {
@@ -27,7 +26,6 @@ public class RoundTurret : Turret, IEnemy, IDamageable {
     //Esto hay que chequearlo.
     public void Update() {
         timer += Time.deltaTime;
-
         if ( !hasNavigation )
         {
             if ( sight.isEnemyOnSigh() )
@@ -44,6 +42,7 @@ public class RoundTurret : Turret, IEnemy, IDamageable {
             else OnInput(TurretState.moving);
         }
         stateMachine.Update();
+        state = stateMachine.current.name;
     }
 
     public void SetStateMachine() {
@@ -76,9 +75,11 @@ public class RoundTurret : Turret, IEnemy, IDamageable {
         quiet.OnUpdate += () => Quiet();
         quiet.OnUpdate += () => vfx.Quiet();
 
-        shooting.OnEnter = () => vfx.ClearAnimations();
-        shooting.OnUpdate += () => Shoot();
-        shooting.OnExit = () => vfx.ClearAnimations();
+        shooting.OnEnter += () => vfx.ClearAnimations();
+        shooting.OnUpdate = () => Shoot();
+        shooting.OnExit += () => vfx.ClearAnimations();
+        shooting.OnExit += () => StopCoroutine(Shooting());
+        //Aqui lo hace una vez uwu
 
         moving.OnEnter = () => vfx.ClearAnimations();
         moving.OnUpdate += () => navigation.MoveToNext();
@@ -94,22 +95,35 @@ public class RoundTurret : Turret, IEnemy, IDamageable {
         dying.OnEnter = () => StartCoroutine(Dying());
 
         stateMachine = new EventFSM<TurretState>(quiet);
+
     }
-        public void Shoot() {
+    public void Shoot() {
         if ( timer > timetoshoot ) {
-            bulletGenerator.Shoot();
+            StartCoroutine(Shooting());
             timer = 0;
-            vfx.Shooting();
         }
         if ( hasNavigation ) {
             navigation.mOVEbUTsLOWER();
             vfx.OnMovement(navigation.speed * navigation.percent);
-        }else 
+        } else
             vfx.Quiet();
-    }
-    public void Quiet() {
+
 
     }
+    IEnumerator Shooting() {
+        for ( int i = 0; i < burstQuantity; i++ ) {
+            bulletGenerator.Shoot();
+            vfx.Shooting();
+            yield return new WaitForSeconds(timeBtBurst);
+        }
+
+    }
+
+    public void Quiet() {
+
+
+    }
+
     IEnumerator Dying() {
         var rb = GetComponent<Rigidbody>();
         if ( rb ) {
@@ -138,6 +152,7 @@ public class RoundTurret : Turret, IEnemy, IDamageable {
         }
         //print(name + " ha recibido " + Damage + " puntos de daño!");
     }
+
 }
 
 public enum TurretState {

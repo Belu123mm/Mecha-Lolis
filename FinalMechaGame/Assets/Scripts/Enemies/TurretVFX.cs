@@ -21,6 +21,7 @@ public class TurretVFX : MonoBehaviour{
         StartCoroutine(Damage());
     }
     public void Dying() {
+        Instantiate(particles [ 4 ], transform.position, Quaternion.identity, transform);
         animator.SetTrigger("DYING");
         Instantiate(particles [ 2 ],transform.position,Quaternion.identity,transform);
         Instantiate(particles [ 1 ], transform.position, Quaternion.identity, transform);
@@ -42,6 +43,7 @@ public class TurretVFX : MonoBehaviour{
         animator.SetBool("DYING", false);
     }
     IEnumerator Damage() {
+        print("powpow");
         ParticleSystem pt = Instantiate(particles [ 0 ], transform.position + Vector3.up, Quaternion.identity, transform);
         yield return new WaitForSeconds(3);
         Destroy(pt.gameObject);

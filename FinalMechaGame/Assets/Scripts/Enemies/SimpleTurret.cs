@@ -11,7 +11,6 @@ public class SimpleTurret : Turret, IEnemy, IDamageable {
     SimpleBullets bulletGenerator;
     public TurretVFX vfx;
 
-    float timer;
     // Use this for initialization
     public override void Start() {
         base.Start();
@@ -47,7 +46,10 @@ public class SimpleTurret : Turret, IEnemy, IDamageable {
         moving.OnUpdate += () => navigation.MoveToNext();
         moving.OnUpdate += () => vfx.OnMovement(navigation.myRigidBody.velocity.magnitude);
 
+        shooting.OnEnter += () => vfx.ClearAnimations();
         shooting.OnUpdate = () => Shoot();
+        shooting.OnExit += () => vfx.ClearAnimations();
+        shooting.OnExit += () => StopCoroutine(Shooting());
 
         if ( hasNavigation ) {
             iterate.OnEnter += () => navigation.NextNode();
@@ -63,6 +65,7 @@ public class SimpleTurret : Turret, IEnemy, IDamageable {
 
     // Update is called once per frame
     void Update() {
+        timer += Time.deltaTime;
         if ( !hasNavigation ) {
             if ( sight.isEnemyOnSigh() )
                 OnInput(TurretState.shooting);
@@ -77,17 +80,32 @@ public class SimpleTurret : Turret, IEnemy, IDamageable {
                 OnInput(TurretState.moving);
         }
         stateMachine.Update();
+        state = stateMachine.current.name;
     }
-    public void Shoot() { //TODO corutina de esto xd
-        timer += Time.deltaTime;
+    public void Shoot() {
         if ( timer > timetoshoot ) {
-            bulletGenerator.Shoot();
+            StartCoroutine(Shooting());
             timer = 0;
-            vfx.Shooting();
         }
-        if ( hasNavigation )
+        if ( hasNavigation ) {
             navigation.mOVEbUTsLOWER();
+            vfx.OnMovement(navigation.speed * navigation.percent);
+        } else
+            vfx.Quiet();
+
+
+
     }
+    IEnumerator Shooting() {
+        for ( int i = 0; i < burstQuantity; i++ ) {
+            bulletGenerator.Shoot();
+            vfx.Shooting();
+            yield return new WaitForSeconds(timeBtBurst);
+        }
+
+    }
+
+
     IEnumerator Dying() {
         GetComponent<Rigidbody>().useGravity = true;
         vfx.Dying();
@@ -100,7 +118,8 @@ public class SimpleTurret : Turret, IEnemy, IDamageable {
     public void AddDamage(int Damage)
     {
         Life -= Damage;
-        if (Life <= 0)
+        vfx.OnDamage();
+        if ( Life <= 0)
         {
             GameModelManager.instance.Points += 10;
             GameModelManager.instance.UpdatePoints();
