@@ -1034,6 +1034,7 @@ MonoBehaviour:
   - {fileID: 198916708760358310, guid: d73f4ffcf6654ee43bac85849b11b876, type: 2}
   - {fileID: 198259203463714732, guid: 2fb4a3ad0a2fe7b4aae2b96beed47521, type: 2}
   - {fileID: 198365535207645224, guid: 3e4c11ddf2f2ca34ebd39b133e721e39, type: 2}
+  - {fileID: 198755859982017374, guid: c86f131823ba9304fad1b2fbe2fc3941, type: 2}
   movementMultiplyer: 0
 --- !u!137 &137375864266015644
 SkinnedMeshRenderer:

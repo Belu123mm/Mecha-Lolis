@@ -84,7 +84,6 @@ public class SimpleTurret : Turret, IEnemy, IDamageable {
     }
     public void Shoot() {
         if ( timer > timetoshoot ) {
-        print("KPOW");
             StartCoroutine(Shooting());
             timer = 0;
         }
@@ -98,11 +97,9 @@ public class SimpleTurret : Turret, IEnemy, IDamageable {
 
     }
     IEnumerator Shooting() {
-        print("REKARGO");
         for ( int i = 0; i < burstQuantity; i++ ) {
             bulletGenerator.Shoot();
             vfx.Shooting();
-            print("POW");
             yield return new WaitForSeconds(timeBtBurst);
         }
 
@@ -121,7 +118,8 @@ public class SimpleTurret : Turret, IEnemy, IDamageable {
     public void AddDamage(int Damage)
     {
         Life -= Damage;
-        if (Life <= 0)
+        vfx.OnDamage();
+        if ( Life <= 0)
         {
             GameModelManager.instance.Points += 10;
             GameModelManager.instance.UpdatePoints();
